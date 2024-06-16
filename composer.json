@@ -1,0 +1,32 @@
+{
+	"name": "sanketio/wp-clocks",
+	"description": "Enable clocks for the sites with different timezones, includes a custom block as well.",
+	"type": "wordpress-plugin",
+	"homepage": "https://github.com/sanketio/wp-clocks",
+	"readme": "https://github.com/sanketio/wp-clocks/blob/trunk/README.md",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Sanket Parmar",
+			"email": "sanket.parmar11@gmail.com",
+			"homepage": "https://sanketio.github.io/",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=8.0"
+	},
+	"require-dev": {
+		"10up/phpcs-composer": "dev-master"
+	},
+	"scripts": {
+		"phpcs": "./vendor/bin/phpcs . -p -s",
+		"phpcbf": "./vendor/bin/phpcbf .",
+		"phpcs:compat": "./vendor/bin/phpcs *.php includes -p -s -v -d --standard=PHPCompatibilityWP --ignore=*/dist/*,*/node_modules/*,*/vendor/* --runtime-set testVersion 8.0-"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

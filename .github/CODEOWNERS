@@ -1,0 +1,7 @@
+# These owners will be the default owners for everything in the repo. Unless a later match takes precedence, @sanketio, as primary maintainers will be requested for review when someone opens a Pull Request.
+*                   @sanketio
+
+# GitHub and WordPress.org specifics
+/.github/           @sanketio
+/.wordpress-org/    @sanketio
+LICENSE.md          @sanketio

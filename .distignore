@@ -1,0 +1,6 @@
+# Directories
+.git
+.github
+
+# Files
+.*

@@ -1,0 +1,35 @@
+{
+	"name": "@sanketio/wp-clocks",
+	"version": "1.0.0",
+	"description": "Enable clocks for the sites with different timezones, includes a custom block as well.",
+	"homepage": "https://github.com/sanketio/wp-clocks#readme",
+	"license": "GPL-2.0-or-later",
+	"author": {
+		"name": "Sanket Parmar",
+		"email": "sanket.parmar11@gmail.com",
+		"url": "https://sanketio.github.io/",
+		"role": "developer"
+	},
+	"bugs": {
+		"url": "https://github.com/sanketio/wp-clocks/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sanketio/wp-clocks.git"
+	},
+	"keywords": [
+		"clock",
+		"watch",
+		"time",
+		"timezone"
+	],
+	"scripts": {
+		"start": "wp-scripts start",
+		"build": "wp-scripts build",
+		"archive": "composer archive --file=wp-clocks --format=zip",
+		"postarchive": "rm -rf wp-clocks && unzip wp-clocks.zip -d wp-clocks && rm wp-clocks.zip && zip -r wp-clocks.zip wp-clocks && rm -rf wp-clocks"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^27.1.0"
+	}
+}

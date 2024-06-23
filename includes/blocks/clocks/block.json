@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wp-clocks/clocks",
+	"title": "Clocks",
+	"category": "widgets",
+	"icon": "clock",
+	"description": "Display clocks",
+	"attributes": {
+		"title": {
+			"type": "string"
+		}
+	},
+	"example": {
+		"attributes": {
+			"title": "Example Block"
+		}
+	},
+	"supports": {
+		"html": false,
+		"color": {
+			"text": true,
+			"background": true
+		}
+	},
+	"textdomain": "wp-clocks",
+	"editorScript": "file:../../../dist/clocks-block.js"
+}

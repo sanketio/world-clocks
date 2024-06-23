@@ -17,3 +17,17 @@
  */
 
 namespace Clocks;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+define( 'CLOCKS_VERSION', '1.0.0' );
+define( 'CLOCKS_PLUGIN_DIR', trailingslashit( __DIR__ ) );
+define( 'CLOCKS_PLUGIN_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
+define( 'CLOCKS_BLOCK_DIR', CLOCKS_PLUGIN_DIR . 'includes/blocks/' );
+define( 'CLOCKS_DIST_DIR', CLOCKS_PLUGIN_DIR . 'dist/' );
+define( 'CLOCKS_DIST_URL', CLOCKS_PLUGIN_URL . 'dist/' );
+
+require CLOCKS_PLUGIN_DIR . 'includes/blocks.php';
+Blocks\setup();

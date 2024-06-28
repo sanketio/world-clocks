@@ -8,6 +8,8 @@
  */
 import { registerBlockType } from '@wordpress/blocks';
 
+import variations from './variations';
+
 /**
  * Internal dependencies
  */
@@ -19,6 +21,7 @@ import block from './block.json';
  * Register block
  */
 registerBlockType(block, {
+	variations,
 	edit,
 	save,
 });

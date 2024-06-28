@@ -1,7 +1,17 @@
 /**
  * WordPress dependencies
  */
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import {
+	RichText,
+	useBlockProps,
+	store as blockEditorStore,
+	__experimentalBlockVariationPicker
+} from '@wordpress/block-editor';
+import {
+	createBlocksFromInnerBlocksTemplate,
+	store as blocksStore,
+} from '@wordpress/blocks';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -16,7 +26,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @returns {Function} Render the edit screen
  */
-const ClocksBlockEdit = (props) => {
+const ClocksEditContainer = (props) => {
 	const { attributes, setAttributes } = props;
 	const { title } = attributes;
 
@@ -34,4 +44,64 @@ const ClocksBlockEdit = (props) => {
 		</div>
 	);
 };
+
+const Placeholder = (props) => {
+	const { clientId, name, setAttributes } = props;
+	const { blockType, defaultVariation, variations } = useSelect(
+		( select ) => {
+			const {
+				getBlockVariations,
+				getBlockType,
+				getDefaultBlockVariation,
+			} = select( blocksStore );
+
+			return {
+				blockType: getBlockType( name ),
+				defaultVariation: getDefaultBlockVariation( name, 'block' ),
+				variations: getBlockVariations( name, 'block' ),
+			};
+		},
+		[ name ]
+	);
+	const { replaceInnerBlocks } = useDispatch( blockEditorStore );
+	const blockProps = useBlockProps();
+
+	return (
+		<div { ...blockProps }>
+			<__experimentalBlockVariationPicker
+				icon={ blockType?.icon?.src }
+				label={ blockType?.title }
+				variations={ variations }
+				instructions={ __( 'Divide into columns. Select a layout:' ) }
+				onSelect={ ( nextVariation = defaultVariation ) => {
+					if ( nextVariation.attributes ) {
+						setAttributes( nextVariation.attributes );
+					}
+					if ( nextVariation.innerBlocks ) {
+						replaceInnerBlocks(
+							clientId,
+							createBlocksFromInnerBlocksTemplate(
+								nextVariation.innerBlocks
+							),
+							true
+						);
+					}
+				} }
+			/>
+		</div>
+	);
+};
+
+const ClocksBlockEdit = ( props ) => {
+	const { clientId } = props;
+	const hasInnerBlocks = useSelect(
+		( select ) =>
+			select( blockEditorStore ).getBlocks( clientId ).length > 0,
+		[ clientId ]
+	);
+	const Component = hasInnerBlocks ? ClocksEditContainer : Placeholder;
+
+	return <Component { ...props } />;
+};
+
 export default ClocksBlockEdit;

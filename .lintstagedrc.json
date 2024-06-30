@@ -6,6 +6,6 @@
 		"npm run lint-js"
 	],
 	"*.php": [
-		"./vendor/bin/phpcs"
+		"./vendor/bin/phpcs --standard=phpcs.xml -p -s ."
 	]
 }

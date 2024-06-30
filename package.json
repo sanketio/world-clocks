@@ -27,9 +27,12 @@
 		"start": "wp-scripts start",
 		"build": "wp-scripts build",
 		"archive": "composer archive --file=wp-clocks --format=zip",
-		"postarchive": "rm -rf wp-clocks && unzip wp-clocks.zip -d wp-clocks && rm wp-clocks.zip && zip -r wp-clocks.zip wp-clocks && rm -rf wp-clocks"
+		"postarchive": "rm -rf wp-clocks && unzip wp-clocks.zip -d wp-clocks && rm wp-clocks.zip && zip -r wp-clocks.zip wp-clocks && rm -rf wp-clocks",
+		"precommit": "npm run lint-css && npm run lint-js",
+		"prepare": "husky install"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^27.1.0"
+		"@wordpress/scripts": "^27.1.0",
+		"husky": "^9.0.11"
 	}
 }

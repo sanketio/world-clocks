@@ -6,7 +6,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
  * @returns {null} Dynamic blocks do not save the HTML.
  */
 const ClocksBlockSave = () => {
-	return <InnerBlocks.Content />
+	return <InnerBlocks.Content />;
 };
 
 export default ClocksBlockSave;

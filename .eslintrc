@@ -1,0 +1,214 @@
+{
+	"parser": "@babel/eslint-parser",
+	"parserOptions": {
+		"requireConfigFile": false,
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"babelOptions": {
+			"presets": ["@babel/preset-react"]
+		}
+	},
+	"env": {
+		"browser": true,
+		"es6": true,
+		"jest/globals": true,
+		"node": true
+	},
+	"plugins": ["jsdoc", "prettier", "jest"],
+	"extends": [
+		"airbnb",
+		"airbnb/hooks",
+		"airbnb-base",
+		"airbnb-base/legacy",
+		"prettier",
+		"plugin:prettier/recommended",
+		"plugin:jest/recommended",
+		"plugin:jest/style",
+		"plugin:@wordpress/eslint-plugin/custom"
+	],
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".js", ".jsx"]
+			}
+		},
+		"import/extensions": [".js", ".mjs", ".jsx"],
+		"import/core-modules": [
+			"@wordpress/block-editor",
+			"@wordpress/components",
+			"@wordpress/block-library",
+			"@wordpress/editor",
+			"@wordpress/element",
+			"@wordpress/hooks",
+			"@wordpress/html-entities",
+			"@wordpress/icons",
+			"@wordpress/blocks",
+			"@wordpress/api-fetch",
+			"@wordpress/dom-ready",
+			"@wordpress/blob",
+			"@wordpress/base-styles",
+			"@wordpress/block-directory",
+			"@wordpress/block-serialization-default-parser",
+			"@wordpress/block-serialization-spec-parser",
+			"@wordpress/compose",
+			"@wordpress/core-data",
+			"@wordpress/customize-widgets",
+			"@wordpress/data-controls",
+			"@wordpress/data",
+			"@wordpress/date",
+			"@wordpress/dom",
+			"@wordpress/escape-html",
+			"@wordpress/format-library",
+			"@wordpress/i18n",
+			"@wordpress/interface",
+			"@wordpress/is-shallow-equal",
+			"@wordpress/keycodes",
+			"@wordpress/lazy-import",
+			"@wordpress/list-reusable-blocks",
+			"@wordpress/media-utils",
+			"@wordpress/notices",
+			"@wordpress/nux",
+			"@wordpress/react-i18n",
+			"@wordpress/priority-queue",
+			"@wordpress/primitives",
+			"@wordpress/react-native-aztec",
+			"@wordpress/react-native-bridge",
+			"@wordpress/redux-routine",
+			"@wordpress/reusable-blocks",
+			"@wordpress/rich-text",
+			"@wordpress/server-side-render",
+			"@wordpress/shortcod",
+			"@wordpress/token-list",
+			"@wordpress/url",
+			"@wordpress/viewport",
+			"@wordpress/warning",
+			"@wordpress/wordcount",
+			"react-dom",
+			"react"
+		]
+	},
+	"globals": {
+		"window": true,
+		"document": true,
+		"wp": "readonly",
+		"lodash": true,
+		"jQuery": true
+	},
+	"rules": {
+		"class-methods-use-this": 0,
+		"no-restricted-syntax": [
+			"error",
+			{
+				"selector": "ForInStatement",
+				"message":
+					"for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array."
+			},
+			{
+				"selector": "LabeledStatement",
+				"message":
+					"Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand."
+			},
+			{
+				"selector": "WithStatement",
+				"message":
+					"`with` is disallowed in strict mode because it makes code impossible to predict and optimize."
+			}
+		],
+		// Disable prefer-destructing for arrays as it can lead to weird and confusing syntax
+		"prefer-destructuring": [2, { "array": false, "object": true }],
+		// this rule is good but annoying
+		"import/prefer-default-export": 0,
+		// an import is valid as long as it's a dependency somewhere,
+		// it's up to developer make sure dev dependencies aren't used in the production bundle
+		"import/no-extraneous-dependencies": [
+			"error",
+			{ "devDependencies": true, "optionalDependencies": true, "peerDependencies": true }
+		],
+		"strict": 0,
+		"no-console": 0,
+		"no-path-concat": 2,
+		"no-process-exit": 2,
+		"global-require": 2,
+		"no-new-require": 2,
+		"react/jsx-filename-extension": 0,
+		"react/forbid-prop-types": [
+			"error",
+			{
+				"forbid": ["any"],
+				"checkContextTypes": true,
+				"checkChildContextTypes": true
+			}
+		],
+		// prefer arrow functions for defining components
+		"react/function-component-definition": [
+			1,
+			{
+				"namedComponents": "arrow-function",
+				"unnamedComponents": "arrow-function"
+			}
+		],
+		"react/jsx-uses-react": 0,
+		"react/react-in-jsx-scope": 0,
+		"react/prop-types": 0,
+		"react/jsx-props-no-spreading": 0,
+		"@wordpress/dependency-group": 0,
+		"import/no-unresolved": [2, { "ignore": ["^@wordpress/"] }],
+		"no-new": 1,
+		// no-plusplus--
+		"no-plusplus": 0,
+		// with ES6 the name of the function can be inferred most of the times.
+		"func-names": [0, "as-needed"],
+		// this is hard to follow when the backend does not follow camelcase conventions when sending data.
+		"camelcase": 0,
+		// we want to allow changing object parameters.
+		"no-param-reassign": [2, { "props": false }],
+		"no-shadow": 0,
+		"no-underscore-dangle": 0,
+		"no-restricted-exports": 0,
+		"import/no-commonjs": 0,
+		"jsdoc/check-alignment": 1,
+		"jsdoc/check-examples": 0,
+		"jsdoc/check-indentation": 1,
+		"jsdoc/check-param-names": 1,
+		"jsdoc/check-tag-names": 1,
+		"jsdoc/check-types": 1,
+		"jsdoc/no-undefined-types": 1,
+		"jsdoc/require-description": 1,
+		"jsdoc/require-jsdoc": [
+			0,
+			{
+				"publicOnly": true,
+				"exemptEmptyFunctions": true
+			}
+		], // disabling for now because eslint --fix is adding empty jsdoc blocks.
+		"jsdoc/require-param": [1, { "enableFixer": false }],
+		"jsdoc/require-param-description": 1,
+		"jsdoc/require-param-name": 1,
+		"jsdoc/require-param-type": 1,
+		"jsdoc/require-returns": 1,
+		"jsdoc/require-returns-check": 1,
+		"jsdoc/require-returns-type": 1,
+		"jsdoc/valid-types": 1,
+		"prettier/prettier": [
+			2,
+			{
+				"useTabs": true,
+				"tabWidth": 4,
+				"printWidth": 100,
+				"singleQuote": true,
+				"trailingComma": "all",
+				"bracketSpacing": true,
+				"parenSpacing": false,
+				"bracketSameLine": false,
+				"semi": true,
+				"arrowParens": "always"
+			},
+			{
+				"usePrettierrc": false
+			}
+		],
+		"no-tabs": 0,
+		"indent": ["error", "tab", { "SwitchCase": 1 }]
+	}
+}

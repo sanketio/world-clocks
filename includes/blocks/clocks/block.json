@@ -6,22 +6,9 @@
 	"category": "widgets",
 	"icon": "clock",
 	"description": "Display clocks",
-	"attributes": {
-		"title": {
-			"type": "string"
-		}
-	},
-	"example": {
-		"attributes": {
-			"title": "Example Block"
-		}
-	},
+	"allowedBlocks": [ "wp-clocks/clock" ],
 	"supports": {
-		"html": false,
-		"color": {
-			"text": true,
-			"background": true
-		}
+		"html": false
 	},
 	"textdomain": "wp-clocks",
 	"editorScript": "file:../../../dist/clocks-block.js"

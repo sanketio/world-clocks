@@ -5,7 +5,8 @@ import {
 	RichText,
 	useBlockProps,
 	store as blockEditorStore,
-	__experimentalBlockVariationPicker
+	__experimentalBlockVariationPicker,
+	useInnerBlocksProps
 } from '@wordpress/block-editor';
 import {
 	createBlocksFromInnerBlocksTemplate,
@@ -31,17 +32,15 @@ const ClocksEditContainer = (props) => {
 	const { title } = attributes;
 
 	const blockProps = useBlockProps();
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		defaultBlock: 'wp-clocks/clock',
+		directInsert: true,
+		orientation: 'horizontal',
+		renderAppender: false,
+	} );
 
 	return (
-		<div {...blockProps}>
-			<RichText
-				className="wp-block-clocks__title"
-				tagName="h2"
-				placeholder={__('Custom Title', 'wp-clocks')}
-				value={title}
-				onChange={(title) => setAttributes({ title })}
-			/>
-		</div>
+		<div { ...innerBlocksProps } />
 	);
 };
 

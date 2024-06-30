@@ -11,9 +11,9 @@ import { __ } from '@wordpress/i18n';
  */
 const variations = [
 	{
-		name: 'one-column-full',
+		name: 'one-clock',
 		title: __( '100' ),
-		description: __( 'One column' ),
+		description: __( 'One clock' ),
 		icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +24,7 @@ const variations = [
 				<Path d="M0 10a2 2 0 0 1 2-2h44a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Z" />
 			</SVG>
 		),
-		innerBlocks: [ [ 'core/column' ] ],
+		innerBlocks: [ [ 'wp-clocks/clock' ] ],
 		scope: [ 'block' ],
 	}
 ];

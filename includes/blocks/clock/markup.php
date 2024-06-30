@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Clocks block markup
+	 * Clock block markup
 	 *
 	 * @package wp-clocks
 	 *
@@ -12,5 +12,7 @@
 
 ?>
 <div <?php echo get_block_wrapper_attributes(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-	<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<h2 class="wp-block-clock__title">
+		<?php echo wp_kses_post( $attributes['title'] ); ?>
+	</h2>
 </div>

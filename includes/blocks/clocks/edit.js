@@ -1,5 +1,3 @@
-// eslint
-
 /**
  * WordPress dependencies
  */
@@ -62,7 +60,7 @@ const Placeholder = (props) => {
 				icon={blockType?.icon?.src}
 				label={blockType?.title}
 				variations={variations}
-				instructions={__('Divide into columns. Select a layout:')}
+				instructions={__('Select a layout:', 'wp-clocks')}
 				onSelect={(nextVariation = defaultVariation) => {
 					if (nextVariation.attributes) {
 						setAttributes(nextVariation.attributes);

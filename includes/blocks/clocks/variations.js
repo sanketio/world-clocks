@@ -31,6 +31,7 @@ const variations = [
 				<Path fill="#007cba" d="M39 0h13s6 0 6 6v0s0 6 -6 6h-13s-6 0 -6 -6v0s0 -6 6 -6" />
 			</SVG>
 		),
+		isDefault: true,
 		innerBlocks: [['wp-clocks/clock']],
 		scope: ['block'],
 	},

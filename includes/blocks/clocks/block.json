@@ -8,7 +8,11 @@
 	"description": "Display clocks",
 	"allowedBlocks": [ "wp-clocks/clock" ],
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"text": true,
+			"background": true
+		}
 	},
 	"textdomain": "wp-clocks",
 	"editorScript": "file:../../../dist/clocks-block.js"

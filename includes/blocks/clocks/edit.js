@@ -74,6 +74,7 @@ const Placeholder = (props) => {
 						);
 					}
 				}}
+				allowSkip
 			/>
 		</div>
 	);

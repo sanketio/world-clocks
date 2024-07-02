@@ -1,30 +1,35 @@
+/* eslint-disable @wordpress/no-unsafe-wp-apis */
+
 /**
  * WordPress dependencies
  */
 import {
 	useBlockProps,
 	store as blockEditorStore,
-	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalBlockVariationPicker as BlockVariationPicker,
 	useInnerBlocksProps,
+	InspectorControls,
 } from '@wordpress/block-editor';
 import { createBlocksFromInnerBlocksTemplate, store as blocksStore } from '@wordpress/blocks';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
+const ClocksInspectorControls = (props) => {
+	// const { attributes, setAttributes } = props;
+	// const { layout, clocksPerRow } = attributes;
+	console.log(props);
+	return 'Test';
+};
+
 /**
  * Edit component.
  * See https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/#edit
  *
- * @param {object}   props                  The block props.
- * @param {object}   props.attributes       Block attributes.
- * @param {string}   props.attributes.title Custom title to be displayed.
- * @param {string}   props.className        Class name for the block.
- * @param {Function} props.setAttributes    Sets the value for block attributes.
+ * @param {object} props The block props.
  *
  * @returns {Function} Render the edit screen
  */
-const ClocksEditContainer = () => {
+const ClocksEditContainer = (props) => {
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps(blockProps, {
 		defaultBlock: 'wp-clocks/clock',
@@ -33,7 +38,14 @@ const ClocksEditContainer = () => {
 		renderAppender: false,
 	});
 
-	return <div {...innerBlocksProps} />;
+	return (
+		<>
+			<InspectorControls>
+				<ClocksInspectorControls props={props} />
+			</InspectorControls>
+			<div {...innerBlocksProps} />
+		</>
+	);
 };
 
 const Placeholder = (props) => {

@@ -7,6 +7,16 @@
 	"icon": "clock",
 	"description": "Display clocks",
 	"allowedBlocks": [ "wp-clocks/clock" ],
+	"attributes": {
+		"layout": {
+			"type": "string",
+			"default": "digital-column"
+		},
+		"clocksPerRow": {
+			"type": "number",
+			"default": 3
+		}
+	},
 	"supports": {
 		"html": false,
 		"color": {

@@ -22,8 +22,6 @@ const variations = [
 		isDefault: true,
 		innerBlocks: [['wp-clocks/clock']],
 		scope: ['block'],
-		isActive: (blockAttributes) =>
-			!blockAttributes.layout || blockAttributes.layout === 'digital-column',
 		icon: DigitalColumn,
 	},
 	{
@@ -32,7 +30,6 @@ const variations = [
 		attributes: { layout: 'digital-row' },
 		innerBlocks: [['wp-clocks/clock']],
 		scope: ['block'],
-		isActive: (blockAttributes) => blockAttributes.layout === 'digital-row',
 		icon: DigitalRow,
 	},
 	{
@@ -41,7 +38,6 @@ const variations = [
 		attributes: { layout: 'clock' },
 		innerBlocks: [['wp-clocks/clock']],
 		scope: ['block'],
-		isActive: (blockAttributes) => blockAttributes.layout === 'clock',
 		icon: Clock,
 	},
 	{
@@ -50,7 +46,6 @@ const variations = [
 		attributes: { layout: 'clock-reverse' },
 		innerBlocks: [['wp-clocks/clock']],
 		scope: ['block'],
-		isActive: (blockAttributes) => blockAttributes.layout === 'clock-reverse',
 		icon: ClockReverse,
 	},
 ];

@@ -1,6 +1,11 @@
 /* eslint-disable @wordpress/no-unsafe-wp-apis */
 
 /**
+ * External dependencies
+ */
+import clsx from 'clsx';
+
+/**
  * WordPress dependencies
  */
 import {
@@ -14,6 +19,7 @@ import { createBlocksFromInnerBlocksTemplate, store as blocksStore } from '@word
 import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
+	PanelBody,
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
@@ -23,21 +29,47 @@ import { __ } from '@wordpress/i18n';
  */
 import DigitalColumn from './icons/digital-column';
 import DigitalRow from './icons/digital-row';
+import Clock from './icons/clock';
+import ClockReverse from './icons/clock-reverse';
 
-const ClocksInspectorControls = (props) => {
-	// const { attributes, setAttributes } = props;
-	// const { layout, clocksPerRow } = attributes;
-	console.log(props);
+import './editor.css';
+
+const LayoutSettings = ({ setAttributes, layout }) => {
 	return (
-		<ToggleGroupControl>
-			<ToggleGroupControlOptionIcon
-				value="uppercase"
-				icon={DigitalColumn}
-				label="Uppercase"
-			/>
+		<PanelBody title={__('Layout', 'wp-clocks')} className="wp-clocks-layout-setting">
+			<ToggleGroupControl
+				isBlock
+				onChange={(layout) => {
+					setAttributes({ layout });
+				}}
+				value={layout}
+				className="wp-clocks-toggle-control"
+			>
+				<ToggleGroupControlOptionIcon
+					value="digital-column"
+					icon={DigitalColumn}
+					label={__('Digital Column', 'wp-clocks')}
+				/>
 
-			<ToggleGroupControlOptionIcon value="lowercase" icon={DigitalRow} label="Lowercase" />
-		</ToggleGroupControl>
+				<ToggleGroupControlOptionIcon
+					value="digital-row"
+					icon={DigitalRow}
+					label={__('Digital Row', 'wp-clocks')}
+				/>
+
+				<ToggleGroupControlOptionIcon
+					value="clock"
+					icon={Clock}
+					label={__('Clock', 'wp-clocks')}
+				/>
+
+				<ToggleGroupControlOptionIcon
+					value="clock-reverse"
+					icon={ClockReverse}
+					label={__('Clock Reverse', 'wp-clocks')}
+				/>
+			</ToggleGroupControl>
+		</PanelBody>
 	);
 };
 
@@ -50,18 +82,27 @@ const ClocksInspectorControls = (props) => {
  * @returns {Function} Render the edit screen
  */
 const ClocksEditContainer = (props) => {
-	const blockProps = useBlockProps();
+	const { attributes, setAttributes } = props;
+	const { layout } = attributes;
+
+	const classes = clsx({
+		[`has-layout-clocks-${layout}`]: layout,
+	});
+
+	const blockProps = useBlockProps({
+		className: classes,
+	});
+
 	const innerBlocksProps = useInnerBlocksProps(blockProps, {
 		defaultBlock: 'wp-clocks/clock',
 		directInsert: true,
-		orientation: 'horizontal',
 		renderAppender: false,
 	});
 
 	return (
 		<>
 			<InspectorControls>
-				<ClocksInspectorControls props={props} />
+				<LayoutSettings setAttributes={setAttributes} layout={layout} />
 			</InspectorControls>
 			<div {...innerBlocksProps} />
 		</>

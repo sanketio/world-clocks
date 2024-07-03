@@ -1,0 +1,27 @@
+.wp-clocks-layout-setting {
+
+	& .wp-clocks-toggle-control {
+		border: none;
+		box-shadow: none;
+		display: flex;
+		flex: 1;
+		flex-direction: row;
+		flex-wrap: wrap;
+
+		&:focus-within {
+			box-shadow: none;
+		}
+
+		& > div {
+			align-items: center;
+			box-sizing: border-box;
+			display: flex;
+			flex: 1;
+			flex-basis: calc(50% - 12px);
+			flex-direction: column;
+			justify-content: center;
+			margin: 6px;
+			padding: 16px;
+		}
+	}
+}

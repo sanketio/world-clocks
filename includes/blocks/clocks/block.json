@@ -25,5 +25,6 @@
 		}
 	},
 	"textdomain": "wp-clocks",
-	"editorScript": "file:../../../dist/clocks-block.js"
+	"editorScript": "file:../../../dist/clocks-block.js",
+	"editorStyle": "file:../../../dist/clocks-block.css"
 }

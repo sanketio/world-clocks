@@ -11,14 +11,34 @@ import {
 	InspectorControls,
 } from '@wordpress/block-editor';
 import { createBlocksFromInnerBlocksTemplate, store as blocksStore } from '@wordpress/blocks';
+import {
+	__experimentalToggleGroupControl as ToggleGroupControl,
+	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
+} from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
+
+/**
+ * Internal dependencies
+ */
+import DigitalColumn from './icons/digital-column';
+import DigitalRow from './icons/digital-row';
 
 const ClocksInspectorControls = (props) => {
 	// const { attributes, setAttributes } = props;
 	// const { layout, clocksPerRow } = attributes;
 	console.log(props);
-	return 'Test';
+	return (
+		<ToggleGroupControl>
+			<ToggleGroupControlOptionIcon
+				value="uppercase"
+				icon={DigitalColumn}
+				label="Uppercase"
+			/>
+
+			<ToggleGroupControlOptionIcon value="lowercase" icon={DigitalRow} label="Lowercase" />
+		</ToggleGroupControl>
+	);
 };
 
 /**

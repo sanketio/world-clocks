@@ -7,6 +7,8 @@
 
 namespace Clocks\Blocks;
 
+use function Clocks\Helpers\get_timezones;
+
 /**
  * Set up blocks
  *
@@ -19,6 +21,7 @@ function setup() {
 	};
 
 	add_action( 'init', $n( 'register_blocks' ) );
+	add_action( 'enqueue_block_editor_assets', $n( 'output_block_settings' ) );
 }
 
 /**
@@ -59,4 +62,22 @@ function register_blocks() {
 			register_block_type_from_metadata( $block_folder, $block_options );
 		}
 	}
+}
+
+/**
+ * Output required data to the JS.
+ *
+ * @return void
+ */
+function output_block_settings() {
+
+	$data = [
+		'timezones' => get_timezones(),
+	];
+
+	wp_add_inline_script(
+		'wp-clocks-clock-editor-script',
+		'const SPWPCLOCK = ' . wp_json_encode( $data ),
+		'before'
+	);
 }

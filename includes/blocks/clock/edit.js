@@ -1,3 +1,5 @@
+/* global SPWPCLOCK */
+
 /**
  * WordPress dependencies
  */
@@ -21,6 +23,8 @@ const ClockBlockEdit = (props) => {
 	const { title } = attributes;
 
 	const blockProps = useBlockProps();
+	const blockCustomData = SPWPCLOCK;
+	console.log(blockCustomData);
 
 	return (
 		<div {...blockProps}>

@@ -29,5 +29,7 @@ define( 'CLOCKS_BLOCK_DIR', CLOCKS_PLUGIN_DIR . 'includes/blocks/' );
 define( 'CLOCKS_DIST_DIR', CLOCKS_PLUGIN_DIR . 'dist/' );
 define( 'CLOCKS_DIST_URL', CLOCKS_PLUGIN_URL . 'dist/' );
 
+require CLOCKS_PLUGIN_DIR . 'includes/helpers.php';
+
 require CLOCKS_PLUGIN_DIR . 'includes/blocks.php';
 Blocks\setup();

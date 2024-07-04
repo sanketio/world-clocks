@@ -85,6 +85,13 @@ const LayoutSettings = ({ setAttributes, layout }) => {
 	);
 };
 
+/**
+ * Check it marks format setting panel should be outputed.
+ *
+ * @param {string} layout Layout to check.
+ *
+ * @returns {boolean}
+ */
 const ShouldShowMarksFormat = (layout) => {
 	const allowedLayouts = ['clock', 'clock-reverse'];
 	if (allowedLayouts.includes(layout)) {

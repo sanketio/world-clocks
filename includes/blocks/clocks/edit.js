@@ -34,6 +34,15 @@ import ClockReverse from './icons/clock-reverse';
 
 import './editor.css';
 
+/**
+ * Layout settings component.
+ *
+ * @param {object} props The block props.
+ * @param {Function} props.setAttributes Set attributes method.
+ * @param {string} props.layout Current layout.
+ *
+ * @returns {HTMLElement}
+ */
 const LayoutSettings = ({ setAttributes, layout }) => {
 	return (
 		<PanelBody title={__('Layout', 'wp-clocks')} className="wp-clocks-layout-setting">
@@ -74,12 +83,11 @@ const LayoutSettings = ({ setAttributes, layout }) => {
 };
 
 /**
- * Edit component.
- * See https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/#edit
+ * Block edit markup.
  *
  * @param {object} props The block props.
  *
- * @returns {Function} Render the edit screen
+ * @returns {HTMLElement} Block edit markup.
  */
 const ClocksEditContainer = (props) => {
 	const { attributes, setAttributes } = props;
@@ -109,6 +117,13 @@ const ClocksEditContainer = (props) => {
 	);
 };
 
+/**
+ * Output placeholder HTML markup for the block.
+ *
+ * @param {object} props The block props.
+ *
+ * @returns {HTMLElement} Placeholder for the block.
+ */
 const Placeholder = (props) => {
 	const { clientId, name, setAttributes } = props;
 	const { blockType, defaultVariation, variations } = useSelect(
@@ -153,6 +168,14 @@ const Placeholder = (props) => {
 	);
 };
 
+/**
+ * Edit component.
+ * See https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/#edit
+ *
+ * @param {object} props The block props.
+ *
+ * @returns {HTMLElement} Render the edit screen
+ */
 const ClocksBlockEdit = (props) => {
 	const { clientId } = props;
 	const hasInnerBlocks = useSelect(

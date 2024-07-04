@@ -31,6 +31,9 @@ import DigitalColumn from './icons/digital-column';
 import DigitalRow from './icons/digital-row';
 import Clock from './icons/clock';
 import ClockReverse from './icons/clock-reverse';
+import Number from './icons/number';
+import Combine from './icons/combine';
+import Line from './icons/line';
 
 import './editor.css';
 
@@ -45,7 +48,7 @@ import './editor.css';
  */
 const LayoutSettings = ({ setAttributes, layout }) => {
 	return (
-		<PanelBody title={__('Layout', 'wp-clocks')} className="wp-clocks-layout-setting">
+		<PanelBody title={__('Layout', 'wp-clocks')} className="wp-clocks-toggle-setting">
 			<ToggleGroupControl
 				isBlock
 				onChange={(layout) => {
@@ -82,6 +85,57 @@ const LayoutSettings = ({ setAttributes, layout }) => {
 	);
 };
 
+const ShouldShowMarksFormat = (layout) => {
+	const allowedLayouts = ['clock', 'clock-reverse'];
+	if (allowedLayouts.includes(layout)) {
+		return true;
+	}
+
+	return false;
+};
+
+/**
+ * Marks Format settings component.
+ *
+ * @param {object} props The block props.
+ * @param {Function} props.setAttributes Set attributes method.
+ * @param {string} props.marksFormat Current marks format.
+ *
+ * @returns {HTMLElement}
+ */
+const MarksFormatSettings = ({ setAttributes, marksFormat }) => {
+	return (
+		<PanelBody title={__('Marks Format', 'wp-clocks')} className="wp-clocks-toggle-setting">
+			<ToggleGroupControl
+				isBlock
+				onChange={(marksFormat) => {
+					setAttributes({ marksFormat });
+				}}
+				value={marksFormat}
+				className="wp-clocks-toggle-control"
+			>
+				<ToggleGroupControlOptionIcon
+					value="number"
+					icon={Number}
+					label={__('Number', 'wp-clocks')}
+				/>
+
+				<ToggleGroupControlOptionIcon
+					value="combine"
+					icon={Combine}
+					label={__('Combine', 'wp-clocks')}
+				/>
+
+				<ToggleGroupControlOptionIcon
+					value="line"
+					icon={Line}
+					label={__('Line', 'wp-clocks')}
+				/>
+			</ToggleGroupControl>
+		</PanelBody>
+	);
+};
+
 /**
  * Block edit markup.
  *
@@ -91,10 +145,13 @@ const LayoutSettings = ({ setAttributes, layout }) => {
  */
 const ClocksEditContainer = (props) => {
 	const { attributes, setAttributes } = props;
-	const { layout } = attributes;
+	const { layout, marksFormat } = attributes;
+
+	const shouldShowMarksFormat = ShouldShowMarksFormat(layout);
 
 	const classes = clsx({
-		[`has-layout-clocks-${layout}`]: layout,
+		[`has-clocks-layout-${layout}`]: layout,
+		[`has-clocks-marks-format-${marksFormat}`]: shouldShowMarksFormat,
 	});
 
 	const blockProps = useBlockProps({
@@ -111,7 +168,12 @@ const ClocksEditContainer = (props) => {
 		<>
 			<InspectorControls>
 				<LayoutSettings setAttributes={setAttributes} layout={layout} />
+
+				{shouldShowMarksFormat && (
+					<MarksFormatSettings setAttributes={setAttributes} marksFormat={marksFormat} />
+				)}
 			</InspectorControls>
+
 			<div {...innerBlocksProps} />
 		</>
 	);

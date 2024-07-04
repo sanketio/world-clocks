@@ -12,9 +12,9 @@
 			"type": "string",
 			"default": "digital-column"
 		},
-		"clocksPerRow": {
-			"type": "number",
-			"default": 3
+		"marksFormat": {
+			"type": "string",
+			"default": "number"
 		}
 	},
 	"supports": {

@@ -8,6 +8,26 @@
 	"description": "Display clocks",
 	"allowedBlocks": [ "wp-clocks/clock" ],
 	"attributes": {
+		"clocksPerRow": {
+			"type": "number",
+			"default": 3
+		},
+		"showClocksAmPmIndicator": {
+			"type": "boolean",
+			"default": true
+		},
+		"showTimestamp": {
+			"type": "boolean",
+			"default": true
+		},
+		"timeFormat": {
+			"type": "string",
+			"default": "colon"
+		},
+		"displayTimestampSeconds": {
+			"type": "boolean",
+			"default": true
+		},
 		"layout": {
 			"type": "string",
 			"default": "digital-column"

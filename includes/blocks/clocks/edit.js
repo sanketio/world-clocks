@@ -20,6 +20,9 @@ import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 	PanelBody,
+	SelectControl,
+	ToggleControl,
+	RangeControl,
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
@@ -36,6 +39,96 @@ import Combine from './icons/combine';
 import Line from './icons/line';
 
 import './editor.css';
+
+/**
+ * Visibility settings component.
+ *
+ * @param {object} props The block props.
+ * @param {Function} props.setAttributes Set attributes method.
+ * @param {object} props.attributes Visibility attributes of the block.
+ * @param {object} props.shouldShowClockSettings Should show clock settings.
+ *
+ * @returns {HTMLElement}
+ */
+const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings }) => {
+	const {
+		clocksPerRow,
+		showClocksAmPmIndicator,
+		showTimestamp,
+		timeFormat,
+		displayTimestampSeconds,
+		layout,
+	} = attributes;
+	const shouldShowTimeFormatSetting = !shouldShowClockSettings || showTimestamp;
+	const shouldShowClocksPerRow = layout !== 'digital-row';
+
+	return (
+		<PanelBody title={__('Visibility Settings', 'wp-clocks')}>
+			{shouldShowClocksPerRow && (
+				<RangeControl
+					label={__('Clocks per row', 'wp-clocks')}
+					value={clocksPerRow}
+					onChange={(clocksPerRow) => {
+						setAttributes({ clocksPerRow });
+					}}
+					min={1}
+					max={4}
+				/>
+			)}
+
+			{shouldShowClockSettings && (
+				<>
+					<ToggleControl
+						label={__('Show Clocks AmPm Indicator', 'wp-clocks')}
+						checked={showClocksAmPmIndicator}
+						onChange={(showClocksAmPmIndicator) => {
+							setAttributes({ showClocksAmPmIndicator });
+						}}
+					/>
+
+					<ToggleControl
+						label={__('Show Timestamp', 'wp-clocks')}
+						checked={showTimestamp}
+						onChange={(showTimestamp) => {
+							setAttributes({ showTimestamp });
+						}}
+					/>
+				</>
+			)}
+
+			{shouldShowTimeFormatSetting && (
+				<>
+					<SelectControl
+						label={__('Time Format', 'wp-clocks')}
+						value={timeFormat}
+						options={[
+							{ label: __('00:00', 'wp-clocks'), value: 'colon' },
+							{
+								label: __('00:00 AM/PM', 'wp-clocks'),
+								value: 'colon-ampm-uppercase',
+							},
+							{
+								label: __('00:00 am/pm', 'wp-clocks'),
+								value: 'colon-ampm-lowercase',
+							},
+						]}
+						onChange={(timeFormat) => {
+							setAttributes({ timeFormat });
+						}}
+					/>
+
+					<ToggleControl
+						label={__('Display Timestamp Seconds', 'wp-clocks')}
+						checked={displayTimestampSeconds}
+						onChange={(displayTimestampSeconds) => {
+							setAttributes({ displayTimestampSeconds });
+						}}
+					/>
+				</>
+			)}
+		</PanelBody>
+	);
+};
 
 /**
  * Layout settings component.
@@ -86,13 +179,13 @@ const LayoutSettings = ({ setAttributes, layout }) => {
 };
 
 /**
- * Check it marks format setting panel should be outputed.
+ * Check it a few settings panel should be outputed.
  *
  * @param {string} layout Layout to check.
  *
  * @returns {boolean}
  */
-const ShouldShowMarksFormat = (layout) => {
+const ShouldShowClockSettings = (layout) => {
 	const allowedLayouts = ['clock', 'clock-reverse'];
 	if (allowedLayouts.includes(layout)) {
 		return true;
@@ -154,11 +247,11 @@ const ClocksEditContainer = (props) => {
 	const { attributes, setAttributes } = props;
 	const { layout, marksFormat } = attributes;
 
-	const shouldShowMarksFormat = ShouldShowMarksFormat(layout);
+	const shouldShowClockSettings = ShouldShowClockSettings(layout);
 
 	const classes = clsx({
 		[`has-clocks-layout-${layout}`]: layout,
-		[`has-clocks-marks-format-${marksFormat}`]: shouldShowMarksFormat,
+		[`has-clocks-marks-format-${marksFormat}`]: shouldShowClockSettings,
 	});
 
 	const blockProps = useBlockProps({
@@ -174,9 +267,15 @@ const ClocksEditContainer = (props) => {
 	return (
 		<>
 			<InspectorControls>
+				<VisibilitySettings
+					setAttributes={setAttributes}
+					attributes={attributes}
+					shouldShowClockSettings={shouldShowClockSettings}
+				/>
+
 				<LayoutSettings setAttributes={setAttributes} layout={layout} />
 
-				{shouldShowMarksFormat && (
+				{shouldShowClockSettings && (
 					<MarksFormatSettings setAttributes={setAttributes} marksFormat={marksFormat} />
 				)}
 			</InspectorControls>

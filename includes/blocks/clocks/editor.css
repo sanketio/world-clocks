@@ -21,6 +21,7 @@
 			flex-direction: column;
 			justify-content: center;
 			margin: 6px;
+			max-width: calc(50% - 12px);
 			padding: 16px;
 		}
 	}

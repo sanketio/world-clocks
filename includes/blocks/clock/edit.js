@@ -281,6 +281,7 @@ const TimezoneSelector = (props) => {
 				onChange={onChange}
 				onKeyDown={onKeyDown}
 				onFocus={onFocus}
+				onClick={onFocus}
 				help={__('Click on the textbox and type to find the timezone.', 'wp-clocks')}
 			/>
 

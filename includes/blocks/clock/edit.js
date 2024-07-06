@@ -330,7 +330,39 @@ const TimezoneSelector = (props) => {
  * @returns {Function} Render the edit screen
  */
 const ClockBlockEdit = (props) => {
+	const { attributes } = props;
+	const { timezone, timezoneLabel } = attributes;
+
 	const blockProps = useBlockProps();
+
+	/**
+	 * Show clock.
+	 *
+	 * @returns {HTMLElement}
+	 */
+	const showClock = () => {
+		const formattedTimezone = timezone.replace(' ', '_');
+		let currentTime = new Date().toLocaleTimeString('en-US', { timeZone: formattedTimezone });
+		const [ctime, setTime] = useState(currentTime); // eslint-disable-line react-hooks/rules-of-hooks, no-unused-vars
+
+		/**
+		 * Update time every second.
+		 */
+		const updateTime = () => {
+			currentTime = new Date().toLocaleTimeString('en-US', { timeZone: formattedTimezone });
+			setTime(currentTime);
+		};
+
+		setInterval(updateTime);
+
+		return (
+			<>
+				<p className="timestamp">{currentTime}</p>
+
+				<p className="timestamp-label">{timezoneLabel}</p>
+			</>
+		);
+	};
 
 	return (
 		<>
@@ -338,7 +370,7 @@ const ClockBlockEdit = (props) => {
 				<TimezoneSelector {...props} />
 			</InspectorControls>
 
-			<div {...blockProps} />
+			<div {...blockProps}>{showClock()}</div>
 		</>
 	);
 };

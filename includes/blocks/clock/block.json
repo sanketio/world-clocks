@@ -10,6 +10,10 @@
 	"attributes": {
 		"timezone": {
 			"type": "string"
+		},
+		"timezoneLabel": {
+			"type": "string",
+			"default": "UTC"
 		}
 	},
 	"supports": {

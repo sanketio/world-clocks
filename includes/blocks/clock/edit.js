@@ -20,7 +20,7 @@ import './editor.css';
  */
 const TimezoneSelector = (props) => {
 	const { attributes, setAttributes } = props;
-	const { timezone } = attributes;
+	const { timezone, timezoneLabel } = attributes;
 	const { timezones } = SPWPCLOCK;
 
 	const continents = timezones.filter((timezoneObj) => {
@@ -152,6 +152,11 @@ const TimezoneSelector = (props) => {
 
 			const foundTimezones = filterTimezones(filteredTimezones[activeTimezone].value);
 
+			// Only override timezone label if timezone is updated.
+			if (timezone !== filteredTimezones[activeTimezone].value) {
+				setAttributes({ timezoneLabel: filteredTimezones[activeTimezone].value });
+			}
+
 			setAttributes({ timezone: filteredTimezones[activeTimezone].value });
 
 			setActiveSuggestion(1);
@@ -212,12 +217,26 @@ const TimezoneSelector = (props) => {
 		const selectedTimezone = event.target.dataset.timezoneValue;
 		const foundTimezones = filterTimezones(selectedTimezone);
 
+		// Only override timezone label if timezone is updated.
+		if (timezone !== selectedTimezone) {
+			setAttributes({ timezoneLabel: selectedTimezone });
+		}
+
 		setAttributes({ timezone: selectedTimezone });
 
 		setActiveSuggestion(1);
 		setFilteredTimezones(foundTimezones);
 		setUserInput(selectedTimezone);
 		setShowSuggestions(false);
+	};
+
+	/**
+	 * On change event for the timezone label field.
+	 *
+	 * @param {string} newTimezoneLabel Textbox input string.
+	 */
+	const onChangeTimezoneLabel = (newTimezoneLabel) => {
+		setAttributes({ timezoneLabel: newTimezoneLabel });
 	};
 
 	let suggestionsList;
@@ -241,9 +260,9 @@ const TimezoneSelector = (props) => {
 							className += ' timezone-disabled';
 						}
 
-						let timezoneLabel = timezoneObj.label;
+						let timezoneLabelText = timezoneObj.label;
 						if (timezoneObj.value === defaultUserInput) {
-							timezoneLabel += ` ${__('(Selected)', 'wp-clocks')}`;
+							timezoneLabelText += ` ${__('(Selected)', 'wp-clocks')}`;
 						}
 
 						return (
@@ -254,7 +273,7 @@ const TimezoneSelector = (props) => {
 								onClick={onClick}
 								disabled={timezoneObj?.disabled}
 							>
-								{timezoneLabel}
+								{timezoneLabelText}
 							</li>
 						);
 					})}
@@ -283,6 +302,14 @@ const TimezoneSelector = (props) => {
 				onFocus={onFocus}
 				onClick={onFocus}
 				help={__('Click on the textbox and type to find the timezone.', 'wp-clocks')}
+			/>
+
+			<TextControl
+				className="wp-clock-timezone-label"
+				label={__('Timezone Label', 'wp-clocks')}
+				value={timezoneLabel}
+				onChange={onChangeTimezoneLabel}
+				help={__('Override default timezone label.', 'wp-clocks')}
 			/>
 
 			{suggestionsList}

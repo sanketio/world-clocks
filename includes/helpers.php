@@ -35,10 +35,18 @@ function get_timezones( $locale = null ) {
 
 	// Save default UTL timezone to the return array.
 	$structure = [
-		'UTC' => [
-			'UTC',
+		[
+			'value'    => 'tUTC',
+			'label'    => 'UTC',
+			'disabled' => true,
+		],
+		[
+			'value' => 'UTC',
+			'label' => 'UTC',
 		],
 	];
+
+	$added_continents = [];
 
 	// Get the timezones.
 	$tz_identifiers = timezone_identifiers_list();
@@ -67,7 +75,21 @@ function get_timezones( $locale = null ) {
 			continue;
 		}
 
-		$structure[ $continent ][] = $value;
+		if ( ! in_array( $continent, $added_continents, true ) ) {
+
+			$structure[] = [
+				'value'    => "t{$continent}",
+				'label'    => $continent,
+				'disabled' => true,
+			];
+
+			$added_continents[] = $continent;
+		}
+
+		$structure[] = [
+			'value' => "{$continent}/{$value}",
+			'label' => $value,
+		];
 	}
 
 	// Manual offset range.
@@ -129,13 +151,47 @@ function get_timezones( $locale = null ) {
 		14,
 	);
 
+	$structure[] = [
+		'value'    => 'tManual Offsets',
+		'label'    => __( 'Manual Offsets', 'wp-clocks' ),
+		'disabled' => true,
+	];
+
 	foreach ( $offset_range as $offset ) {
 
 		$offset_name = 0 <= $offset ? '+' . $offset : $offset;
 		$offset_name = str_replace( [ '.25', '.5', '.75' ], [ ':15', ':30', ':45' ], $offset_name );
 
-		$structure['Manual Offsets'][] = "UTC{$offset_name}";
+		$structure[] = [
+			'value' => "UTC{$offset_name}",
+			'label' => "UTC{$offset_name}",
+		];
 	}
 
 	return $structure;
+}
+
+/**
+ * Get asset info from extracted asset files
+ *
+ * @param string $slug Asset slug as defined in build/webpack configuration
+ * @param string $attribute Optional attribute to get. Can be version or dependencies
+ *
+ * @return string|array
+ */
+function get_asset_info( $slug, $attribute = null ) {
+
+	if ( file_exists( CLOCKS_DIST_DIR . $slug . '.asset.php' ) ) {
+		$asset = require CLOCKS_DIST_DIR . $slug . '.asset.php';
+	} elseif ( file_exists( CLOCKS_DIST_DIR . $slug . '.asset.php' ) ) {
+		$asset = require CLOCKS_DIST_DIR . $slug . '.asset.php';
+	} else {
+		return null;
+	}
+
+	if ( ! empty( $attribute ) && isset( $asset[ $attribute ] ) ) {
+		return $asset[ $attribute ];
+	}
+
+	return $asset;
 }

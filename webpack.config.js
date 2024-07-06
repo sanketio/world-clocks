@@ -10,5 +10,6 @@ module.exports = {
 	entry: {
 		'clocks-block': ['./includes/blocks/clocks/index.js'],
 		'clock-block': ['./includes/blocks/clock/index.js'],
+		'admin-style': ['./assets/css/admin/admin-style.css'],
 	},
 };

@@ -31,5 +31,8 @@ define( 'CLOCKS_DIST_URL', CLOCKS_PLUGIN_URL . 'dist/' );
 
 require CLOCKS_PLUGIN_DIR . 'includes/helpers.php';
 
+require CLOCKS_PLUGIN_DIR . 'includes/core.php';
+Core\setup();
+
 require CLOCKS_PLUGIN_DIR . 'includes/blocks.php';
 Blocks\setup();

@@ -8,13 +8,8 @@
 	"description": "Display clocks",
 	"parent": [ "wp-clocks/clocks" ],
 	"attributes": {
-		"title": {
+		"timezone": {
 			"type": "string"
-		}
-	},
-	"example": {
-		"attributes": {
-			"title": "Example Block"
 		}
 	},
 	"supports": {
@@ -25,5 +20,6 @@
 		}
 	},
 	"textdomain": "wp-clocks",
-	"editorScript": "file:../../../dist/clock-block.js"
+	"editorScript": "file:../../../dist/clock-block.js",
+	"editorStyle": "file:../../../dist/clock-block.css"
 }

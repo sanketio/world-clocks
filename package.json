@@ -60,5 +60,8 @@
 		"stylelint-config-recommended": "^14.0.1",
 		"stylelint-declaration-strict-value": "^1.10.4",
 		"stylelint-order": "^6.0.4"
+	},
+	"dependencies": {
+		"@wordpress/keycodes": "^4.2.0"
 	}
 }

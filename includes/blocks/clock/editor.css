@@ -1,0 +1,48 @@
+.no-suggestions {
+	color: var(--c-red);
+}
+
+.wp-clock-timezone-setting {
+	position: relative;
+	width: inherit;
+
+	& .timezone-suggestions {
+		background-color: var(--c-white);
+		border: 1px solid var(--c-dusty-gray);
+		border-top-width: 0;
+		left: 17px;
+		margin: 0;
+		max-height: 200px;
+		overflow-y: auto;
+		padding: 0;
+		position: absolute;
+		top: 108px;
+		width: calc(100% - 32px);
+		z-index: 99;
+
+		& li.timezone {
+			cursor: pointer;
+			padding: 5px 25px;
+
+			&.timezone-selected {
+				font-weight: 700;
+			}
+
+			&.timezone-selected,
+			&.timezone-active,
+			&:hover {
+				color: var(--wp-admin-theme-color);
+			}
+
+			&.timezone-disabled {
+				color: var(--c-silver-chalice);
+				cursor: default;
+				padding: 5px 10px;
+
+				&:hover {
+					color: var(--c-silver-chalice);
+				}
+			}
+		}
+	}
+}

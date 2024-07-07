@@ -318,6 +318,71 @@ const TimezoneSelector = (props) => {
 };
 
 /**
+ * Output digital clock.
+ *
+ * @param {object} settings The function attributes.
+ * @param {string} settings.timezone Clock timezone.
+ * @param {Array} settings.context Parent block context values.
+ *
+ * @returns {null|HTMLElement}
+ */
+const DigitalClock = ({ timezone, context }) => {
+	// Allowed clocks layout.
+	const digitalClocksLayouts = ['digital-column', 'digital-row'];
+
+	// Return early, if should not show digital clock.
+	if (
+		!(
+			digitalClocksLayouts.includes(context['parent-clock/layout']) ||
+			context['parent-clock/showTimestamp']
+		)
+	) {
+		return null;
+	}
+
+	// Check if 24 hours format is enabled.
+	const shouldUse12HoursFormat = !context['parent-clock/display24HoursFormat'];
+
+	// Defailt time string object.
+	const timeStringSettings = {
+		timeZone: timezone,
+		hour12: shouldUse12HoursFormat,
+		hour: '2-digit',
+		minute: '2-digit',
+	};
+
+	// Allow seconds to display if enabled.
+	if (context['parent-clock/displayTimestampSeconds']) {
+		timeStringSettings.second = '2-digit';
+	}
+
+	// Get the initial time.
+	const initialTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
+
+	// Save initial time in state.
+	const [currentTime, setCurrentTime] = useState(initialTime); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+
+	/**
+	 * Update time every second.
+	 */
+	const updateTime = () => {
+		// Update new time to the state.
+		setCurrentTime(new Date().toLocaleTimeString('en-US', timeStringSettings));
+	};
+
+	// Set interval to update time every second.
+	useEffect( () => { // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+		const intervalId = setInterval(updateTime);
+
+		return () => {
+			clearInterval(intervalId);
+		};
+	});
+
+	return <p className="digital-clock">{currentTime}</p>;
+};
+
+/**
  * Edit component.
  * See https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/#edit
  *
@@ -333,51 +398,10 @@ const ClockBlockEdit = (props) => {
 	const { attributes, context } = props;
 	const { timezone, timezoneLabel } = attributes;
 
+	// Format timezone for Date object.
+	const formattedTimezone = timezone.replace(' ', '_');
+
 	const blockProps = useBlockProps();
-
-	/**
-	 * Show clock.
-	 *
-	 * @returns {HTMLElement}
-	 */
-	const showClock = () => {
-		const formattedTimezone = timezone.replace(' ', '_');
-
-		const shouldUse12HoursFormat = !context['parent-clock/display24HoursFormat'];
-
-		const timeStringSettings = {
-			timeZone: formattedTimezone,
-			hour12: shouldUse12HoursFormat,
-			hour: '2-digit',
-			minute: '2-digit',
-		};
-
-		if (context['parent-clock/displayTimestampSeconds']) {
-			timeStringSettings.second = '2-digit';
-		}
-
-		let currentTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-
-		const [ctime, setTime] = useState(currentTime); // eslint-disable-line react-hooks/rules-of-hooks, no-unused-vars
-
-		/**
-		 * Update time every second.
-		 */
-		const updateTime = () => {
-			currentTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-			setTime(currentTime);
-		};
-
-		setInterval(updateTime);
-
-		return (
-			<>
-				<p className="timestamp">{currentTime}</p>
-
-				<p className="timestamp-label">{timezoneLabel}</p>
-			</>
-		);
-	};
 
 	return (
 		<>
@@ -385,7 +409,11 @@ const ClockBlockEdit = (props) => {
 				<TimezoneSelector {...props} />
 			</InspectorControls>
 
-			<div {...blockProps}>{showClock()}</div>
+			<div {...blockProps}>
+				<DigitalClock timezone={formattedTimezone} context={context} />
+
+				<p className="clock-label">{timezoneLabel}</p>
+			</div>
 		</>
 	);
 };

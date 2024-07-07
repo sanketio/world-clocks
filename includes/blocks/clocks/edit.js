@@ -39,6 +39,7 @@ import Combine from './icons/combine';
 import Line from './icons/line';
 
 import './editor.css';
+import './style.css';
 
 /**
  * Visibility settings component.

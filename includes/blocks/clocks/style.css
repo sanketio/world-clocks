@@ -1,0 +1,119 @@
+@import url("../../../assets/css/global/colors.css");
+
+.has-clocks-layout-digital-column {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	text-align: center;
+
+	& .wp-block-wp-clocks-clock {
+		border-bottom: 1px solid var(--c-dusty-gray);
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		justify-content: flex-start;
+		overflow-wrap: anywhere;
+	}
+
+	&.has-clocks-1-columns {
+
+		& .wp-block-wp-clocks-clock {
+			flex-basis: 100%;
+
+			&:last-of-type {
+				border-bottom: unset;
+			}
+
+			& .clock-label {
+				margin-top: 0;
+			}
+		}
+	}
+
+	&.has-clocks-2-columns {
+
+		& .wp-block-wp-clocks-clock {
+			border-right: 1px solid var(--c-dusty-gray);
+			flex-basis: 49%;
+
+			& .clock-label {
+				margin-top: 0;
+			}
+
+			&:nth-last-child(-n + 2):nth-child(2n + 1),
+			&:nth-last-child(-n + 2):nth-child(2n + 1) ~ & {
+				border-bottom: unset;
+			}
+
+			&:nth-child(2n),
+			&:last-of-type {
+				border-right: unset;
+			}
+		}
+	}
+
+	&.has-clocks-3-columns {
+
+		& .wp-block-wp-clocks-clock {
+			border-right: 1px solid var(--c-dusty-gray);
+			flex-basis: 33%;
+
+			& .clock-label {
+				margin-top: 0;
+			}
+
+			&:nth-last-child(-n + 3):nth-child(3n + 1),
+			&:nth-last-child(-n + 3):nth-child(3n + 1) ~ & {
+				border-bottom: unset;
+			}
+
+			&:nth-child(3n),
+			&:last-of-type {
+				border-right: unset;
+			}
+		}
+	}
+
+	&.has-clocks-4-columns {
+
+		& .wp-block-wp-clocks-clock {
+			border-right: 1px solid var(--c-dusty-gray);
+			flex-basis: 24%;
+
+			& .clock-label {
+				margin-top: 0;
+			}
+
+			&:nth-last-child(-n + 4):nth-child(4n + 1),
+			&:nth-last-child(-n + 4):nth-child(4n + 1) ~ & {
+				border-bottom: unset;
+			}
+
+			&:nth-child(4n),
+			&:last-of-type {
+				border-right: unset;
+			}
+		}
+	}
+}
+
+.has-clocks-layout-digital-row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	& .wp-block-wp-clocks-clock {
+		align-items: center;
+		border-bottom: 1px solid var(--c-dusty-gray);
+		display: flex;
+		flex: 1;
+		flex-basis: 100%;
+		flex-direction: row;
+		justify-content: space-between;
+		overflow-wrap: anywhere;
+
+		&:last-of-type {
+			border-bottom: unset;
+		}
+	}
+}

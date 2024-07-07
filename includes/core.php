@@ -30,9 +30,9 @@ function setup() {
  */
 function admin_styles() {
 
-	$admin_style_data         = get_asset_info( 'admin-style', 'version' );
+	$admin_style_data         = get_asset_info( 'admin-style' );
 	$admin_style_dependencies = empty( $admin_style_data['dependencies'] ) ? [] : $admin_style_data['dependencies'];
-	$admin_style_version      = empty( $admin_style_data['version'] ) ? [] : $admin_style_data['version'];
+	$admin_style_version      = empty( $admin_style_data['version'] ) ? constant( 'CLOCKS_VERSION' ) : $admin_style_data['version'];
 
 	wp_enqueue_style(
 		'wp-clocks-admin-style',

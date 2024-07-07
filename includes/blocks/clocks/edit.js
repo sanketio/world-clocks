@@ -259,9 +259,10 @@ const ClocksEditContainer = (props) => {
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(blockProps, {
-		defaultBlock: 'wp-clocks/clock',
+		defaultBlock: {
+			name: 'wp-clocks/clock',
+		},
 		directInsert: true,
-		renderAppender: false,
 	});
 
 	return (

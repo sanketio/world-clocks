@@ -13,6 +13,14 @@
 		flex-direction: column;
 		justify-content: flex-start;
 		overflow-wrap: anywhere;
+
+		& .digital-clock {
+			font-size: 24px;
+		}
+
+		& .clock-label {
+			font-size: 18px;
+		}
 	}
 
 	&.has-clocks-1-columns {
@@ -114,6 +122,14 @@
 
 		&:last-of-type {
 			border-bottom: unset;
+		}
+
+		& .digital-clock {
+			font-size: 24px;
+		}
+
+		& .clock-label {
+			font-size: 18px;
 		}
 	}
 }

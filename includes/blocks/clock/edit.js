@@ -350,8 +350,11 @@ const ClockBlockEdit = (props) => {
 			hour12: shouldUse12HoursFormat,
 			hour: '2-digit',
 			minute: '2-digit',
-			second: '2-digit',
 		};
+
+		if (context['parent-clock/displayTimestampSeconds']) {
+			timeStringSettings.second = '2-digit';
+		}
 
 		let currentTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
 

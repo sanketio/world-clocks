@@ -22,7 +22,7 @@
 		},
 		"timeFormat": {
 			"type": "string",
-			"default": "colon"
+			"default": "colon-ampm-uppercase"
 		},
 		"displayTimestampSeconds": {
 			"type": "boolean",

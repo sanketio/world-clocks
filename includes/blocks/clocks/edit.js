@@ -103,7 +103,6 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 						label={__('Time Format', 'wp-clocks')}
 						value={timeFormat}
 						options={[
-							{ label: __('00:00', 'wp-clocks'), value: 'colon' },
 							{
 								label: __('00:00 AM/PM', 'wp-clocks'),
 								value: 'colon-ampm-uppercase',
@@ -112,6 +111,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 								label: __('00:00 am/pm', 'wp-clocks'),
 								value: 'colon-ampm-lowercase',
 							},
+							{ label: __('00:00', 'wp-clocks'), value: 'colon' },
 						]}
 						onChange={(timeFormat) => {
 							setAttributes({ timeFormat });

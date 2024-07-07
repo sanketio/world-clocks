@@ -356,8 +356,38 @@ const DigitalClock = ({ timezone, context }) => {
 		timeStringSettings.second = '2-digit';
 	}
 
+	/**
+	 * Update time format.
+	 *
+	 * @param {string} timeString Time string.
+	 *
+	 * @returns {string}
+	 */
+	const updateTimeFormat = (timeString) => {
+		let newTimeString = timeString;
+
+		if (
+			context['parent-clock/display24HoursFormat'] &&
+			context['parent-clock/timeFormat'] !== 'colon'
+		) {
+			const newTimeArray = newTimeString.split(':');
+			const ampm = parseInt(newTimeArray[0], 10) >= 12 ? 'PM' : 'AM';
+
+			newTimeString = `${newTimeString} ${ampm}`;
+		}
+
+		if (context['parent-clock/timeFormat'] === 'colon-ampm-lowercase') {
+			newTimeString = newTimeString.toLowerCase();
+		} else if (context['parent-clock/timeFormat'] === 'colon') {
+			newTimeString = newTimeString.toLowerCase().replace(/am| pm/gi, '');
+		}
+
+		return newTimeString;
+	};
+
 	// Get the initial time.
-	const initialTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
+	let initialTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
+	initialTime = updateTimeFormat(initialTime);
 
 	// Save initial time in state.
 	const [currentTime, setCurrentTime] = useState(initialTime); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
@@ -367,7 +397,10 @@ const DigitalClock = ({ timezone, context }) => {
 	 */
 	const updateTime = () => {
 		// Update new time to the state.
-		setCurrentTime(new Date().toLocaleTimeString('en-US', timeStringSettings));
+		let newTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
+		newTime = updateTimeFormat(newTime);
+
+		setCurrentTime(newTime);
 	};
 
 	// Set interval to update time every second.

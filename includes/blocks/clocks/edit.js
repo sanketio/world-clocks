@@ -57,6 +57,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 		showTimestamp,
 		timeFormat,
 		displayTimestampSeconds,
+		display24HoursFormat,
 		layout,
 	} = attributes;
 	const shouldShowTimeFormatSetting = !shouldShowClockSettings || showTimestamp;
@@ -122,6 +123,14 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 						checked={displayTimestampSeconds}
 						onChange={(displayTimestampSeconds) => {
 							setAttributes({ displayTimestampSeconds });
+						}}
+					/>
+
+					<ToggleControl
+						label={__('Display 24hours Format', 'wp-clocks')}
+						checked={display24HoursFormat}
+						onChange={(display24HoursFormat) => {
+							setAttributes({ display24HoursFormat });
 						}}
 					/>
 				</>

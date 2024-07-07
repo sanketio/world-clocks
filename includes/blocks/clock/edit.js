@@ -342,14 +342,23 @@ const ClockBlockEdit = (props) => {
 	 */
 	const showClock = () => {
 		const formattedTimezone = timezone.replace(' ', '_');
-		let currentTime = new Date().toLocaleTimeString('en-US', { timeZone: formattedTimezone });
+		const timeStringSettings = {
+			timeZone: formattedTimezone,
+			hour12: true,
+			hour: '2-digit',
+			minute: '2-digit',
+			second: '2-digit',
+		};
+
+		let currentTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
+
 		const [ctime, setTime] = useState(currentTime); // eslint-disable-line react-hooks/rules-of-hooks, no-unused-vars
 
 		/**
 		 * Update time every second.
 		 */
 		const updateTime = () => {
-			currentTime = new Date().toLocaleTimeString('en-US', { timeZone: formattedTimezone });
+			currentTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
 			setTime(currentTime);
 		};
 

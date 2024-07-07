@@ -245,13 +245,14 @@ const MarksFormatSettings = ({ setAttributes, marksFormat }) => {
  */
 const ClocksEditContainer = (props) => {
 	const { attributes, setAttributes } = props;
-	const { layout, marksFormat } = attributes;
+	const { layout, marksFormat, clocksPerRow } = attributes;
 
 	const shouldShowClockSettings = ShouldShowClockSettings(layout);
 
 	const classes = clsx({
 		[`has-clocks-layout-${layout}`]: layout,
 		[`has-clocks-marks-format-${marksFormat}`]: shouldShowClockSettings,
+		[`has-clocks-${clocksPerRow}-columns`]: clocksPerRow && layout !== 'digital-row',
 	});
 
 	const blockProps = useBlockProps({

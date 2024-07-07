@@ -127,7 +127,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 					/>
 
 					<ToggleControl
-						label={__('Display 24hours Format', 'wp-clocks')}
+						label={__('Display 24 hours Format', 'wp-clocks')}
 						checked={display24HoursFormat}
 						onChange={(display24HoursFormat) => {
 							setAttributes({ display24HoursFormat });

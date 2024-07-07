@@ -330,7 +330,7 @@ const TimezoneSelector = (props) => {
  * @returns {Function} Render the edit screen
  */
 const ClockBlockEdit = (props) => {
-	const { attributes } = props;
+	const { attributes, context } = props;
 	const { timezone, timezoneLabel } = attributes;
 
 	const blockProps = useBlockProps();
@@ -342,9 +342,12 @@ const ClockBlockEdit = (props) => {
 	 */
 	const showClock = () => {
 		const formattedTimezone = timezone.replace(' ', '_');
+
+		const shouldUse12HoursFormat = !context['parent-clock/display24HoursFormat'];
+
 		const timeStringSettings = {
 			timeZone: formattedTimezone,
-			hour12: true,
+			hour12: shouldUse12HoursFormat,
 			hour: '2-digit',
 			minute: '2-digit',
 			second: '2-digit',

@@ -41,6 +41,15 @@
 			"default": "number"
 		}
 	},
+	"providesContext": {
+		"parent-clock/showClocksAmPmIndicator": "showClocksAmPmIndicator",
+		"parent-clock/showTimestamp": "showTimestamp",
+		"parent-clock/timeFormat": "timeFormat",
+		"parent-clock/displayTimestampSeconds": "displayTimestampSeconds",
+		"parent-clock/display24HoursFormat": "display24HoursFormat",
+		"parent-clock/layout": "layout",
+		"parent-clock/marksFormat": "marksFormat"
+	},
 	"supports": {
 		"html": false,
 		"color": {

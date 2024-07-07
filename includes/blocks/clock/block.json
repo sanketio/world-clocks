@@ -24,6 +24,15 @@
 			"background": true
 		}
 	},
+	"usesContext": [
+		"parent-clock/showClocksAmPmIndicator",
+		"parent-clock/showTimestamp",
+		"parent-clock/timeFormat",
+		"parent-clock/displayTimestampSeconds",
+		"parent-clock/display24HoursFormat",
+		"parent-clock/layout",
+		"parent-clock/marksFormat"
+	],
 	"textdomain": "wp-clocks",
 	"editorScript": "file:../../../dist/clock-block.js",
 	"editorStyle": "file:../../../dist/clock-block.css"

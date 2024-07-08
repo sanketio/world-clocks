@@ -415,6 +415,103 @@ const DigitalClock = ({ timezone, context }) => {
 	return <p className="digital-clock">{currentTime}</p>;
 };
 
+const AnalogClock = ({ context }) => {
+	// Allowed clocks layout.
+	const digitalClocksLayouts = ['clock', 'clock-reverse'];
+
+	// Return early, if should not show digital clock.
+	if (!digitalClocksLayouts.includes(context['parent-clock/layout'])) {
+		return null;
+	}
+
+	// Get the initial time.
+	const initialTime = new Date();
+
+	// Save initial time in state.
+	const [currentTime, setCurrentTime] = useState(initialTime); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+
+	/**
+	 * Update time every second.
+	 */
+	const updateTime = () => {
+		// Update new time to the state.
+		const newTime = new Date();
+
+		setCurrentTime(newTime);
+	};
+
+	// Set interval to update time every second.
+	useEffect( () => { // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+		const intervalId = setInterval(updateTime);
+
+		return () => {
+			clearInterval(intervalId);
+		};
+	});
+
+	return (
+		<div className="analog-clock">
+			<div className="indicator">
+				<span
+					className="hand hour"
+					style={{
+						transform: `rotate(${currentTime.getHours() * 30 + currentTime.getMinutes() * (360 / 720)}deg)`,
+					}}
+				/>
+				<span
+					className="hand minute"
+					style={{
+						transform: `rotate(${currentTime.getMinutes() * 6 + currentTime.getSeconds() * (360 / 3600)}deg)`,
+					}}
+				/>
+				<span
+					className="hand second"
+					style={{
+						transform: `rotate(${currentTime.getSeconds() * 6}deg)`,
+					}}
+				/>
+			</div>
+
+			<span className="number-indicator one">
+				<span>1</span>
+			</span>
+			<span className="number-indicator two">
+				<span>2</span>
+			</span>
+			<span className="number-indicator three">
+				<span>3</span>
+			</span>
+			<span className="number-indicator four">
+				<span>4</span>
+			</span>
+			<span className="number-indicator five">
+				<span>5</span>
+			</span>
+			<span className="number-indicator six">
+				<span>6</span>
+			</span>
+			<span className="number-indicator seven">
+				<span>7</span>
+			</span>
+			<span className="number-indicator eight">
+				<span>8</span>
+			</span>
+			<span className="number-indicator nine">
+				<span>9</span>
+			</span>
+			<span className="number-indicator ten">
+				<span>10</span>
+			</span>
+			<span className="number-indicator eleven">
+				<span>11</span>
+			</span>
+			<span className="number-indicator twelve">
+				<span>12</span>
+			</span>
+		</div>
+	);
+};
+
 /**
  * Edit component.
  * See https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/#edit
@@ -444,6 +541,8 @@ const ClockBlockEdit = (props) => {
 
 			<div {...blockProps}>
 				<DigitalClock timezone={formattedTimezone} context={context} />
+
+				<AnalogClock context={context} />
 
 				<p className="clock-label">{timezoneLabel}</p>
 			</div>

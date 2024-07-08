@@ -1,17 +1,16 @@
 @import url("../../../assets/css/global/colors.css");
 
-.has-clocks-layout-digital-column {
+.has-clocks-layout-digital-column,
+.has-clocks-layout-digital-row,
+.has-clocks-layout-clock {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	text-align: center;
 
 	& .wp-block-wp-clocks-clock {
 		border-bottom: 1px solid var(--c-dusty-gray);
 		display: flex;
 		flex: 1;
-		flex-direction: column;
-		justify-content: flex-start;
 		overflow-wrap: anywhere;
 
 		& .digital-clock {
@@ -21,6 +20,16 @@
 		& .clock-label {
 			font-size: 18px;
 		}
+	}
+}
+
+.has-clocks-layout-digital-column,
+.has-clocks-layout-clock {
+	text-align: center;
+
+	& .wp-block-wp-clocks-clock {
+		flex-direction: column;
+		justify-content: flex-start;
 	}
 
 	&.has-clocks-1-columns {
@@ -105,58 +114,31 @@
 	}
 }
 
-.has-clocks-layout-digital-row {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+.has-clocks-layout-digital-row,
+.has-clocks-layout-clock {
 
 	& .wp-block-wp-clocks-clock {
 		align-items: center;
-		border-bottom: 1px solid var(--c-dusty-gray);
-		display: flex;
-		flex: 1;
+	}
+}
+
+.has-clocks-layout-digital-row {
+
+	& .wp-block-wp-clocks-clock {
 		flex-basis: 100%;
 		flex-direction: row;
 		justify-content: space-between;
-		overflow-wrap: anywhere;
 
 		&:last-of-type {
 			border-bottom: unset;
-		}
-
-		& .digital-clock {
-			font-size: 24px;
-		}
-
-		& .clock-label {
-			font-size: 18px;
 		}
 	}
 }
 
 .has-clocks-layout-clock {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	text-align: center;
 
 	& .wp-block-wp-clocks-clock {
-		align-items: center;
-		border-bottom: 1px solid var(--c-dusty-gray);
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-		gap: 25px;
-		justify-content: flex-start;
-		overflow-wrap: anywhere;
-
-		& .digital-clock {
-			font-size: 24px;
-		}
-
-		& .clock-label {
-			font-size: 18px;
-		}
+		gap: 24px;
 
 		& .analog-clock {
 			align-items: center;
@@ -332,19 +314,10 @@
 	&.has-clocks-1-columns {
 
 		& .wp-block-wp-clocks-clock {
-			flex-basis: 100%;
 			padding-top: 24px;
 
 			&:first-of-type {
 				padding-top: 0;
-			}
-
-			&:last-of-type {
-				border-bottom: unset;
-			}
-
-			& .clock-label {
-				margin-top: 0;
 			}
 		}
 	}
@@ -352,27 +325,10 @@
 	&.has-clocks-2-columns {
 
 		& .wp-block-wp-clocks-clock {
-			border-right: 1px solid var(--c-dusty-gray);
-			flex-basis: 49%;
 			padding-top: 24px;
-
-			& .clock-label {
-				margin-top: 0;
-			}
 
 			&:nth-of-type(-n + 2) {
 				padding-top: 0;
-			}
-
-			&:nth-last-child(-n + 2):nth-child(2n + 1),
-			&:nth-last-child(-n + 2):nth-child(2n + 1) ~ & {
-				border-bottom: unset;
-				padding-top: 24px;
-			}
-
-			&:nth-child(2n),
-			&:last-of-type {
-				border-right: unset;
 			}
 		}
 	}
@@ -380,26 +336,10 @@
 	&.has-clocks-3-columns {
 
 		& .wp-block-wp-clocks-clock {
-			border-right: 1px solid var(--c-dusty-gray);
-			flex-basis: 33%;
 			padding-top: 24px;
-
-			& .clock-label {
-				margin-top: 0;
-			}
 
 			&:nth-of-type(-n + 3) {
 				padding-top: 0;
-			}
-
-			&:nth-last-child(-n + 3):nth-child(3n + 1),
-			&:nth-last-child(-n + 3):nth-child(3n + 1) ~ & {
-				border-bottom: unset;
-			}
-
-			&:nth-child(3n),
-			&:last-of-type {
-				border-right: unset;
 			}
 		}
 	}
@@ -407,26 +347,10 @@
 	&.has-clocks-4-columns {
 
 		& .wp-block-wp-clocks-clock {
-			border-right: 1px solid var(--c-dusty-gray);
-			flex-basis: 24%;
 			padding-top: 24px;
-
-			& .clock-label {
-				margin-top: 0;
-			}
 
 			&:nth-of-type(-n + 4) {
 				padding-top: 0;
-			}
-
-			&:nth-last-child(-n + 4):nth-child(4n + 1),
-			&:nth-last-child(-n + 4):nth-child(4n + 1) ~ & {
-				border-bottom: unset;
-			}
-
-			&:nth-child(4n),
-			&:last-of-type {
-				border-right: unset;
 			}
 		}
 	}

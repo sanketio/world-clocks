@@ -10,7 +10,7 @@
 	"attributes": {
 		"clocksPerRow": {
 			"type": "number",
-			"default": 3
+			"default": 2
 		},
 		"showClocksAmPmIndicator": {
 			"type": "boolean",
@@ -18,7 +18,7 @@
 		},
 		"showTimestamp": {
 			"type": "boolean",
-			"default": true
+			"default": false
 		},
 		"timestampFormat": {
 			"type": "string",
@@ -26,7 +26,7 @@
 		},
 		"displayTimestampSeconds": {
 			"type": "boolean",
-			"default": false
+			"default": true
 		},
 		"display24HoursTimestampFormat": {
 			"type": "boolean",

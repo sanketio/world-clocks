@@ -88,6 +88,13 @@ const Clock = ({ timezone, clockLabel, context }) => {
 		[`${currentAmPm}`]: context['parent-clock/showClocksAmPmIndicator'],
 	});
 
+	const hasMarksFormatLine = context['parent-clock/marksFormat'] === 'line';
+	const hasMarksFormatCombine = context['parent-clock/marksFormat'] === 'combine';
+
+	const marksFormatClass = clsx({
+		[`${context['parent-clock/marksFormat']}`]: context['parent-clock/marksFormat'],
+	});
+
 	return (
 		<>
 			{(hasAnalogClocks || hasAnalogClocksReverse) && (
@@ -123,40 +130,64 @@ const Clock = ({ timezone, clockLabel, context }) => {
 						</div>
 
 						<span className="number-indicator one">
-							<span>1</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine || hasMarksFormatCombine ? '|' : '1'}
+							</span>
 						</span>
 						<span className="number-indicator two">
-							<span>2</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine || hasMarksFormatCombine ? '|' : '2'}
+							</span>
 						</span>
 						<span className="number-indicator three">
-							<span>3</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine ? '|' : '3'}
+							</span>
 						</span>
 						<span className="number-indicator four">
-							<span>4</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine || hasMarksFormatCombine ? '|' : '4'}
+							</span>
 						</span>
 						<span className="number-indicator five">
-							<span>5</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine || hasMarksFormatCombine ? '|' : '5'}
+							</span>
 						</span>
 						<span className="number-indicator six">
-							<span>6</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine ? '|' : '6'}
+							</span>
 						</span>
 						<span className="number-indicator seven">
-							<span>7</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine || hasMarksFormatCombine ? '|' : '7'}
+							</span>
 						</span>
 						<span className="number-indicator eight">
-							<span>8</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine || hasMarksFormatCombine ? '|' : '8'}
+							</span>
 						</span>
 						<span className="number-indicator nine">
-							<span>9</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine ? '|' : '9'}
+							</span>
 						</span>
 						<span className="number-indicator ten">
-							<span>10</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine || hasMarksFormatCombine ? '|' : '10'}
+							</span>
 						</span>
 						<span className="number-indicator eleven">
-							<span>11</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine || hasMarksFormatCombine ? '|' : '11'}
+							</span>
 						</span>
 						<span className="number-indicator twelve">
-							<span>12</span>
+							<span className={marksFormatClass}>
+								{hasMarksFormatLine ? '|' : '12'}
+							</span>
 						</span>
 					</div>
 

@@ -54,6 +54,7 @@ import './style.css';
 const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings }) => {
 	const {
 		clocksPerRow,
+		clocksStackOnMobile,
 		showClocksAmPmIndicator,
 		showTimestamp,
 		timestampFormat,
@@ -62,20 +63,30 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 		layout,
 	} = attributes;
 	const shouldShowTimestampFormatSetting = !shouldShowClockSettings || showTimestamp;
-	const shouldShowClocksPerRow = layout !== 'digital-row';
+	const shouldShowClocksColumnSettings = layout !== 'digital-row';
 
 	return (
 		<PanelBody title={__('Visibility Settings', 'wp-clocks')}>
-			{shouldShowClocksPerRow && (
-				<RangeControl
-					label={__('Clocks per row', 'wp-clocks')}
-					value={clocksPerRow}
-					onChange={(clocksPerRow) => {
-						setAttributes({ clocksPerRow });
-					}}
-					min={1}
-					max={4}
-				/>
+			{shouldShowClocksColumnSettings && (
+				<>
+					<RangeControl
+						label={__('Clocks per row', 'wp-clocks')}
+						value={clocksPerRow}
+						onChange={(clocksPerRow) => {
+							setAttributes({ clocksPerRow });
+						}}
+						min={1}
+						max={4}
+					/>
+
+					<ToggleControl
+						label={__('Stack on mobile', 'wp-clocks')}
+						checked={clocksStackOnMobile}
+						onChange={(clocksStackOnMobile) => {
+							setAttributes({ clocksStackOnMobile });
+						}}
+					/>
+				</>
 			)}
 
 			{shouldShowClockSettings && (
@@ -255,7 +266,7 @@ const ShouldShowClockSettings = (layout) => {
  */
 const ClocksEditContainer = (props) => {
 	const { attributes, setAttributes } = props;
-	const { layout, marksFormat, clocksPerRow } = attributes;
+	const { layout, marksFormat, clocksPerRow, clocksStackOnMobile } = attributes;
 
 	const shouldShowClockSettings = ShouldShowClockSettings(layout);
 
@@ -263,6 +274,7 @@ const ClocksEditContainer = (props) => {
 		[`has-clocks-layout-${layout}`]: layout,
 		[`has-clocks-marks-format-${marksFormat}`]: shouldShowClockSettings,
 		[`has-clocks-${clocksPerRow}-columns`]: clocksPerRow && layout !== 'digital-row',
+		'has-clocks-stack-on-mobile': clocksStackOnMobile,
 	});
 
 	const blockProps = useBlockProps({

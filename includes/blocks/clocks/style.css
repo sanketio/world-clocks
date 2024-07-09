@@ -3,7 +3,8 @@
 
 .has-clocks-layout-digital-column,
 .has-clocks-layout-digital-row,
-.has-clocks-layout-clock {
+.has-clocks-layout-clock,
+.has-clocks-layout-clock-reverse {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -31,7 +32,8 @@
 }
 
 .has-clocks-layout-digital-column,
-.has-clocks-layout-clock {
+.has-clocks-layout-clock,
+.has-clocks-layout-clock-reverse {
 	text-align: center;
 
 	& .wp-block-wp-clocks-clock {
@@ -199,7 +201,8 @@
 }
 
 .has-clocks-layout-digital-row,
-.has-clocks-layout-clock {
+.has-clocks-layout-clock,
+.has-clocks-layout-clock-reverse {
 
 	& .wp-block-wp-clocks-clock {
 		align-items: center;
@@ -224,7 +227,8 @@
 	}
 }
 
-.has-clocks-layout-clock {
+.has-clocks-layout-clock,
+.has-clocks-layout-clock-reverse {
 
 	& .wp-block-wp-clocks-clock {
 

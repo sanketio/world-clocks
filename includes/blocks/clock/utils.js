@@ -23,10 +23,18 @@ export const hasDigitalClockLayout = (context) => {
  * @returns {boolean}
  */
 export const hasAnalogClockLayout = (context) => {
-	// Allowed clock layouts.
-	const analogClockLayouts = ['clock', 'clock-reverse'];
+	return context['parent-clock/layout'] === 'clock';
+};
 
-	return analogClockLayouts.includes(context['parent-clock/layout']);
+/**
+ * If parent clock block has analog reverse layout set.
+ *
+ * @param {Array} context Parent block context.
+ *
+ * @returns {boolean}
+ */
+export const hasAnalogClockReverseLayout = (context) => {
+	return context['parent-clock/layout'] === 'clock-reverse';
 };
 
 /**

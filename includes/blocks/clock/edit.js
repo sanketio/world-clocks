@@ -8,7 +8,12 @@ import { useState, useEffect } from '@wordpress/element';
  * Internal dependencies
  */
 import TimezoneSelector from './timezone-selector';
-import { hasDigitalClockLayout, hasAnalogClockLayout, getTimestampFormat } from './utils';
+import {
+	hasDigitalClockLayout,
+	hasAnalogClockLayout,
+	hasAnalogClockReverseLayout,
+	getTimestampFormat,
+} from './utils';
 
 import './editor.css';
 
@@ -25,6 +30,7 @@ import './editor.css';
 const Clock = ({ timezone, clockLabel, context }) => {
 	const hasDigitalClocks = hasDigitalClockLayout(context);
 	const hasAnalogClocks = hasAnalogClockLayout(context);
+	const hasAnalogClocksReverse = hasAnalogClockReverseLayout(context);
 
 	// Check if 24 hours format is enabled.
 	const shouldUse12HoursTimestampFormat = !context['parent-clock/display24HoursTimestampFormat'];
@@ -73,8 +79,16 @@ const Clock = ({ timezone, clockLabel, context }) => {
 
 	return (
 		<>
-			{hasAnalogClocks && (
+			{(hasAnalogClocks || hasAnalogClocksReverse) && (
 				<>
+					{hasAnalogClocksReverse && (
+						<>
+							<p className="clock-label">{clockLabel}</p>
+
+							{hasDigitalClocks && <p className="digital-clock">{currentTime}</p>}
+						</>
+					)}
+
 					<div className="analog-clock">
 						<div className="indicator">
 							<span
@@ -135,15 +149,21 @@ const Clock = ({ timezone, clockLabel, context }) => {
 						</span>
 					</div>
 
-					<p className="clock-label">{clockLabel}</p>
+					{hasAnalogClocks && (
+						<>
+							<p className="clock-label">{clockLabel}</p>
+
+							{hasDigitalClocks && <p className="digital-clock">{currentTime}</p>}
+						</>
+					)}
 				</>
 			)}
 
-			{hasDigitalClocks && (
+			{hasDigitalClocks && !hasAnalogClocks && !hasAnalogClocksReverse && (
 				<>
 					<p className="digital-clock">{currentTime}</p>
 
-					{!hasAnalogClocks && <p className="clock-label">{clockLabel}</p>}
+					<p className="clock-label">{clockLabel}</p>
 				</>
 			)}
 		</>

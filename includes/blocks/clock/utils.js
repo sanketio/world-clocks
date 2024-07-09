@@ -48,31 +48,27 @@ export const hasAnalogClockReverseLayout = (context) => {
 export const getTimestampFormat = (timeString, context) => {
 	let newTimeString = timeString;
 
-	if (
-		context['parent-clock/display24HoursTimestampFormat'] &&
-		context['parent-clock/timestampFormat'] !== 'colon'
-	) {
-		const newTimeArray = newTimeString.split(':');
-		const ampm = parseInt(newTimeArray[0], 10) >= 12 ? 'PM' : 'AM';
-
-		newTimeString = `${newTimeString} ${ampm}`;
-	}
-
-	if (context['parent-clock/timestampFormat'] === 'colon-ampm-lowercase') {
-		newTimeString = newTimeString.toLowerCase();
-	} else if (context['parent-clock/timestampFormat'] === 'colon') {
-		newTimeString = newTimeString.toLowerCase().replace(/am| pm/gi, '');
-	}
-
 	const timeStringData = newTimeString.split(' ');
 	const timeData = timeStringData[0].split(':');
 	const hours = parseInt(timeData[0], 10);
 	const minutes = parseInt(timeData[1], 10);
 	const seconds = parseInt(timeData[2], 10);
+	let ampm = timeStringData[1] ? `${timeStringData[1]}` : '';
+
+	if (context['parent-clock/display24HoursTimestampFormat']) {
+		ampm = hours >= 12 ? 'PM' : 'AM';
+
+		newTimeString = `${newTimeString} ${ampm}`;
+	}
 
 	if (!context['parent-clock/displayTimestampSeconds']) {
-		const hasAmPm = timeStringData[1] ? ` ${timeStringData[1]}` : '';
-		newTimeString = `${timeData[0]}:${timeData[1]} ${hasAmPm}`;
+		newTimeString = `${timeData[0]}:${timeData[1]} ${ampm}`;
+	}
+
+	if (context['parent-clock/timestampFormat'] === 'colon-ampm-lowercase') {
+		newTimeString = newTimeString.toLowerCase();
+	} else if (context['parent-clock/timestampFormat'] === 'colon') {
+		newTimeString = newTimeString.toLowerCase().replace(/ am| pm/gi, '');
 	}
 
 	return {
@@ -80,5 +76,6 @@ export const getTimestampFormat = (timeString, context) => {
 		hours,
 		minutes,
 		seconds,
+		ampm: ampm.toLowerCase(),
 	};
 };

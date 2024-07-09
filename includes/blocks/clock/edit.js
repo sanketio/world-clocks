@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import clsx from 'clsx';
+
+/**
  * WordPress dependencies
  */
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
@@ -46,13 +51,14 @@ const Clock = ({ timezone, clockLabel, context }) => {
 
 	// Get the initial time.
 	const initialTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-	const { time, hours, minutes, seconds } = getTimestampFormat(initialTime, context);
+	const { time, hours, minutes, seconds, ampm } = getTimestampFormat(initialTime, context);
 
 	// Save initial time in state.
 	const [currentTime, setCurrentTime] = useState(time); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 	const [currentHour, setCurrentHour] = useState(hours); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 	const [currentMinute, setCurrentMinute] = useState(minutes); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 	const [currentSecond, setCurrentSecond] = useState(seconds); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+	const [currentAmPm, setCurrentAmPm] = useState(ampm); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 
 	/**
 	 * Update time every second.
@@ -60,12 +66,13 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	const updateTime = () => {
 		// Update new time to the state.
 		const newTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-		const { time, hours, minutes, seconds } = getTimestampFormat(newTime, context);
+		const { time, hours, minutes, seconds, ampm } = getTimestampFormat(newTime, context);
 
 		setCurrentTime(time);
 		setCurrentHour(hours);
 		setCurrentMinute(minutes);
 		setCurrentSecond(seconds);
+		setCurrentAmPm(ampm);
 	};
 
 	// Set interval to update time every second.
@@ -75,6 +82,10 @@ const Clock = ({ timezone, clockLabel, context }) => {
 		return () => {
 			clearInterval(intervalId);
 		};
+	});
+
+	const indicatorClass = clsx({
+		[`${currentAmPm}`]: context['parent-clock/showClocksAmPmIndicator'],
 	});
 
 	return (
@@ -90,7 +101,7 @@ const Clock = ({ timezone, clockLabel, context }) => {
 					)}
 
 					<div className="analog-clock">
-						<div className="indicator">
+						<div className={`indicator ${indicatorClass}`}>
 							<span
 								className="hand hour"
 								style={{

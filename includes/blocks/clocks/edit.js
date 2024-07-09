@@ -274,7 +274,7 @@ const ClocksEditContainer = (props) => {
 		[`has-clocks-layout-${layout}`]: layout,
 		[`has-clocks-marks-format-${marksFormat}`]: shouldShowClockSettings,
 		[`has-clocks-${clocksPerRow}-columns`]: clocksPerRow && layout !== 'digital-row',
-		'has-clocks-stack-on-mobile': clocksStackOnMobile,
+		'has-clocks-not-stacked-on-mobile': !clocksStackOnMobile,
 	});
 
 	const blockProps = useBlockProps({

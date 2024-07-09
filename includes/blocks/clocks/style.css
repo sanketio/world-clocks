@@ -40,7 +40,10 @@
 		justify-content: flex-start;
 	}
 
-	&.has-clocks-1-columns {
+	&.has-clocks-1-columns,
+	&.has-clocks-2-columns,
+	&.has-clocks-3-columns,
+	&.has-clocks-4-columns {
 
 		& .wp-block-wp-clocks-clock {
 			flex-basis: 100%;
@@ -56,18 +59,10 @@
 		}
 	}
 
-	&.has-clocks-2-columns,
-	&.has-clocks-3-columns,
-	&.has-clocks-4-columns {
-
-		& .wp-block-wp-clocks-clock {
-			border-right: 1px solid var(--c-dusty-gray);
-		}
-	}
-
 	&.has-clocks-2-columns {
 
-		& .wp-block-wp-clocks-clock {
+		&.has-clocks-not-stacked-on-mobile .wp-block-wp-clocks-clock {
+			border-right: 1px solid var(--c-dusty-gray);
 			flex-basis: 49%;
 
 			&:nth-of-type(-n + 2) {
@@ -85,11 +80,35 @@
 				border-right: unset;
 			}
 		}
+
+		@media screen and (min-width: 768px) {
+
+			& .wp-block-wp-clocks-clock {
+				border-right: 1px solid var(--c-dusty-gray);
+				flex-basis: 49%;
+
+				&:nth-of-type(-n + 2) {
+					padding-top: 0;
+				}
+
+				&:nth-last-child(-n + 2):nth-child(2n + 1),
+				&:nth-last-child(-n + 2):nth-child(2n + 1) ~ & {
+					border-bottom: unset;
+					padding-bottom: 0;
+				}
+
+				&:nth-child(2n),
+				&:last-of-type {
+					border-right: unset;
+				}
+			}
+		}
 	}
 
 	&.has-clocks-3-columns {
 
-		& .wp-block-wp-clocks-clock {
+		&.has-clocks-not-stacked-on-mobile .wp-block-wp-clocks-clock {
+			border-right: 1px solid var(--c-dusty-gray);
 			flex-basis: 33%;
 
 			&:nth-of-type(-n + 3) {
@@ -107,11 +126,35 @@
 				border-right: unset;
 			}
 		}
+
+		@media screen and (min-width: 768px) {
+
+			& .wp-block-wp-clocks-clock {
+				border-right: 1px solid var(--c-dusty-gray);
+				flex-basis: 33%;
+
+				&:nth-of-type(-n + 3) {
+					padding-top: 0;
+				}
+
+				&:nth-last-child(-n + 3):nth-child(3n + 1),
+				&:nth-last-child(-n + 3):nth-child(3n + 1) ~ & {
+					border-bottom: unset;
+					padding-bottom: 0;
+				}
+
+				&:nth-child(3n),
+				&:last-of-type {
+					border-right: unset;
+				}
+			}
+		}
 	}
 
 	&.has-clocks-4-columns {
 
-		& .wp-block-wp-clocks-clock {
+		&.has-clocks-not-stacked-on-mobile .wp-block-wp-clocks-clock {
+			border-right: 1px solid var(--c-dusty-gray);
 			flex-basis: 24%;
 
 			&:nth-of-type(-n + 4) {
@@ -127,6 +170,29 @@
 			&:nth-child(4n),
 			&:last-of-type {
 				border-right: unset;
+			}
+		}
+
+		@media screen and (min-width: 768px) {
+
+			& .wp-block-wp-clocks-clock {
+				border-right: 1px solid var(--c-dusty-gray);
+				flex-basis: 24%;
+
+				&:nth-of-type(-n + 4) {
+					padding-top: 0;
+				}
+
+				&:nth-last-child(-n + 4):nth-child(4n + 1),
+				&:nth-last-child(-n + 4):nth-child(4n + 1) ~ & {
+					border-bottom: unset;
+					padding-bottom: 0;
+				}
+
+				&:nth-child(4n),
+				&:last-of-type {
+					border-right: unset;
+				}
 			}
 		}
 	}

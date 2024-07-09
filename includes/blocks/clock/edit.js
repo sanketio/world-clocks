@@ -1,443 +1,65 @@
-/* global SPWPCLOCK */
-
 /**
  * WordPress dependencies
  */
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { UP, DOWN, ENTER, ESCAPE } from '@wordpress/keycodes';
+
+/**
+ * Internal dependencies
+ */
+import TimezoneSelector from './timezone-selector';
+import { hasDigitalClockLayout, hasAnalogClockLayout, getTimestampFormat } from './utils';
 
 import './editor.css';
 
 /**
- * Timezone selector component.
- *
- * @param {object} props Block props.
- *
- * @returns {HTMLElement}
- */
-const TimezoneSelector = (props) => {
-	const { attributes, setAttributes } = props;
-	const { timezone, timezoneLabel } = attributes;
-	const { timezones } = SPWPCLOCK;
-
-	const continents = timezones.filter((timezoneObj) => {
-		return timezoneObj?.disabled;
-	});
-
-	/**
-	 * Filter timezones based on the timezone string.
-	 *
-	 * @param {string} timezoneString Timezone string.
-	 *
-	 * @returns {Array}
-	 */
-	const filterTimezones = (timezoneString) => {
-		/**
-		 * Filter out timezones that contains the user's input and is not disabled.
-		 *
-		 * Disabled timezones (continents) will be included later.
-		 */
-		const foundTimezones = timezones.filter((timezoneObj) => {
-			return (
-				!timezoneObj?.disabled &&
-				timezoneObj.value.toLowerCase().includes(timezoneString.toLowerCase())
-			);
-		});
-
-		const finalTimezones = [];
-		const availedTimezones = [];
-
-		// Loop through filtered timezones and inject Timezone continents.
-		foundTimezones.forEach((timezoneObj) => {
-			let continentTimezoneLabel = 'UTC';
-			if (timezoneObj.value.includes('/')) {
-				// Get the continent name
-				const continentTimezone = timezoneObj.value.split('/');
-
-				continentTimezoneLabel = continentTimezone[0];
-			} else if (
-				timezoneObj.value.includes(`${continentTimezoneLabel}-`) ||
-				timezoneObj.value.includes(`${continentTimezoneLabel}+`)
-			) {
-				continentTimezoneLabel = 'Manual Offsets';
-			}
-
-			// Check if continent name is already been included.
-			if (!availedTimezones.includes(continentTimezoneLabel)) {
-				// Filter the right continent name for the timezones.
-				const timezone = continents.filter((continent) => {
-					return continent.label === continentTimezoneLabel;
-				});
-
-				// Push the continent to the final list.
-				finalTimezones.push(timezone[0]);
-
-				// Mark the continent as availed.
-				availedTimezones.push(continentTimezoneLabel);
-			}
-
-			// Push the timezone to the final list.
-			finalTimezones.push(timezoneObj);
-		});
-
-		return finalTimezones;
-	};
-
-	// Default values.
-	const defaultUserInput = timezone || 'UTC';
-	const defaultFilteredTimezones = timezone ? filterTimezones(timezone) : timezones;
-
-	const [activeTimezone, setActiveSuggestion] = useState(1);
-	const [filteredTimezones, setFilteredTimezones] = useState(defaultFilteredTimezones);
-	const [showSuggestions, setShowSuggestions] = useState(false);
-	const [userInput, setUserInput] = useState(defaultUserInput);
-
-	/**
-	 * Disable suggestions on clicking outside the element.
-	 *
-	 * @param {object} event Fired click event.
-	 */
-	const handleOutsideClick = (event) => {
-		const element = event.target;
-		const timezoneSelector = element.closest('.wp-clock-timezone-selector');
-		if (!timezoneSelector) {
-			setShowSuggestions(false);
-			setUserInput(defaultUserInput);
-		}
-	};
-
-	useEffect(() => {
-		document.addEventListener('click', handleOutsideClick);
-
-		return () => {
-			document.removeEventListener('click', handleOutsideClick);
-		};
-	});
-
-	/**
-	 * On change event for the text control.
-	 *
-	 * @param {string} value Textbox input string.
-	 */
-	const onChange = (value) => {
-		if (value) {
-			const foundTimezones = filterTimezones(value);
-			setFilteredTimezones(foundTimezones);
-		} else {
-			setFilteredTimezones(timezones);
-		}
-
-		setActiveSuggestion(1);
-		setUserInput(value);
-		setShowSuggestions(true);
-	};
-
-	/**
-	 * On key down event for the suggestions.
-	 *
-	 * @param {object} event Fired event for the keys.
-	 *
-	 * @returns {void}
-	 */
-	const onKeyDown = (event) => {
-		const { keyCode } = event;
-
-		if (keyCode === ENTER) {
-			if (filteredTimezones[activeTimezone]?.disabled) {
-				return;
-			}
-
-			const foundTimezones = filterTimezones(filteredTimezones[activeTimezone].value);
-
-			// Only override timezone label if timezone is updated.
-			if (timezone !== filteredTimezones[activeTimezone].value) {
-				setAttributes({ timezoneLabel: filteredTimezones[activeTimezone].value });
-			}
-
-			setAttributes({ timezone: filteredTimezones[activeTimezone].value });
-
-			setActiveSuggestion(1);
-			setShowSuggestions(false);
-			setUserInput(filteredTimezones[activeTimezone].value);
-			setFilteredTimezones(foundTimezones);
-		} else if (keyCode === UP) {
-			if (activeTimezone <= 1) {
-				return;
-			}
-
-			setActiveSuggestion(activeTimezone - 1);
-
-			if (
-				typeof filteredTimezones[activeTimezone - 1] !== 'undefined' &&
-				filteredTimezones[activeTimezone - 1]?.disabled
-			) {
-				setActiveSuggestion(activeTimezone - 2);
-			}
-		} else if (keyCode === DOWN) {
-			if (activeTimezone + 1 === filteredTimezones.length) {
-				return;
-			}
-
-			if (
-				typeof filteredTimezones[activeTimezone + 1] !== 'undefined' &&
-				filteredTimezones[activeTimezone + 1]?.disabled
-			) {
-				setActiveSuggestion(activeTimezone + 2);
-			} else {
-				setActiveSuggestion(activeTimezone + 1);
-			}
-		} else if (keyCode === ESCAPE) {
-			setShowSuggestions(false);
-			setUserInput(defaultUserInput);
-		}
-	};
-
-	/**
-	 * On focus event for the textbox.
-	 */
-	const onFocus = () => {
-		setShowSuggestions(true);
-	};
-
-	/**
-	 * On click event for the suggestion.
-	 *
-	 * @param {object} event Event for the suggestion for list.
-	 *
-	 * @returns {void}
-	 */
-	const onClick = (event) => {
-		if (event.target.attributes?.disabled) {
-			return;
-		}
-
-		const selectedTimezone = event.target.dataset.timezoneValue;
-		const foundTimezones = filterTimezones(selectedTimezone);
-
-		// Only override timezone label if timezone is updated.
-		if (timezone !== selectedTimezone) {
-			setAttributes({ timezoneLabel: selectedTimezone });
-		}
-
-		setAttributes({ timezone: selectedTimezone });
-
-		setActiveSuggestion(1);
-		setFilteredTimezones(foundTimezones);
-		setUserInput(selectedTimezone);
-		setShowSuggestions(false);
-	};
-
-	/**
-	 * On change event for the timezone label field.
-	 *
-	 * @param {string} newTimezoneLabel Textbox input string.
-	 */
-	const onChangeTimezoneLabel = (newTimezoneLabel) => {
-		setAttributes({ timezoneLabel: newTimezoneLabel });
-	};
-
-	let suggestionsList;
-	if (showSuggestions) {
-		if (filteredTimezones.length) {
-			suggestionsList = (
-				<ul className="timezone-suggestions">
-					{filteredTimezones.map((timezoneObj, index) => {
-						let className = 'timezone';
-
-						// Flag the active timezone with a class
-						if (index === activeTimezone) {
-							className += ' timezone-active';
-						}
-
-						if (timezoneObj.value === defaultUserInput) {
-							className += ' timezone-selected';
-						}
-
-						if (timezoneObj?.disabled) {
-							className += ' timezone-disabled';
-						}
-
-						let timezoneLabelText = timezoneObj.label;
-						if (timezoneObj.value === defaultUserInput) {
-							timezoneLabelText += ` ${__('(Selected)', 'wp-clocks')}`;
-						}
-
-						return (
-							<li // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
-								className={className}
-								key={timezoneObj.value}
-								data-timezone-value={timezoneObj.value}
-								onClick={onClick}
-								disabled={timezoneObj?.disabled}
-							>
-								{timezoneLabelText}
-							</li>
-						);
-					})}
-				</ul>
-			);
-		} else {
-			suggestionsList = (
-				<div className="no-suggestions">
-					<em>{__('Please select a valid timezone from the available list.')}</em>
-				</div>
-			);
-		}
-	}
-
-	return (
-		<PanelBody
-			title={__('Timezone Settings', 'wp-clocks')}
-			className="wp-clock-timezone-setting"
-		>
-			<TextControl
-				className="wp-clock-timezone-selector"
-				label={__('Select Timezone', 'wp-clocks')}
-				value={userInput}
-				onChange={onChange}
-				onKeyDown={onKeyDown}
-				onFocus={onFocus}
-				onClick={onFocus}
-				help={__('Click on the textbox and type to find the timezone.', 'wp-clocks')}
-			/>
-
-			<TextControl
-				className="wp-clock-timezone-label"
-				label={__('Timezone Label', 'wp-clocks')}
-				value={timezoneLabel}
-				onChange={onChangeTimezoneLabel}
-				help={__('Override default timezone label.', 'wp-clocks')}
-			/>
-
-			{suggestionsList}
-		</PanelBody>
-	);
-};
-
-/**
- * Output digital clock.
+ * Output clock.
  *
  * @param {object} settings The function attributes.
  * @param {string} settings.timezone Clock timezone.
+ * @param {string} settings.clockLabel Clock label.
  * @param {Array} settings.context Parent block context values.
  *
  * @returns {null|HTMLElement}
  */
-const DigitalClock = ({ timezone, context }) => {
-	// Allowed clocks layout.
-	const digitalClocksLayouts = ['digital-column', 'digital-row'];
-
-	// Return early, if should not show digital clock.
-	if (
-		!(
-			digitalClocksLayouts.includes(context['parent-clock/layout']) ||
-			context['parent-clock/showTimestamp']
-		)
-	) {
-		return null;
-	}
+const Clock = ({ timezone, clockLabel, context }) => {
+	const hasDigitalClocks = hasDigitalClockLayout(context);
+	const hasAnalogClocks = hasAnalogClockLayout(context);
 
 	// Check if 24 hours format is enabled.
-	const shouldUse12HoursFormat = !context['parent-clock/display24HoursFormat'];
+	const shouldUse12HoursTimestampFormat = !context['parent-clock/display24HoursTimestampFormat'];
 
 	// Defailt time string object.
 	const timeStringSettings = {
 		timeZone: timezone,
-		hour12: shouldUse12HoursFormat,
+		hour12: shouldUse12HoursTimestampFormat,
 		hour: '2-digit',
 		minute: '2-digit',
-	};
-
-	// Allow seconds to display if enabled.
-	if (context['parent-clock/displayTimestampSeconds']) {
-		timeStringSettings.second = '2-digit';
-	}
-
-	/**
-	 * Update time format.
-	 *
-	 * @param {string} timeString Time string.
-	 *
-	 * @returns {string}
-	 */
-	const updateTimeFormat = (timeString) => {
-		let newTimeString = timeString;
-
-		if (
-			context['parent-clock/display24HoursFormat'] &&
-			context['parent-clock/timeFormat'] !== 'colon'
-		) {
-			const newTimeArray = newTimeString.split(':');
-			const ampm = parseInt(newTimeArray[0], 10) >= 12 ? 'PM' : 'AM';
-
-			newTimeString = `${newTimeString} ${ampm}`;
-		}
-
-		if (context['parent-clock/timeFormat'] === 'colon-ampm-lowercase') {
-			newTimeString = newTimeString.toLowerCase();
-		} else if (context['parent-clock/timeFormat'] === 'colon') {
-			newTimeString = newTimeString.toLowerCase().replace(/am| pm/gi, '');
-		}
-
-		return newTimeString;
+		second: '2-digit',
 	};
 
 	// Get the initial time.
-	let initialTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-	initialTime = updateTimeFormat(initialTime);
+	const initialTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
+	const { time, hours, minutes, seconds } = getTimestampFormat(initialTime, context);
 
 	// Save initial time in state.
-	const [currentTime, setCurrentTime] = useState(initialTime); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+	const [currentTime, setCurrentTime] = useState(time); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+	const [currentHour, setCurrentHour] = useState(hours); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+	const [currentMinute, setCurrentMinute] = useState(minutes); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+	const [currentSecond, setCurrentSecond] = useState(seconds); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 
 	/**
 	 * Update time every second.
 	 */
 	const updateTime = () => {
 		// Update new time to the state.
-		let newTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-		newTime = updateTimeFormat(newTime);
+		const newTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
+		const { time, hours, minutes, seconds } = getTimestampFormat(newTime, context);
 
-		setCurrentTime(newTime);
-	};
-
-	// Set interval to update time every second.
-	useEffect( () => { // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
-		const intervalId = setInterval(updateTime);
-
-		return () => {
-			clearInterval(intervalId);
-		};
-	});
-
-	return <p className="digital-clock">{currentTime}</p>;
-};
-
-const AnalogClock = ({ context }) => {
-	// Allowed clocks layout.
-	const digitalClocksLayouts = ['clock', 'clock-reverse'];
-
-	// Return early, if should not show digital clock.
-	if (!digitalClocksLayouts.includes(context['parent-clock/layout'])) {
-		return null;
-	}
-
-	// Get the initial time.
-	const initialTime = new Date();
-
-	// Save initial time in state.
-	const [currentTime, setCurrentTime] = useState(initialTime); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
-
-	/**
-	 * Update time every second.
-	 */
-	const updateTime = () => {
-		// Update new time to the state.
-		const newTime = new Date();
-
-		setCurrentTime(newTime);
+		setCurrentTime(time);
+		setCurrentHour(hours);
+		setCurrentMinute(minutes);
+		setCurrentSecond(seconds);
 	};
 
 	// Set interval to update time every second.
@@ -450,65 +72,81 @@ const AnalogClock = ({ context }) => {
 	});
 
 	return (
-		<div className="analog-clock">
-			<div className="indicator">
-				<span
-					className="hand hour"
-					style={{
-						transform: `rotate(${currentTime.getHours() * 30 + currentTime.getMinutes() * (360 / 720)}deg)`,
-					}}
-				/>
-				<span
-					className="hand minute"
-					style={{
-						transform: `rotate(${currentTime.getMinutes() * 6 + currentTime.getSeconds() * (360 / 3600)}deg)`,
-					}}
-				/>
-				<span
-					className="hand second"
-					style={{
-						transform: `rotate(${currentTime.getSeconds() * 6}deg)`,
-					}}
-				/>
-			</div>
+		<>
+			{hasAnalogClocks && (
+				<>
+					<div className="analog-clock">
+						<div className="indicator">
+							<span
+								className="hand hour"
+								style={{
+									transform: `rotate(${currentHour * 30 + currentMinute * (360 / 720)}deg)`,
+								}}
+							/>
+							<span
+								className="hand minute"
+								style={{
+									transform: `rotate(${currentMinute * 6 + currentSecond * (360 / 3600)}deg)`,
+								}}
+							/>
+							<span
+								className="hand second"
+								style={{
+									transform: `rotate(${currentSecond * 6}deg)`,
+								}}
+							/>
+						</div>
 
-			<span className="number-indicator one">
-				<span>1</span>
-			</span>
-			<span className="number-indicator two">
-				<span>2</span>
-			</span>
-			<span className="number-indicator three">
-				<span>3</span>
-			</span>
-			<span className="number-indicator four">
-				<span>4</span>
-			</span>
-			<span className="number-indicator five">
-				<span>5</span>
-			</span>
-			<span className="number-indicator six">
-				<span>6</span>
-			</span>
-			<span className="number-indicator seven">
-				<span>7</span>
-			</span>
-			<span className="number-indicator eight">
-				<span>8</span>
-			</span>
-			<span className="number-indicator nine">
-				<span>9</span>
-			</span>
-			<span className="number-indicator ten">
-				<span>10</span>
-			</span>
-			<span className="number-indicator eleven">
-				<span>11</span>
-			</span>
-			<span className="number-indicator twelve">
-				<span>12</span>
-			</span>
-		</div>
+						<span className="number-indicator one">
+							<span>1</span>
+						</span>
+						<span className="number-indicator two">
+							<span>2</span>
+						</span>
+						<span className="number-indicator three">
+							<span>3</span>
+						</span>
+						<span className="number-indicator four">
+							<span>4</span>
+						</span>
+						<span className="number-indicator five">
+							<span>5</span>
+						</span>
+						<span className="number-indicator six">
+							<span>6</span>
+						</span>
+						<span className="number-indicator seven">
+							<span>7</span>
+						</span>
+						<span className="number-indicator eight">
+							<span>8</span>
+						</span>
+						<span className="number-indicator nine">
+							<span>9</span>
+						</span>
+						<span className="number-indicator ten">
+							<span>10</span>
+						</span>
+						<span className="number-indicator eleven">
+							<span>11</span>
+						</span>
+						<span className="number-indicator twelve">
+							<span>12</span>
+						</span>
+					</div>
+
+					<p className="clock-label">{clockLabel}</p>
+				</>
+			)}
+
+			{hasDigitalClocks && (
+				<>
+					<p className="digital-clock">{currentTime}</p>
+
+					{!hasAnalogClocks && <p className="clock-label">{clockLabel}</p>}
+				</>
+			)}
+		</>
 	);
 };
 
@@ -540,11 +178,7 @@ const ClockBlockEdit = (props) => {
 			</InspectorControls>
 
 			<div {...blockProps}>
-				<DigitalClock timezone={formattedTimezone} context={context} />
-
-				<AnalogClock context={context} />
-
-				<p className="clock-label">{timezoneLabel}</p>
+				<Clock timezone={formattedTimezone} clockLabel={timezoneLabel} context={context} />
 			</div>
 		</>
 	);

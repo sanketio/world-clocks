@@ -20,15 +20,15 @@
 			"type": "boolean",
 			"default": true
 		},
-		"timeFormat": {
+		"timestampFormat": {
 			"type": "string",
 			"default": "colon-ampm-uppercase"
 		},
 		"displayTimestampSeconds": {
 			"type": "boolean",
-			"default": true
+			"default": false
 		},
-		"display24HoursFormat": {
+		"display24HoursTimestampFormat": {
 			"type": "boolean",
 			"default": false
 		},
@@ -44,9 +44,9 @@
 	"providesContext": {
 		"parent-clock/showClocksAmPmIndicator": "showClocksAmPmIndicator",
 		"parent-clock/showTimestamp": "showTimestamp",
-		"parent-clock/timeFormat": "timeFormat",
+		"parent-clock/timestampFormat": "timestampFormat",
 		"parent-clock/displayTimestampSeconds": "displayTimestampSeconds",
-		"parent-clock/display24HoursFormat": "display24HoursFormat",
+		"parent-clock/display24HoursTimestampFormat": "display24HoursTimestampFormat",
 		"parent-clock/layout": "layout",
 		"parent-clock/marksFormat": "marksFormat"
 	},

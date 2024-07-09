@@ -27,9 +27,9 @@
 	"usesContext": [
 		"parent-clock/showClocksAmPmIndicator",
 		"parent-clock/showTimestamp",
-		"parent-clock/timeFormat",
+		"parent-clock/timestampFormat",
 		"parent-clock/displayTimestampSeconds",
-		"parent-clock/display24HoursFormat",
+		"parent-clock/display24HoursTimestampFormat",
 		"parent-clock/layout",
 		"parent-clock/marksFormat"
 	],

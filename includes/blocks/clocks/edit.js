@@ -56,12 +56,12 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 		clocksPerRow,
 		showClocksAmPmIndicator,
 		showTimestamp,
-		timeFormat,
+		timestampFormat,
 		displayTimestampSeconds,
-		display24HoursFormat,
+		display24HoursTimestampFormat,
 		layout,
 	} = attributes;
-	const shouldShowTimeFormatSetting = !shouldShowClockSettings || showTimestamp;
+	const shouldShowTimestampFormatSetting = !shouldShowClockSettings || showTimestamp;
 	const shouldShowClocksPerRow = layout !== 'digital-row';
 
 	return (
@@ -98,11 +98,11 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 				</>
 			)}
 
-			{shouldShowTimeFormatSetting && (
+			{shouldShowTimestampFormatSetting && (
 				<>
 					<SelectControl
-						label={__('Time Format', 'wp-clocks')}
-						value={timeFormat}
+						label={__('Timestamp Format', 'wp-clocks')}
+						value={timestampFormat}
 						options={[
 							{
 								label: __('00:00 AM/PM', 'wp-clocks'),
@@ -114,8 +114,8 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 							},
 							{ label: __('00:00', 'wp-clocks'), value: 'colon' },
 						]}
-						onChange={(timeFormat) => {
-							setAttributes({ timeFormat });
+						onChange={(timestampFormat) => {
+							setAttributes({ timestampFormat });
 						}}
 					/>
 
@@ -128,10 +128,10 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 					/>
 
 					<ToggleControl
-						label={__('Display 24 hours Format', 'wp-clocks')}
-						checked={display24HoursFormat}
-						onChange={(display24HoursFormat) => {
-							setAttributes({ display24HoursFormat });
+						label={__('Display 24 hours Timestamp Format', 'wp-clocks')}
+						checked={display24HoursTimestampFormat}
+						onChange={(display24HoursTimestampFormat) => {
+							setAttributes({ display24HoursTimestampFormat });
 						}}
 					/>
 				</>
@@ -189,22 +189,6 @@ const LayoutSettings = ({ setAttributes, layout }) => {
 };
 
 /**
- * Check it a few settings panel should be outputed.
- *
- * @param {string} layout Layout to check.
- *
- * @returns {boolean}
- */
-const ShouldShowClockSettings = (layout) => {
-	const allowedLayouts = ['clock', 'clock-reverse'];
-	if (allowedLayouts.includes(layout)) {
-		return true;
-	}
-
-	return false;
-};
-
-/**
  * Marks Format settings component.
  *
  * @param {object} props The block props.
@@ -244,6 +228,22 @@ const MarksFormatSettings = ({ setAttributes, marksFormat }) => {
 			</ToggleGroupControl>
 		</PanelBody>
 	);
+};
+
+/**
+ * Check it a few settings panel should be outputed.
+ *
+ * @param {string} layout Layout to check.
+ *
+ * @returns {boolean}
+ */
+const ShouldShowClockSettings = (layout) => {
+	const allowedLayouts = ['clock', 'clock-reverse'];
+	if (allowedLayouts.includes(layout)) {
+		return true;
+	}
+
+	return false;
 };
 
 /**

@@ -30,9 +30,10 @@ import './editor.css';
  * @param {string} settings.clockLabel Clock label.
  * @param {Array} settings.context Parent block context values.
  *
- * @returns {null|HTMLElement}
+ * @returns {HTMLElement}
  */
 const Clock = ({ timezone, clockLabel, context }) => {
+	// World clocks layout flags.
 	const hasDigitalClocks = hasDigitalClockLayout(context);
 	const hasAnalogClocks = hasAnalogClockLayout(context);
 	const hasAnalogClocksReverse = hasAnalogClockReverseLayout(context);
@@ -40,7 +41,7 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	// Default time string object.
 	const timeStringSettings = {
 		timeZone: timezone,
-		hour12: !context['parent-clock/display24HoursTimestampFormat'],
+		hour12: !context['world-clocks/display24HoursTimestampFormat'],
 		hour: '2-digit',
 		minute: '2-digit',
 		second: '2-digit',
@@ -81,15 +82,17 @@ const Clock = ({ timezone, clockLabel, context }) => {
 		};
 	});
 
+	// Indicator CSS class.
 	const indicatorClass = clsx({
-		[`${currentAmPm}`]: context['parent-clock/showClocksAmPmIndicator'],
+		[`${currentAmPm}`]: context['world-clocks/showClocksAmPmIndicator'],
 	});
 
-	const hasMarksFormatLine = context['parent-clock/marksFormat'] === 'line';
-	const hasMarksFormatCombine = context['parent-clock/marksFormat'] === 'combine';
+	const hasMarksFormatLine = context['world-clocks/marksFormat'] === 'line';
+	const hasMarksFormatCombine = context['world-clocks/marksFormat'] === 'combine';
 
+	// Marks format CSS class.
 	const marksFormatClass = clsx({
-		[`${context['parent-clock/marksFormat']}`]: context['parent-clock/marksFormat'],
+		[`${context['world-clocks/marksFormat']}`]: context['world-clocks/marksFormat'],
 	});
 
 	return (
@@ -223,7 +226,7 @@ const Clock = ({ timezone, clockLabel, context }) => {
  */
 const ClockBlockEdit = (props) => {
 	const { attributes, context } = props;
-	const { timezone, timezoneLabel } = attributes;
+	const { timezone, clockLabel } = attributes;
 
 	// Format timezone for Date object.
 	const formattedTimezone = timezone.replace(' ', '_');
@@ -237,7 +240,7 @@ const ClockBlockEdit = (props) => {
 			</InspectorControls>
 
 			<div {...blockProps}>
-				<Clock timezone={formattedTimezone} clockLabel={timezoneLabel} context={context} />
+				<Clock timezone={formattedTimezone} clockLabel={clockLabel} context={context} />
 			</div>
 		</>
 	);

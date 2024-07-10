@@ -2,17 +2,17 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "world-clocks/clock",
-	"title": "Single Clock",
+	"title": "Single clock",
 	"category": "widgets",
 	"icon": "clock",
-	"description": "Display clocks",
+	"description": "Display single clock inside World Clocks block",
 	"parent": [ "world-clocks/clocks" ],
 	"attributes": {
 		"timezone": {
 			"type": "string",
 			"default": "UTC"
 		},
-		"timezoneLabel": {
+		"clockLabel": {
 			"type": "string",
 			"default": "UTC"
 		}
@@ -25,13 +25,13 @@
 		}
 	},
 	"usesContext": [
-		"parent-clock/showClocksAmPmIndicator",
-		"parent-clock/showTimestamp",
-		"parent-clock/timestampFormat",
-		"parent-clock/displayTimestampSeconds",
-		"parent-clock/display24HoursTimestampFormat",
-		"parent-clock/layout",
-		"parent-clock/marksFormat"
+		"world-clocks/showClocksAmPmIndicator",
+		"world-clocks/showTimestamp",
+		"world-clocks/timestampFormat",
+		"world-clocks/displayTimestampSeconds",
+		"world-clocks/display24HoursTimestampFormat",
+		"world-clocks/layout",
+		"world-clocks/marksFormat"
 	],
 	"textdomain": "world-clocks",
 	"editorScript": "file:../../../dist/clock-block.js",

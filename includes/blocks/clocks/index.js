@@ -1,5 +1,5 @@
 /**
- * Clocks block.
+ * World Clocks block.
  */
 
 /**
@@ -7,6 +7,10 @@
  */
 import { registerBlockType } from '@wordpress/blocks';
 
+/**
+ * Internal dependencies
+ */
+import WorldClocks from './icons/world-clocks';
 import variations from './variations';
 
 /**
@@ -20,6 +24,7 @@ import block from './block.json';
  * Register block
  */
 registerBlockType(block, {
+	icon: WorldClocks,
 	variations,
 	edit,
 	save,

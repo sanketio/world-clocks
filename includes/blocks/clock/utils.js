@@ -1,5 +1,5 @@
 /**
- * If parent clock block has digital layout set.
+ * If world clocks block has digital layout set.
  *
  * @param {Array} context Parent block context.
  *
@@ -10,31 +10,31 @@ export const hasDigitalClockLayout = (context) => {
 	const digitalClockLayouts = ['digital-column', 'digital-row'];
 
 	return (
-		digitalClockLayouts.includes(context['parent-clock/layout']) ||
-		context['parent-clock/showTimestamp']
+		digitalClockLayouts.includes(context['world-clocks/layout']) ||
+		context['world-clocks/showTimestamp']
 	);
 };
 
 /**
- * If parent clock block has analog layout set.
+ * If world clocks block has analog layout set.
  *
  * @param {Array} context Parent block context.
  *
  * @returns {boolean}
  */
 export const hasAnalogClockLayout = (context) => {
-	return context['parent-clock/layout'] === 'clock';
+	return context['world-clocks/layout'] === 'clock';
 };
 
 /**
- * If parent clock block has analog reverse layout set.
+ * If world clocks block has analog reverse layout set.
  *
  * @param {Array} context Parent block context.
  *
  * @returns {boolean}
  */
 export const hasAnalogClockReverseLayout = (context) => {
-	return context['parent-clock/layout'] === 'clock-reverse';
+	return context['world-clocks/layout'] === 'clock-reverse';
 };
 
 /**
@@ -55,19 +55,19 @@ export const getTimestampFormat = (timeString, context) => {
 	const seconds = parseInt(timeData[2], 10);
 	let ampm = timeStringData[1] ? `${timeStringData[1]}` : '';
 
-	if (context['parent-clock/display24HoursTimestampFormat']) {
+	if (context['world-clocks/display24HoursTimestampFormat']) {
 		ampm = hours >= 12 ? 'PM' : 'AM';
 
 		newTimeString = `${newTimeString} ${ampm}`;
 	}
 
-	if (!context['parent-clock/displayTimestampSeconds']) {
+	if (!context['world-clocks/displayTimestampSeconds']) {
 		newTimeString = `${timeData[0]}:${timeData[1]} ${ampm}`;
 	}
 
-	if (context['parent-clock/timestampFormat'] === 'colon-ampm-lowercase') {
+	if (context['world-clocks/timestampFormat'] === 'colon-ampm-lowercase') {
 		newTimeString = newTimeString.toLowerCase();
-	} else if (context['parent-clock/timestampFormat'] === 'colon') {
+	} else if (context['world-clocks/timestampFormat'] === 'colon') {
 		newTimeString = newTimeString.toLowerCase().replace(/ am| pm/gi, '');
 	}
 

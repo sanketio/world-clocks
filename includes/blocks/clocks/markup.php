@@ -1,6 +1,6 @@
 <?php
 /**
- * Clocks block markup
+ * World Clocks block markup
  *
  * @package world-clocks
  *

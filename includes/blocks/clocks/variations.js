@@ -16,21 +16,21 @@ import ClockReverse from './icons/clock-reverse';
  */
 const variations = [
 	{
-		name: 'digital-column',
-		title: __('Digital Column', 'world-clocks'),
-		attributes: { layout: 'digital-column' },
-		isDefault: true,
-		innerBlocks: [['world-clocks/clock']],
-		scope: ['block'],
-		icon: DigitalColumn,
-	},
-	{
 		name: 'digital-row',
 		title: __('Digital Row', 'world-clocks'),
 		attributes: { layout: 'digital-row' },
+		isDefault: true,
 		innerBlocks: [['world-clocks/clock']],
 		scope: ['block'],
 		icon: DigitalRow,
+	},
+	{
+		name: 'digital-column',
+		title: __('Digital Column', 'world-clocks'),
+		attributes: { layout: 'digital-column' },
+		innerBlocks: [['world-clocks/clock']],
+		scope: ['block'],
+		icon: DigitalColumn,
 	},
 	{
 		name: 'clock',

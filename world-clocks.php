@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Clocks
+ * Plugin Name:       World Clocks
  * Plugin URI:        https://wordpress.org/plugins/world-clocks/
  * Description:       Enable clocks for the sites with different timezones, includes a custom block as well
  * Version:           1.0.0
@@ -16,7 +16,7 @@
  * @package world-clocks
  */
 
-namespace Clocks;
+namespace WorldClocks;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

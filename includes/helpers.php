@@ -5,7 +5,7 @@
  * @package world-clocks
  */
 
-namespace Clocks\Helpers;
+namespace WorldClocks\Helpers;
 
 /**
  * Get list of timezones.
@@ -208,7 +208,7 @@ function has_digital_clock_layout( $context ) {
 	// Allowed clock layouts.
 	$digital_clock_layouts = [ 'digital-column', 'digital-row' ];
 
-	return in_array( $context['parent-clock/layout'], $digital_clock_layouts, true ) || $context['parent-clock/showTimestamp'];
+	return in_array( $context['world-clocks/layout'], $digital_clock_layouts, true ) || $context['world-clocks/showTimestamp'];
 };
 
 /**
@@ -219,7 +219,7 @@ function has_digital_clock_layout( $context ) {
  * @return bool
  */
 function has_analog_clock_layout( $context ) {
-	return 'clock' === $context['parent-clock/layout'];
+	return 'clock' === $context['world-clocks/layout'];
 }
 
 /**
@@ -230,5 +230,5 @@ function has_analog_clock_layout( $context ) {
  * @return bool
  */
 function has_analog_clock_reverse_layout( $context ) {
-	return 'clock-reverse' === $context['parent-clock/layout'];
+	return 'clock-reverse' === $context['world-clocks/layout'];
 };

@@ -17,7 +17,7 @@ import { UP, DOWN, ENTER, ESCAPE } from '@wordpress/keycodes';
  */
 const TimezoneSelector = (props) => {
 	const { attributes, setAttributes } = props;
-	const { timezone, timezoneLabel } = attributes;
+	const { timezone, clockLabel } = attributes;
 	const { timezones } = SPWPCLOCK;
 
 	const continents = timezones.filter((timezoneObj) => {
@@ -49,31 +49,31 @@ const TimezoneSelector = (props) => {
 
 		// Loop through filtered timezones and inject Timezone continents.
 		foundTimezones.forEach((timezoneObj) => {
-			let continentTimezoneLabel = 'UTC';
+			let continentClockLabel = 'UTC';
 			if (timezoneObj.value.includes('/')) {
 				// Get the continent name
 				const continentTimezone = timezoneObj.value.split('/');
 
-				continentTimezoneLabel = continentTimezone[0];
+				continentClockLabel = continentTimezone[0];
 			} else if (
-				timezoneObj.value.includes(`${continentTimezoneLabel}-`) ||
-				timezoneObj.value.includes(`${continentTimezoneLabel}+`)
+				timezoneObj.value.includes(`${continentClockLabel}-`) ||
+				timezoneObj.value.includes(`${continentClockLabel}+`)
 			) {
-				continentTimezoneLabel = 'Manual Offsets';
+				continentClockLabel = 'Manual Offsets';
 			}
 
 			// Check if continent name is already been included.
-			if (!availedTimezones.includes(continentTimezoneLabel)) {
+			if (!availedTimezones.includes(continentClockLabel)) {
 				// Filter the right continent name for the timezones.
 				const timezone = continents.filter((continent) => {
-					return continent.label === continentTimezoneLabel;
+					return continent.label === continentClockLabel;
 				});
 
 				// Push the continent to the final list.
 				finalTimezones.push(timezone[0]);
 
 				// Mark the continent as availed.
-				availedTimezones.push(continentTimezoneLabel);
+				availedTimezones.push(continentClockLabel);
 			}
 
 			// Push the timezone to the final list.
@@ -99,7 +99,7 @@ const TimezoneSelector = (props) => {
 	 */
 	const handleOutsideClick = (event) => {
 		const element = event.target;
-		const timezoneSelector = element.closest('.wp-clock-timezone-selector');
+		const timezoneSelector = element.closest('.single-clock-timezone-selector');
 		if (!timezoneSelector) {
 			setShowSuggestions(false);
 			setUserInput(defaultUserInput);
@@ -151,7 +151,7 @@ const TimezoneSelector = (props) => {
 
 			// Only override timezone label if timezone is updated.
 			if (timezone !== filteredTimezones[activeTimezone].value) {
-				setAttributes({ timezoneLabel: filteredTimezones[activeTimezone].value });
+				setAttributes({ clockLabel: filteredTimezones[activeTimezone].value });
 			}
 
 			setAttributes({ timezone: filteredTimezones[activeTimezone].value });
@@ -216,7 +216,7 @@ const TimezoneSelector = (props) => {
 
 		// Only override timezone label if timezone is updated.
 		if (timezone !== selectedTimezone) {
-			setAttributes({ timezoneLabel: selectedTimezone });
+			setAttributes({ clockLabel: selectedTimezone });
 		}
 
 		setAttributes({ timezone: selectedTimezone });
@@ -230,10 +230,10 @@ const TimezoneSelector = (props) => {
 	/**
 	 * On change event for the timezone label field.
 	 *
-	 * @param {string} newTimezoneLabel Textbox input string.
+	 * @param {string} newClockLabel Textbox input string.
 	 */
-	const onChangeTimezoneLabel = (newTimezoneLabel) => {
-		setAttributes({ timezoneLabel: newTimezoneLabel });
+	const onChangeClockLabel = (newClockLabel) => {
+		setAttributes({ clockLabel: newClockLabel });
 	};
 
 	let suggestionsList;
@@ -257,9 +257,9 @@ const TimezoneSelector = (props) => {
 							className += ' timezone-disabled';
 						}
 
-						let timezoneLabelText = timezoneObj.label;
+						let clockLabelText = timezoneObj.label;
 						if (timezoneObj.value === defaultUserInput) {
-							timezoneLabelText += ` ${__('(Selected)', 'world-clocks')}`;
+							clockLabelText += ` ${__('(Selected)', 'world-clocks')}`;
 						}
 
 						return (
@@ -270,7 +270,7 @@ const TimezoneSelector = (props) => {
 								onClick={onClick}
 								disabled={timezoneObj?.disabled}
 							>
-								{timezoneLabelText}
+								{clockLabelText}
 							</li>
 						);
 					})}
@@ -288,24 +288,27 @@ const TimezoneSelector = (props) => {
 	return (
 		<PanelBody
 			title={__('Timezone Settings', 'world-clocks')}
-			className="wp-clock-timezone-setting"
+			className="single-clock-timezone-setting"
 		>
 			<TextControl
-				className="wp-clock-timezone-selector"
+				className="single-clock-timezone-selector"
 				label={__('Select Timezone', 'world-clocks')}
 				value={userInput}
 				onChange={onChange}
 				onKeyDown={onKeyDown}
 				onFocus={onFocus}
 				onClick={onFocus}
-				help={__('Click on the textbox and type to find the timezone.', 'world-clocks')}
+				help={__(
+					'Click on the textbox and start typing to find the suitable timezone. You can remove existing selected timezone and search more.',
+					'world-clocks',
+				)}
 			/>
 
 			<TextControl
-				className="wp-clock-timezone-label"
+				className="single-clock-timezone-label"
 				label={__('Timezone Label', 'world-clocks')}
-				value={timezoneLabel}
-				onChange={onChangeTimezoneLabel}
+				value={clockLabel}
+				onChange={onChangeClockLabel}
 				help={__('Override default timezone label.', 'world-clocks')}
 			/>
 

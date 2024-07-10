@@ -5,9 +5,9 @@
  * @package world-clocks
  */
 
-namespace Clocks\Core;
+namespace WorldClocks\Core;
 
-use function Clocks\Helpers\get_asset_info;
+use function WorldClocks\Helpers\get_asset_info;
 
 /**
  * Set up blocks

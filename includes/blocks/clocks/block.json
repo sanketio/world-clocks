@@ -2,10 +2,9 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "world-clocks/clocks",
-	"title": "Clocks",
+	"title": "World Clocks",
 	"category": "widgets",
-	"icon": "clock",
-	"description": "Display clocks",
+	"description": "Display world clocks",
 	"allowedBlocks": [ "world-clocks/clock" ],
 	"attributes": {
 		"clocksPerRow": {
@@ -46,13 +45,13 @@
 		}
 	},
 	"providesContext": {
-		"parent-clock/showClocksAmPmIndicator": "showClocksAmPmIndicator",
-		"parent-clock/showTimestamp": "showTimestamp",
-		"parent-clock/timestampFormat": "timestampFormat",
-		"parent-clock/displayTimestampSeconds": "displayTimestampSeconds",
-		"parent-clock/display24HoursTimestampFormat": "display24HoursTimestampFormat",
-		"parent-clock/layout": "layout",
-		"parent-clock/marksFormat": "marksFormat"
+		"world-clocks/showClocksAmPmIndicator": "showClocksAmPmIndicator",
+		"world-clocks/showTimestamp": "showTimestamp",
+		"world-clocks/timestampFormat": "timestampFormat",
+		"world-clocks/displayTimestampSeconds": "displayTimestampSeconds",
+		"world-clocks/display24HoursTimestampFormat": "display24HoursTimestampFormat",
+		"world-clocks/layout": "layout",
+		"world-clocks/marksFormat": "marksFormat"
 	},
 	"supports": {
 		"html": false,

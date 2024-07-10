@@ -1,4 +1,4 @@
-=== Clocks ===
+=== World Clocks ===
 Contributors:      sanket.parmar
 Tags:              clock, watch, time, timezone
 Requires at least: 6.0
@@ -15,14 +15,14 @@ Enable clocks for the sites with different timezones, includes a custom block as
 = From your WordPress dashboard =
 
 1. Visit 'Plugins > Add New'
-2. Search for 'Clocks'
-3. Activate Clocks plugin from your Plugins page.
+2. Search for 'World Clocks'
+3. Activate World Clocks plugin from your Plugins page.
 
 = From WordPress.org =
 
-1. Download Clocks.
+1. Download World Clocks plugin zip file.
 2. Upload the 'world-clocks.zip' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
-3. Activate Clocks plugin from your Plugins page.
+3. Activate World Clocks plugin from your Plugins page.
 
 == Changelog ==
 

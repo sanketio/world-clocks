@@ -1,5 +1,5 @@
 /**
- * Clocks block.
+ * Clock block.
  */
 
 /**

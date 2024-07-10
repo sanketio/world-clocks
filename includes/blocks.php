@@ -5,9 +5,9 @@
  * @package world-clocks
  */
 
-namespace Clocks\Blocks;
+namespace WorldClocks\Blocks;
 
-use function Clocks\Helpers\get_timezones;
+use function WorldClocks\Helpers\get_timezones;
 
 /**
  * Set up blocks

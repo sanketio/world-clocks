@@ -172,15 +172,15 @@ const LayoutSettings = ({ setAttributes, layout }) => {
 				className="world-clocks-toggle-control"
 			>
 				<ToggleGroupControlOptionIcon
-					value="digital-column"
-					icon={DigitalColumn}
-					label={__('Digital Column', 'world-clocks')}
-				/>
-
-				<ToggleGroupControlOptionIcon
 					value="digital-row"
 					icon={DigitalRow}
 					label={__('Digital Row', 'world-clocks')}
+				/>
+
+				<ToggleGroupControlOptionIcon
+					value="digital-column"
+					icon={DigitalColumn}
+					label={__('Digital Column', 'world-clocks')}
 				/>
 
 				<ToggleGroupControlOptionIcon

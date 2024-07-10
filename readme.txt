@@ -21,7 +21,7 @@ Enable clocks for the sites with different timezones, includes a custom block as
 = From WordPress.org =
 
 1. Download Clocks.
-2. Upload the 'wp-clocks.zip' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
+2. Upload the 'world-clocks.zip' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
 3. Activate Clocks plugin from your Plugins page.
 
 == Changelog ==
@@ -30,4 +30,4 @@ Enable clocks for the sites with different timezones, includes a custom block as
 * Initial Release
 
 = Earlier versions =
-For the changelog of earlier versions, please refer to the [changelog on github.com](https://github.com/sanketio/wp-clocks/blob/trunk/CHANGELOG.md).
+For the changelog of earlier versions, please refer to the [changelog on github.com](https://github.com/sanketio/world-clocks/blob/trunk/CHANGELOG.md).

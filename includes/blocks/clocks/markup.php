@@ -2,7 +2,7 @@
 /**
  * Clocks block markup
  *
- * @package wp-clocks
+ * @package world-clocks
  *
  * @var array    $attributes Block attributes.
  * @var string   $content    Block content.

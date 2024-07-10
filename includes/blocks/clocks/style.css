@@ -10,7 +10,7 @@
 	flex-wrap: wrap;
 	padding: 24px 0;
 
-	& > .wp-block-wp-clocks-clock {
+	& > .wp-block-world-clocks-clock {
 		border-bottom: 1px solid var(--c-dusty-gray);
 		display: flex;
 		flex: 1;
@@ -36,7 +36,7 @@
 .has-clocks-layout-clock-reverse {
 	text-align: center;
 
-	& > .wp-block-wp-clocks-clock {
+	& > .wp-block-world-clocks-clock {
 		flex-direction: column;
 		gap: 24px;
 		justify-content: flex-start;
@@ -47,7 +47,7 @@
 	&.has-clocks-3-columns,
 	&.has-clocks-4-columns {
 
-		& > .wp-block-wp-clocks-clock {
+		& > .wp-block-world-clocks-clock {
 			flex-basis: 100%;
 
 			&:first-of-type {
@@ -63,7 +63,7 @@
 
 	&.has-clocks-2-columns {
 
-		&.has-clocks-not-stacked-on-mobile .wp-block-wp-clocks-clock {
+		&.has-clocks-not-stacked-on-mobile .wp-block-world-clocks-clock {
 			border-right: 1px solid var(--c-dusty-gray);
 			flex-basis: 49%;
 
@@ -85,7 +85,7 @@
 
 		@media screen and (min-width: 768px) {
 
-			& > .wp-block-wp-clocks-clock {
+			& > .wp-block-world-clocks-clock {
 				border-right: 1px solid var(--c-dusty-gray);
 				flex-basis: 49%;
 
@@ -109,7 +109,7 @@
 
 	&.has-clocks-3-columns {
 
-		&.has-clocks-not-stacked-on-mobile .wp-block-wp-clocks-clock {
+		&.has-clocks-not-stacked-on-mobile .wp-block-world-clocks-clock {
 			border-right: 1px solid var(--c-dusty-gray);
 			flex-basis: 33%;
 
@@ -131,7 +131,7 @@
 
 		@media screen and (min-width: 768px) {
 
-			& > .wp-block-wp-clocks-clock {
+			& > .wp-block-world-clocks-clock {
 				border-right: 1px solid var(--c-dusty-gray);
 				flex-basis: 33%;
 
@@ -155,7 +155,7 @@
 
 	&.has-clocks-4-columns {
 
-		&.has-clocks-not-stacked-on-mobile .wp-block-wp-clocks-clock {
+		&.has-clocks-not-stacked-on-mobile .wp-block-world-clocks-clock {
 			border-right: 1px solid var(--c-dusty-gray);
 			flex-basis: 24%;
 
@@ -177,7 +177,7 @@
 
 		@media screen and (min-width: 768px) {
 
-			& > .wp-block-wp-clocks-clock {
+			& > .wp-block-world-clocks-clock {
 				border-right: 1px solid var(--c-dusty-gray);
 				flex-basis: 24%;
 
@@ -204,14 +204,14 @@
 .has-clocks-layout-clock,
 .has-clocks-layout-clock-reverse {
 
-	& > .wp-block-wp-clocks-clock {
+	& > .wp-block-world-clocks-clock {
 		align-items: center;
 	}
 }
 
 .has-clocks-layout-digital-row {
 
-	& > .wp-block-wp-clocks-clock {
+	& > .wp-block-world-clocks-clock {
 		flex-basis: 100%;
 		flex-direction: row;
 		justify-content: space-between;
@@ -230,7 +230,7 @@
 .has-clocks-layout-clock,
 .has-clocks-layout-clock-reverse {
 
-	& > .wp-block-wp-clocks-clock {
+	& > .wp-block-world-clocks-clock {
 
 		& .analog-clock {
 			align-items: center;

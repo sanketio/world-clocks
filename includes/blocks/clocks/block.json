@@ -1,12 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "wp-clocks/clocks",
+	"name": "world-clocks/clocks",
 	"title": "Clocks",
 	"category": "widgets",
 	"icon": "clock",
 	"description": "Display clocks",
-	"allowedBlocks": [ "wp-clocks/clock" ],
+	"allowedBlocks": [ "world-clocks/clock" ],
 	"attributes": {
 		"clocksPerRow": {
 			"type": "number",
@@ -61,7 +61,7 @@
 			"background": true
 		}
 	},
-	"textdomain": "wp-clocks",
+	"textdomain": "world-clocks",
 	"editorScript": "file:../../../dist/clocks-block.js",
 	"editorStyle": "file:../../../dist/clocks-block.css",
 	"style": "file:../../../dist/style-clocks-block.css"

@@ -259,7 +259,7 @@ const TimezoneSelector = (props) => {
 
 						let timezoneLabelText = timezoneObj.label;
 						if (timezoneObj.value === defaultUserInput) {
-							timezoneLabelText += ` ${__('(Selected)', 'wp-clocks')}`;
+							timezoneLabelText += ` ${__('(Selected)', 'world-clocks')}`;
 						}
 
 						return (
@@ -287,26 +287,26 @@ const TimezoneSelector = (props) => {
 
 	return (
 		<PanelBody
-			title={__('Timezone Settings', 'wp-clocks')}
+			title={__('Timezone Settings', 'world-clocks')}
 			className="wp-clock-timezone-setting"
 		>
 			<TextControl
 				className="wp-clock-timezone-selector"
-				label={__('Select Timezone', 'wp-clocks')}
+				label={__('Select Timezone', 'world-clocks')}
 				value={userInput}
 				onChange={onChange}
 				onKeyDown={onKeyDown}
 				onFocus={onFocus}
 				onClick={onFocus}
-				help={__('Click on the textbox and type to find the timezone.', 'wp-clocks')}
+				help={__('Click on the textbox and type to find the timezone.', 'world-clocks')}
 			/>
 
 			<TextControl
 				className="wp-clock-timezone-label"
-				label={__('Timezone Label', 'wp-clocks')}
+				label={__('Timezone Label', 'world-clocks')}
 				value={timezoneLabel}
 				onChange={onChangeTimezoneLabel}
-				help={__('Override default timezone label.', 'wp-clocks')}
+				help={__('Override default timezone label.', 'world-clocks')}
 			/>
 
 			{suggestionsList}

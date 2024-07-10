@@ -2,7 +2,7 @@
 /**
  * Gutenberg Blocks setup
  *
- * @package wp-clocks
+ * @package world-clocks
  */
 
 namespace Clocks\Blocks;
@@ -76,7 +76,7 @@ function output_block_settings() {
 	];
 
 	wp_add_inline_script(
-		'wp-clocks-clock-editor-script',
+		'world-clocks-clock-editor-script',
 		'const SPWPCLOCK = ' . wp_json_encode( $data ),
 		'before'
 	);

@@ -2,7 +2,7 @@
 /**
  * Plugin helper functions.
  *
- * @package wp-clocks
+ * @package world-clocks
  */
 
 namespace Clocks\Helpers;
@@ -153,7 +153,7 @@ function get_timezones( $locale = null ) {
 
 	$structure[] = [
 		'value'    => 'tManual Offsets',
-		'label'    => __( 'Manual Offsets', 'wp-clocks' ),
+		'label'    => __( 'Manual Offsets', 'world-clocks' ),
 		'disabled' => true,
 	];
 

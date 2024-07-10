@@ -7,5 +7,5 @@ All notable changes to this project will be documented in this file, per [the Ke
 ## [1.0.0] - TBD
 - Initial Release.
 
-[Unreleased]: https://github.com/10up/wp-clocks/compare/trunk...develop
-[1.0.0]: https://github.com/10up/wp-clocks/tree/1.0.0
+[Unreleased]: https://github.com/10up/world-clocks/compare/trunk...develop
+[1.0.0]: https://github.com/10up/world-clocks/tree/1.0.0

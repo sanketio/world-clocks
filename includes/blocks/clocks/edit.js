@@ -66,11 +66,11 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 	const shouldShowClocksColumnSettings = layout !== 'digital-row';
 
 	return (
-		<PanelBody title={__('Visibility Settings', 'wp-clocks')}>
+		<PanelBody title={__('Visibility Settings', 'world-clocks')}>
 			{shouldShowClocksColumnSettings && (
 				<>
 					<RangeControl
-						label={__('Clocks per row', 'wp-clocks')}
+						label={__('Clocks per row', 'world-clocks')}
 						value={clocksPerRow}
 						onChange={(clocksPerRow) => {
 							setAttributes({ clocksPerRow });
@@ -80,7 +80,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 					/>
 
 					<ToggleControl
-						label={__('Stack on mobile', 'wp-clocks')}
+						label={__('Stack on mobile', 'world-clocks')}
 						checked={clocksStackOnMobile}
 						onChange={(clocksStackOnMobile) => {
 							setAttributes({ clocksStackOnMobile });
@@ -92,7 +92,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 			{shouldShowClockSettings && (
 				<>
 					<ToggleControl
-						label={__('Show Clocks AmPm Indicator', 'wp-clocks')}
+						label={__('Show Clocks AmPm Indicator', 'world-clocks')}
 						checked={showClocksAmPmIndicator}
 						onChange={(showClocksAmPmIndicator) => {
 							setAttributes({ showClocksAmPmIndicator });
@@ -100,7 +100,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 					/>
 
 					<ToggleControl
-						label={__('Show Timestamp', 'wp-clocks')}
+						label={__('Show Timestamp', 'world-clocks')}
 						checked={showTimestamp}
 						onChange={(showTimestamp) => {
 							setAttributes({ showTimestamp });
@@ -112,18 +112,18 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 			{shouldShowTimestampFormatSetting && (
 				<>
 					<SelectControl
-						label={__('Timestamp Format', 'wp-clocks')}
+						label={__('Timestamp Format', 'world-clocks')}
 						value={timestampFormat}
 						options={[
 							{
-								label: __('00:00 AM/PM', 'wp-clocks'),
+								label: __('00:00 AM/PM', 'world-clocks'),
 								value: 'colon-ampm-uppercase',
 							},
 							{
-								label: __('00:00 am/pm', 'wp-clocks'),
+								label: __('00:00 am/pm', 'world-clocks'),
 								value: 'colon-ampm-lowercase',
 							},
-							{ label: __('00:00', 'wp-clocks'), value: 'colon' },
+							{ label: __('00:00', 'world-clocks'), value: 'colon' },
 						]}
 						onChange={(timestampFormat) => {
 							setAttributes({ timestampFormat });
@@ -131,7 +131,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 					/>
 
 					<ToggleControl
-						label={__('Display Timestamp Seconds', 'wp-clocks')}
+						label={__('Display Timestamp Seconds', 'world-clocks')}
 						checked={displayTimestampSeconds}
 						onChange={(displayTimestampSeconds) => {
 							setAttributes({ displayTimestampSeconds });
@@ -139,7 +139,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 					/>
 
 					<ToggleControl
-						label={__('Display 24 hours Timestamp Format', 'wp-clocks')}
+						label={__('Display 24 hours Timestamp Format', 'world-clocks')}
 						checked={display24HoursTimestampFormat}
 						onChange={(display24HoursTimestampFormat) => {
 							setAttributes({ display24HoursTimestampFormat });
@@ -162,37 +162,37 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
  */
 const LayoutSettings = ({ setAttributes, layout }) => {
 	return (
-		<PanelBody title={__('Layout', 'wp-clocks')} className="wp-clocks-toggle-setting">
+		<PanelBody title={__('Layout', 'world-clocks')} className="world-clocks-toggle-setting">
 			<ToggleGroupControl
 				isBlock
 				onChange={(layout) => {
 					setAttributes({ layout });
 				}}
 				value={layout}
-				className="wp-clocks-toggle-control"
+				className="world-clocks-toggle-control"
 			>
 				<ToggleGroupControlOptionIcon
 					value="digital-column"
 					icon={DigitalColumn}
-					label={__('Digital Column', 'wp-clocks')}
+					label={__('Digital Column', 'world-clocks')}
 				/>
 
 				<ToggleGroupControlOptionIcon
 					value="digital-row"
 					icon={DigitalRow}
-					label={__('Digital Row', 'wp-clocks')}
+					label={__('Digital Row', 'world-clocks')}
 				/>
 
 				<ToggleGroupControlOptionIcon
 					value="clock"
 					icon={Clock}
-					label={__('Clock', 'wp-clocks')}
+					label={__('Clock', 'world-clocks')}
 				/>
 
 				<ToggleGroupControlOptionIcon
 					value="clock-reverse"
 					icon={ClockReverse}
-					label={__('Clock Reverse', 'wp-clocks')}
+					label={__('Clock Reverse', 'world-clocks')}
 				/>
 			</ToggleGroupControl>
 		</PanelBody>
@@ -210,31 +210,34 @@ const LayoutSettings = ({ setAttributes, layout }) => {
  */
 const MarksFormatSettings = ({ setAttributes, marksFormat }) => {
 	return (
-		<PanelBody title={__('Marks Format', 'wp-clocks')} className="wp-clocks-toggle-setting">
+		<PanelBody
+			title={__('Marks Format', 'world-clocks')}
+			className="world-clocks-toggle-setting"
+		>
 			<ToggleGroupControl
 				isBlock
 				onChange={(marksFormat) => {
 					setAttributes({ marksFormat });
 				}}
 				value={marksFormat}
-				className="wp-clocks-toggle-control"
+				className="world-clocks-toggle-control"
 			>
 				<ToggleGroupControlOptionIcon
 					value="number"
 					icon={Number}
-					label={__('Number', 'wp-clocks')}
+					label={__('Number', 'world-clocks')}
 				/>
 
 				<ToggleGroupControlOptionIcon
 					value="combine"
 					icon={Combine}
-					label={__('Combine', 'wp-clocks')}
+					label={__('Combine', 'world-clocks')}
 				/>
 
 				<ToggleGroupControlOptionIcon
 					value="line"
 					icon={Line}
-					label={__('Line', 'wp-clocks')}
+					label={__('Line', 'world-clocks')}
 				/>
 			</ToggleGroupControl>
 		</PanelBody>
@@ -283,7 +286,7 @@ const ClocksEditContainer = (props) => {
 
 	const innerBlocksProps = useInnerBlocksProps(blockProps, {
 		defaultBlock: {
-			name: 'wp-clocks/clock',
+			name: 'world-clocks/clock',
 		},
 		directInsert: true,
 	});
@@ -340,7 +343,7 @@ const Placeholder = (props) => {
 				icon={blockType?.icon?.src}
 				label={blockType?.title}
 				variations={variations}
-				instructions={__('Select a layout:', 'wp-clocks')}
+				instructions={__('Select a layout:', 'world-clocks')}
 				onSelect={(nextVariation = defaultVariation) => {
 					if (nextVariation.attributes) {
 						setAttributes(nextVariation.attributes);

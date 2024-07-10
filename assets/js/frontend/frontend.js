@@ -4,7 +4,7 @@ import { getTimestampFormat } from './utils';
 
 const outputClock = () => {
 	// Fetch all the parent clock blocks element, if not found, return early.
-	const wpClocksAll = document.querySelectorAll('.wp-block-wp-clocks-clocks');
+	const wpClocksAll = document.querySelectorAll('.wp-block-world-clocks-clocks');
 	if (!wpClocksAll.length) {
 		return;
 	}
@@ -12,7 +12,7 @@ const outputClock = () => {
 	// Loop through each parent clock.
 	wpClocksAll.forEach((wpClocks) => {
 		// Find child clocks inside parent clock wrapper, if not found, return.
-		const childClocks = wpClocks.querySelectorAll('.wp-block-wp-clocks-clock');
+		const childClocks = wpClocks.querySelectorAll('.wp-block-world-clocks-clock');
 		if (!childClocks.length) {
 			return;
 		}

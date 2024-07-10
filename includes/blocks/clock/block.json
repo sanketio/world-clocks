@@ -1,12 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "wp-clocks/clock",
+	"name": "world-clocks/clock",
 	"title": "Single Clock",
 	"category": "widgets",
 	"icon": "clock",
 	"description": "Display clocks",
-	"parent": [ "wp-clocks/clocks" ],
+	"parent": [ "world-clocks/clocks" ],
 	"attributes": {
 		"timezone": {
 			"type": "string",
@@ -33,7 +33,7 @@
 		"parent-clock/layout",
 		"parent-clock/marksFormat"
 	],
-	"textdomain": "wp-clocks",
+	"textdomain": "world-clocks",
 	"editorScript": "file:../../../dist/clock-block.js",
 	"editorStyle": "file:../../../dist/clock-block.css"
 }

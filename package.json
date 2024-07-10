@@ -1,8 +1,8 @@
 {
-	"name": "@sanketio/wp-clocks",
+	"name": "@sanketio/world-clocks",
 	"version": "1.0.0",
 	"description": "Enable clocks for the sites with different timezones, includes a custom block as well.",
-	"homepage": "https://github.com/sanketio/wp-clocks#readme",
+	"homepage": "https://github.com/sanketio/world-clocks#readme",
 	"license": "GPL-2.0-or-later",
 	"author": {
 		"name": "Sanket Parmar",
@@ -11,11 +11,11 @@
 		"role": "developer"
 	},
 	"bugs": {
-		"url": "https://github.com/sanketio/wp-clocks/issues"
+		"url": "https://github.com/sanketio/world-clocks/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/sanketio/wp-clocks.git"
+		"url": "git+https://github.com/sanketio/world-clocks.git"
 	},
 	"keywords": [
 		"clock",
@@ -26,8 +26,8 @@
 	"scripts": {
 		"start": "wp-scripts start",
 		"build": "wp-scripts build",
-		"archive": "composer archive --file=wp-clocks --format=zip",
-		"postarchive": "rm -rf wp-clocks && unzip wp-clocks.zip -d wp-clocks && rm wp-clocks.zip && zip -r wp-clocks.zip wp-clocks && rm -rf wp-clocks",
+		"archive": "composer archive --file=world-clocks --format=zip",
+		"postarchive": "rm -rf world-clocks && unzip world-clocks.zip -d world-clocks && rm world-clocks.zip && zip -r world-clocks.zip world-clocks && rm -rf world-clocks",
 		"precommit": "npm run lint-php && npm run lint-style && npm run lint-js",
 		"prepare": "husky install",
 		"lint-js": "wp-scripts lint-js",

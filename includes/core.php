@@ -2,7 +2,7 @@
 /**
  * Core plugin functionality.
  *
- * @package wp-clocks
+ * @package world-clocks
  */
 
 namespace Clocks\Core;
@@ -37,7 +37,7 @@ function admin_styles() {
 	$admin_style_version      = empty( $admin_style_data['version'] ) ? constant( 'CLOCKS_VERSION' ) : $admin_style_data['version'];
 
 	wp_enqueue_style(
-		'wp-clocks-admin-style',
+		'world-clocks-admin-style',
 		CLOCKS_DIST_URL . 'admin-style.css',
 		$admin_style_dependencies,
 		$admin_style_version,
@@ -56,7 +56,7 @@ function styles() {
 	$frontend_css_version      = empty( $frontend_css_data['version'] ) ? constant( 'CLOCKS_VERSION' ) : $frontend_css_data['version'];
 
 	wp_enqueue_style(
-		'wp-clocks-frontend-style',
+		'world-clocks-frontend-style',
 		CLOCKS_DIST_URL . 'frontend.css',
 		$frontend_css_dependencies,
 		$frontend_css_version,
@@ -75,7 +75,7 @@ function scripts() {
 	$frontend_js_version      = empty( $frontend_js_data['version'] ) ? constant( 'CLOCKS_VERSION' ) : $frontend_js_data['version'];
 
 	wp_enqueue_script(
-		'wp-clocks-frontend-js',
+		'world-clocks-frontend-js',
 		CLOCKS_DIST_URL . 'frontend.js',
 		$frontend_js_dependencies,
 		$frontend_js_version,

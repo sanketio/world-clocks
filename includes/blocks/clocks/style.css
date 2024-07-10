@@ -10,7 +10,7 @@
 	flex-wrap: wrap;
 	padding: 24px 0;
 
-	& .wp-block-wp-clocks-clock {
+	& > .wp-block-wp-clocks-clock {
 		border-bottom: 1px solid var(--c-dusty-gray);
 		display: flex;
 		flex: 1;
@@ -36,7 +36,7 @@
 .has-clocks-layout-clock-reverse {
 	text-align: center;
 
-	& .wp-block-wp-clocks-clock {
+	& > .wp-block-wp-clocks-clock {
 		flex-direction: column;
 		gap: 24px;
 		justify-content: flex-start;
@@ -47,7 +47,7 @@
 	&.has-clocks-3-columns,
 	&.has-clocks-4-columns {
 
-		& .wp-block-wp-clocks-clock {
+		& > .wp-block-wp-clocks-clock {
 			flex-basis: 100%;
 
 			&:first-of-type {
@@ -85,7 +85,7 @@
 
 		@media screen and (min-width: 768px) {
 
-			& .wp-block-wp-clocks-clock {
+			& > .wp-block-wp-clocks-clock {
 				border-right: 1px solid var(--c-dusty-gray);
 				flex-basis: 49%;
 
@@ -131,7 +131,7 @@
 
 		@media screen and (min-width: 768px) {
 
-			& .wp-block-wp-clocks-clock {
+			& > .wp-block-wp-clocks-clock {
 				border-right: 1px solid var(--c-dusty-gray);
 				flex-basis: 33%;
 
@@ -177,7 +177,7 @@
 
 		@media screen and (min-width: 768px) {
 
-			& .wp-block-wp-clocks-clock {
+			& > .wp-block-wp-clocks-clock {
 				border-right: 1px solid var(--c-dusty-gray);
 				flex-basis: 24%;
 
@@ -204,14 +204,14 @@
 .has-clocks-layout-clock,
 .has-clocks-layout-clock-reverse {
 
-	& .wp-block-wp-clocks-clock {
+	& > .wp-block-wp-clocks-clock {
 		align-items: center;
 	}
 }
 
 .has-clocks-layout-digital-row {
 
-	& .wp-block-wp-clocks-clock {
+	& > .wp-block-wp-clocks-clock {
 		flex-basis: 100%;
 		flex-direction: row;
 		justify-content: space-between;
@@ -230,7 +230,7 @@
 .has-clocks-layout-clock,
 .has-clocks-layout-clock-reverse {
 
-	& .wp-block-wp-clocks-clock {
+	& > .wp-block-wp-clocks-clock {
 
 		& .analog-clock {
 			align-items: center;
@@ -276,7 +276,6 @@
 					content: "";
 					height: 4px;
 					left: 50%;
-					margin-left: 1px;
 					position: absolute;
 					top: 50%;
 					transform: translate(-50%, -50%);
@@ -289,7 +288,7 @@
 					border-radius: 25px;
 					bottom: 0;
 					height: 37%;
-					left: 50%;
+					left: calc(50% - 1px);
 					position: absolute;
 					top: 13%;
 					transform-origin: bottom;

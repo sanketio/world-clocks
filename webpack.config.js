@@ -11,5 +11,6 @@ module.exports = {
 		'clocks-block': ['./includes/blocks/clocks/index.js'],
 		'clock-block': ['./includes/blocks/clock/index.js'],
 		'admin-style': ['./assets/css/admin/admin-style.css'],
+		frontend: ['./assets/js/frontend/frontend.js'],
 	},
 };

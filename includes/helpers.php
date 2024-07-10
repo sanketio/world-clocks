@@ -195,3 +195,40 @@ function get_asset_info( $slug, $attribute = null ) {
 
 	return $asset;
 }
+
+/**
+ * If parent clock block has digital layout set.
+ *
+ * @param array $context Parent block context.
+ *
+ * @return bool
+ */
+function has_digital_clock_layout( $context ) {
+
+	// Allowed clock layouts.
+	$digital_clock_layouts = [ 'digital-column', 'digital-row' ];
+
+	return in_array( $context['parent-clock/layout'], $digital_clock_layouts, true ) || $context['parent-clock/showTimestamp'];
+};
+
+/**
+ * If parent clock block has analog layout set.
+ *
+ * @param array $context Parent block context.
+ *
+ * @return bool
+ */
+function has_analog_clock_layout( $context ) {
+	return 'clock' === $context['parent-clock/layout'];
+}
+
+/**
+ * If parent clock block has analog reverse layout set.
+ *
+ * @param array $context Parent block context.
+ *
+ * @return bool
+ */
+function has_analog_clock_reverse_layout( $context ) {
+	return 'clock-reverse' === $context['parent-clock/layout'];
+};

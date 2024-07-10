@@ -37,13 +37,10 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	const hasAnalogClocks = hasAnalogClockLayout(context);
 	const hasAnalogClocksReverse = hasAnalogClockReverseLayout(context);
 
-	// Check if 24 hours format is enabled.
-	const shouldUse12HoursTimestampFormat = !context['parent-clock/display24HoursTimestampFormat'];
-
-	// Defailt time string object.
+	// Default time string object.
 	const timeStringSettings = {
 		timeZone: timezone,
-		hour12: shouldUse12HoursTimestampFormat,
+		hour12: !context['parent-clock/display24HoursTimestampFormat'],
 		hour: '2-digit',
 		minute: '2-digit',
 		second: '2-digit',

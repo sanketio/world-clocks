@@ -32,7 +32,11 @@
 		"prepare": "husky install",
 		"lint-js": "wp-scripts lint-js",
 		"lint-style": "wp-scripts lint-style --allow-empty-input",
-		"lint-php": "./vendor/bin/phpcs --standard=phpcs.xml -p -s ."
+		"lint-php": "./vendor/bin/phpcs --standard=phpcs.xml -p -s .",
+		"clean-dist": "rm -rf dist",
+		"clean-npm-dependency": "rm -rf node_modules",
+		"clean-composer-dependency": "rm -rf vendor",
+		"clean-all": "npm run clean-composer-dependency && npm run clean-npm-dependency && npm run clean-dist"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.24.7",

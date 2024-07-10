@@ -131,7 +131,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 					/>
 
 					<ToggleControl
-						label={__('Display Timestamp Seconds', 'world-clocks')}
+						label={__('Show Timestamp Seconds', 'world-clocks')}
 						checked={displayTimestampSeconds}
 						onChange={(displayTimestampSeconds) => {
 							setAttributes({ displayTimestampSeconds });
@@ -139,7 +139,7 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 					/>
 
 					<ToggleControl
-						label={__('Display 24 hours Timestamp Format', 'world-clocks')}
+						label={__('Show 24 hours Timestamp Format', 'world-clocks')}
 						checked={display24HoursTimestampFormat}
 						onChange={(display24HoursTimestampFormat) => {
 							setAttributes({ display24HoursTimestampFormat });

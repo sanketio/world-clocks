@@ -1,0 +1,171 @@
+# Copyright (C) 2024 Sanket Parmar
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: World Clocks 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/world-clocks\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-07-10T15:54:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: world-clocks\n"
+
+#. Plugin Name of the plugin
+msgid "World Clocks"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/world-clocks/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Enable clocks for the sites with different timezones, includes a custom Gutenberg block"
+msgstr ""
+
+#. Author of the plugin
+msgid "Sanket Parmar"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://sanketio.github.io/"
+msgstr ""
+
+#: includes/helpers.php:156
+msgid "Manual Offsets"
+msgstr ""
+
+#: includes/blocks/clock/timezone-selector.js:262
+msgid "(Selected)"
+msgstr ""
+
+#: includes/blocks/clock/timezone-selector.js:290
+msgid "Timezone Settings"
+msgstr ""
+
+#: includes/blocks/clock/timezone-selector.js:295
+msgid "Select Timezone"
+msgstr ""
+
+#: includes/blocks/clock/timezone-selector.js:301
+msgid "Click on the textbox and start typing to find the suitable timezone. You can remove existing selected timezone and search more."
+msgstr ""
+
+#: includes/blocks/clock/timezone-selector.js:309
+msgid "Timezone Label"
+msgstr ""
+
+#: includes/blocks/clock/timezone-selector.js:312
+msgid "Override default timezone label."
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:69
+msgid "Visibility Settings"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:73
+msgid "Clocks per row"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:83
+msgid "Stack on mobile"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:95
+msgid "Show Clocks AmPm Indicator"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:103
+msgid "Show Timestamp"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:115
+msgid "Timestamp Format"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:119
+msgid "00:00 AM/PM"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:123
+msgid "00:00 am/pm"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:126
+msgid "00:00"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:134
+msgid "Show Timestamp Seconds"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:142
+msgid "Show 24 hours Timestamp Format"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:165
+msgid "Layout"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:177
+#: includes/blocks/clocks/variations.js:20
+msgid "Digital Row"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:183
+#: includes/blocks/clocks/variations.js:29
+msgid "Digital Column"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:189
+#: includes/blocks/clocks/variations.js:37
+msgid "Clock"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:195
+#: includes/blocks/clocks/variations.js:45
+msgid "Clock Reverse"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:214
+msgid "Marks Format"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:228
+msgid "Number"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:234
+msgid "Combine"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:240
+msgid "Line"
+msgstr ""
+
+#: includes/blocks/clocks/edit.js:346
+msgid "Select a layout:"
+msgstr ""
+
+#: includes/blocks/clock/block.json
+msgctxt "block title"
+msgid "Single clock"
+msgstr ""
+
+#: includes/blocks/clock/block.json
+msgctxt "block description"
+msgid "Display single clock inside World Clocks block"
+msgstr ""
+
+#: includes/blocks/clocks/block.json
+msgctxt "block title"
+msgid "World Clocks"
+msgstr ""
+
+#: includes/blocks/clocks/block.json
+msgctxt "block description"
+msgid "Display world clocks"
+msgstr ""

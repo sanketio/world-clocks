@@ -1,6 +1,6 @@
 {
 	"name": "sanketio/world-clocks",
-	"description": "Enable clocks for the sites with different timezones, includes a custom block as well.",
+	"description": "Enable clocks for the sites with different timezones, includes a custom Gutenberg block.",
 	"type": "wordpress-plugin",
 	"homepage": "https://github.com/sanketio/world-clocks",
 	"readme": "https://github.com/sanketio/world-clocks/blob/trunk/README.md",

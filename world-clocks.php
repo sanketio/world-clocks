@@ -2,12 +2,12 @@
 /**
  * Plugin Name:       World Clocks
  * Plugin URI:        https://wordpress.org/plugins/world-clocks/
- * Description:       Enable clocks for the sites with different timezones, includes a custom block as well
+ * Description:       Enable clocks for the sites with different timezones, includes a custom Gutenberg block
  * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Sanket Parmar
- * Author URI:        https: //sanketio.github.io/
+ * Author URI:        https://sanketio.github.io/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       world-clocks

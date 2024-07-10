@@ -17,7 +17,7 @@ namespace WorldClocks\Helpers;
 function get_timezones( $locale = null ) {
 
 	// Allowed continents.
-	$continents = array( 'Africa', 'America', 'Antarctica', 'Arctic', 'Asia', 'Atlantic', 'Australia', 'Europe', 'Indian', 'Pacific' );
+	$continents = [ 'Africa', 'America', 'Antarctica', 'Arctic', 'Asia', 'Atlantic', 'Australia', 'Europe', 'Indian', 'Pacific' ];
 
 	static $mo_loaded = false, $locale_loaded = null;
 

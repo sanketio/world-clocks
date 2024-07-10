@@ -8,7 +8,7 @@ Requires PHP:      8.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
-Enable clocks for the sites with different timezones, includes a custom block as well.
+Enable clocks for the sites with different timezones, includes a custom Gutenberg block.
 
 == Installation ==
 

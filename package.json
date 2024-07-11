@@ -44,6 +44,7 @@
 		"@babel/preset-react": "^7.24.7",
 		"@stylistic/stylelint-plugin": "^2.1.2",
 		"@wordpress/eslint-plugin": "^19.2.0",
+		"@wordpress/keycodes": "^4.2.0",
 		"@wordpress/scripts": "^27.1.0",
 		"clsx": "^2.1.1",
 		"eslint": "^8.57.0",
@@ -64,8 +65,5 @@
 		"stylelint-config-recommended": "^14.0.1",
 		"stylelint-declaration-strict-value": "^1.10.4",
 		"stylelint-order": "^6.0.4"
-	},
-	"dependencies": {
-		"@wordpress/keycodes": "^4.2.0"
 	}
 }

@@ -21,6 +21,7 @@ import {
 } from './utils';
 
 import './editor.css';
+import './style.css';
 
 /**
  * Output clock.

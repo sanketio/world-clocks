@@ -35,5 +35,6 @@
 	],
 	"textdomain": "world-clocks",
 	"editorScript": "file:../../../dist/clock-block.js",
-	"editorStyle": "file:../../../dist/clock-block.css"
+	"editorStyle": "file:../../../dist/clock-block.css",
+	"style": "file:../../../dist/style-clock-block.css"
 }

@@ -33,6 +33,15 @@ const outputClock = () => {
 		childClocks.forEach((singleClock) => {
 			// Find the timezone for the clock.
 			const timezone = singleClock?.dataset?.timezone || 'UTC';
+			let validTimezone = timezone;
+			let manualOffset = 0;
+			if (
+				timezone.toUpperCase().includes('UTC-') ||
+				timezone.toUpperCase().includes('UTC+')
+			) {
+				manualOffset = timezone.replace('UTC', '');
+				validTimezone = 'UTC';
+			}
 
 			// Find the relevant child elements for the single clock.
 			const digitalClockElement = singleClock.querySelector('.digital-clock');
@@ -43,7 +52,7 @@ const outputClock = () => {
 
 			// Default time string object.
 			const timeStringSettings = {
-				timeZone: timezone,
+				timeZone: validTimezone,
 				hour12: !display24HoursTimestampFormat,
 				hour: '2-digit',
 				minute: '2-digit',
@@ -56,11 +65,15 @@ const outputClock = () => {
 			const updateTime = () => {
 				// Update new time to the state.
 				const newTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-				const { time, hours, minutes, seconds, ampm } = getTimestampFormat(newTime, {
-					display24HoursTimestampFormat,
-					displayTimestampSeconds,
-					timestampFormat,
-				});
+				const { time, hours, minutes, seconds, ampm } = getTimestampFormat(
+					newTime,
+					{
+						display24HoursTimestampFormat,
+						displayTimestampSeconds,
+						timestampFormat,
+					},
+					manualOffset,
+				);
 
 				if (digitalClockElement) {
 					digitalClockElement.innerText = time;

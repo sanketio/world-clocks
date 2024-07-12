@@ -39,9 +39,16 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	const hasAnalogClocks = hasAnalogClockLayout(context);
 	const hasAnalogClocksReverse = hasAnalogClockReverseLayout(context);
 
+	let validTimezone = timezone;
+	let manualOffset = 0;
+	if (timezone.toUpperCase().includes('UTC-') || timezone.toUpperCase().includes('UTC+')) {
+		manualOffset = timezone.replace('UTC', '');
+		validTimezone = 'UTC';
+	}
+
 	// Default time string object.
 	const timeStringSettings = {
-		timeZone: timezone,
+		timeZone: validTimezone,
 		hour12: !context['world-clocks/display24HoursTimestampFormat'],
 		hour: '2-digit',
 		minute: '2-digit',
@@ -50,7 +57,11 @@ const Clock = ({ timezone, clockLabel, context }) => {
 
 	// Get the initial time.
 	const initialTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-	const { time, hours, minutes, seconds, ampm } = getTimestampFormat(initialTime, context);
+	const { time, hours, minutes, seconds, ampm } = getTimestampFormat(
+		initialTime,
+		context,
+		manualOffset,
+	);
 
 	// Save initial time in state.
 	const [currentTime, setCurrentTime] = useState(time); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
@@ -65,7 +76,11 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	const updateTime = () => {
 		// Update new time to the state.
 		const newTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-		const { time, hours, minutes, seconds, ampm } = getTimestampFormat(newTime, context);
+		const { time, hours, minutes, seconds, ampm } = getTimestampFormat(
+			newTime,
+			context,
+			manualOffset,
+		);
 
 		setCurrentTime(time);
 		setCurrentHour(hours);

@@ -19,21 +19,13 @@
 			"type": "boolean",
 			"default": true
 		},
-		"showTimestamp": {
+		"showDigitalTime": {
 			"type": "boolean",
 			"default": false
 		},
-		"timestampFormat": {
+		"timeFormat": {
 			"type": "string",
-			"default": "colon-ampm-uppercase"
-		},
-		"displayTimestampSeconds": {
-			"type": "boolean",
-			"default": true
-		},
-		"display24HoursTimestampFormat": {
-			"type": "boolean",
-			"default": false
+			"default": "h:i:s A"
 		},
 		"layout": {
 			"type": "string",
@@ -46,10 +38,8 @@
 	},
 	"providesContext": {
 		"world-clocks/showClocksAmPmIndicator": "showClocksAmPmIndicator",
-		"world-clocks/showTimestamp": "showTimestamp",
-		"world-clocks/timestampFormat": "timestampFormat",
-		"world-clocks/displayTimestampSeconds": "displayTimestampSeconds",
-		"world-clocks/display24HoursTimestampFormat": "display24HoursTimestampFormat",
+		"world-clocks/showDigitalTime": "showDigitalTime",
+		"world-clocks/timeFormat": "timeFormat",
 		"world-clocks/layout": "layout",
 		"world-clocks/marksFormat": "marksFormat"
 	},

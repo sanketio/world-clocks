@@ -20,11 +20,13 @@ import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 	PanelBody,
-	SelectControl,
 	ToggleControl,
 	RangeControl,
+	TextControl,
+	ExternalLink,
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
+import { createInterpolateElement } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -56,18 +58,16 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 		clocksPerRow,
 		clocksStackOnMobile,
 		showClocksAmPmIndicator,
-		showTimestamp,
-		timestampFormat,
-		displayTimestampSeconds,
-		display24HoursTimestampFormat,
+		showDigitalTime,
+		timeFormat,
 		layout,
 	} = attributes;
-	const shouldShowTimestampFormatSetting = !shouldShowClockSettings || showTimestamp;
-	const shouldShowClocksColumnSettings = layout !== 'digital-row';
+	const shouldShowTimeFormatSetting = !shouldShowClockSettings || showDigitalTime;
+	const shouldShowColumnSettings = layout !== 'digital-row';
 
 	return (
 		<PanelBody title={__('Visibility Settings', 'world-clocks')}>
-			{shouldShowClocksColumnSettings && (
+			{shouldShowColumnSettings && (
 				<>
 					<RangeControl
 						label={__('Clocks per row', 'world-clocks')}
@@ -100,52 +100,39 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 					/>
 
 					<ToggleControl
-						label={__('Show Timestamp', 'world-clocks')}
-						checked={showTimestamp}
-						onChange={(showTimestamp) => {
-							setAttributes({ showTimestamp });
+						label={__('Show Digital Time', 'world-clocks')}
+						checked={showDigitalTime}
+						onChange={(showDigitalTime) => {
+							setAttributes({ showDigitalTime });
 						}}
 					/>
 				</>
 			)}
 
-			{shouldShowTimestampFormatSetting && (
-				<>
-					<SelectControl
-						label={__('Timestamp Format', 'world-clocks')}
-						value={timestampFormat}
-						options={[
-							{
-								label: __('00:00 AM/PM', 'world-clocks'),
-								value: 'colon-ampm-uppercase',
-							},
-							{
-								label: __('00:00 am/pm', 'world-clocks'),
-								value: 'colon-ampm-lowercase',
-							},
-							{ label: __('00:00', 'world-clocks'), value: 'colon' },
-						]}
-						onChange={(timestampFormat) => {
-							setAttributes({ timestampFormat });
-						}}
-					/>
-
-					<ToggleControl
-						label={__('Show Timestamp Seconds', 'world-clocks')}
-						checked={displayTimestampSeconds}
-						onChange={(displayTimestampSeconds) => {
-							setAttributes({ displayTimestampSeconds });
-						}}
-					/>
-
-					<ToggleControl
-						label={__('Show 24 hours Timestamp Format', 'world-clocks')}
-						checked={display24HoursTimestampFormat}
-						onChange={(display24HoursTimestampFormat) => {
-							setAttributes({ display24HoursTimestampFormat });
-						}}
-					/>
-				</>
+			{shouldShowTimeFormatSetting && (
+				<TextControl
+					label={__('Time Format', 'world-clocks')}
+					help={createInterpolateElement(
+						__(
+							'Enter a time <Link>format string</Link>. Please note, the "Timezone abbreviation (T)" is not supported.',
+							'world-clocks',
+						),
+						{
+							Link: (
+								<ExternalLink
+									href={__(
+										'https://wordpress.org/documentation/article/customize-date-and-time-format/',
+										'world-clocks',
+									)}
+								/>
+							),
+						},
+					)}
+					value={timeFormat}
+					onChange={(timeFormat) => {
+						setAttributes({ timeFormat });
+					}}
+				/>
 			)}
 		</PanelBody>
 	);

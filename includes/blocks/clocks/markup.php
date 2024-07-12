@@ -22,14 +22,12 @@ if ( ! $attributes['clocksStackOnMobile'] ) {
 
 $wrapper_attributes = get_block_wrapper_attributes(
 	[
-		'class'                              => join( ' ', $css_classes ),
-		'data-showClocksAmPmIndicator'       => $attributes['showClocksAmPmIndicator'],
-		'data-showTimestamp'                 => $attributes['showTimestamp'],
-		'data-timestampFormat'               => $attributes['timestampFormat'],
-		'data-displayTimestampSeconds'       => $attributes['displayTimestampSeconds'],
-		'data-display24HoursTimestampFormat' => $attributes['display24HoursTimestampFormat'],
-		'data-layout'                        => $attributes['layout'],
-		'data-marksFormat'                   => $attributes['marksFormat'],
+		'class'                        => join( ' ', $css_classes ),
+		'data-showClocksAmPmIndicator' => $attributes['showClocksAmPmIndicator'],
+		'data-showDigitalTime'         => $attributes['showDigitalTime'],
+		'data-timeFormat'              => $attributes['timeFormat'],
+		'data-layout'                  => $attributes['layout'],
+		'data-marksFormat'             => $attributes['marksFormat'],
 	]
 );
 ?>

@@ -208,7 +208,7 @@ function has_digital_clock_layout( $context ) {
 	// Allowed clock layouts.
 	$digital_clock_layouts = [ 'digital-column', 'digital-row' ];
 
-	return in_array( $context['world-clocks/layout'], $digital_clock_layouts, true ) || $context['world-clocks/showTimestamp'];
+	return in_array( $context['world-clocks/layout'], $digital_clock_layouts, true ) || $context['world-clocks/showDigitalTime'];
 };
 
 /**

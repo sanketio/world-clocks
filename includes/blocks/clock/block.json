@@ -26,10 +26,8 @@
 	},
 	"usesContext": [
 		"world-clocks/showClocksAmPmIndicator",
-		"world-clocks/showTimestamp",
-		"world-clocks/timestampFormat",
-		"world-clocks/displayTimestampSeconds",
-		"world-clocks/display24HoursTimestampFormat",
+		"world-clocks/showDigitalTime",
+		"world-clocks/timeFormat",
 		"world-clocks/layout",
 		"world-clocks/marksFormat"
 	],

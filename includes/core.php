@@ -51,14 +51,13 @@ function admin_styles() {
  */
 function styles() {
 
-	$frontend_css_data         = get_asset_info( 'frontend' );
-	$frontend_css_dependencies = empty( $frontend_css_data['dependencies'] ) ? [] : $frontend_css_data['dependencies'];
-	$frontend_css_version      = empty( $frontend_css_data['version'] ) ? constant( 'CLOCKS_VERSION' ) : $frontend_css_data['version'];
+	$frontend_css_data    = get_asset_info( 'frontend' );
+	$frontend_css_version = empty( $frontend_css_data['version'] ) ? constant( 'CLOCKS_VERSION' ) : $frontend_css_data['version'];
 
 	wp_enqueue_style(
 		'world-clocks-frontend-style',
 		CLOCKS_DIST_URL . 'frontend.css',
-		$frontend_css_dependencies,
+		[],
 		$frontend_css_version,
 	);
 }

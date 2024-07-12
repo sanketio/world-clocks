@@ -1,6 +1,6 @@
 import '../../css/frontend/style.css';
 
-import { getTimestampFormat } from './utils';
+import { getDateTimeFormat } from './utils';
 
 const outputClock = () => {
 	// Fetch all the parent clock blocks element, if not found, return early.
@@ -18,16 +18,10 @@ const outputClock = () => {
 		}
 
 		// Settings for the clocks.
-		const display24HoursTimestampFormat =
-			wpClocks?.dataset?.display24hourstimestampformat &&
-			wpClocks?.dataset?.display24hourstimestampformat !== '';
-		const displayTimestampSeconds =
-			wpClocks?.dataset?.displaytimestampseconds &&
-			wpClocks?.dataset?.displaytimestampseconds !== '';
 		const showClocksAmPmIndicator =
 			wpClocks?.dataset?.showclocksampmindicator &&
 			wpClocks?.dataset?.showclocksampmindicator !== '';
-		const timestampFormat = wpClocks?.dataset?.timestampformat || 'colon-ampm-uppercase';
+		const timeFormat = wpClocks?.dataset?.timeformat || 'h:i:s A';
 
 		// Loop through each clock block.
 		childClocks.forEach((singleClock) => {
@@ -53,25 +47,30 @@ const outputClock = () => {
 			// Default time string object.
 			const timeStringSettings = {
 				timeZone: validTimezone,
-				hour12: !display24HoursTimestampFormat,
-				hour: '2-digit',
-				minute: '2-digit',
-				second: '2-digit',
 			};
+
+			const hourFormat = ['g', 'h', 'G', 'H'].find((format) => timeFormat.includes(format));
+			if (hourFormat) {
+				timeStringSettings.hour12 = !['G', 'H'].includes(hourFormat);
+				timeStringSettings.hour = ['g', 'G'].includes(hourFormat) ? 'numeric' : '2-digit';
+			}
+
+			if (timeFormat.includes('i')) {
+				timeStringSettings.minute = '2-digit';
+			}
+
+			if (timeFormat.includes('s')) {
+				timeStringSettings.second = '2-digit';
+			}
 
 			/**
 			 * Update time every second.
 			 */
 			const updateTime = () => {
 				// Update new time to the state.
-				const newTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-				const { time, hours, minutes, seconds, ampm } = getTimestampFormat(
-					newTime,
-					{
-						display24HoursTimestampFormat,
-						displayTimestampSeconds,
-						timestampFormat,
-					},
+				const { time, hours, minutes, seconds, ampm } = getDateTimeFormat(
+					new Date().toLocaleTimeString('en-US', timeStringSettings),
+					timeFormat,
 					manualOffset,
 				);
 

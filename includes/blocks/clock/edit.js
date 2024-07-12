@@ -17,7 +17,7 @@ import {
 	hasDigitalClockLayout,
 	hasAnalogClockLayout,
 	hasAnalogClockReverseLayout,
-	getTimestampFormat,
+	getDateTimeFormat,
 } from './utils';
 
 import './editor.css';
@@ -49,17 +49,28 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	// Default time string object.
 	const timeStringSettings = {
 		timeZone: validTimezone,
-		hour12: !context['world-clocks/display24HoursTimestampFormat'],
-		hour: '2-digit',
-		minute: '2-digit',
-		second: '2-digit',
 	};
 
+	const hourFormat = ['g', 'h', 'G', 'H'].find((format) =>
+		context['world-clocks/timeFormat'].includes(format),
+	);
+	if (hourFormat) {
+		timeStringSettings.hour12 = !['G', 'H'].includes(hourFormat);
+		timeStringSettings.hour = ['g', 'G'].includes(hourFormat) ? 'numeric' : '2-digit';
+	}
+
+	if (context['world-clocks/timeFormat'].includes('i')) {
+		timeStringSettings.minute = '2-digit';
+	}
+
+	if (context['world-clocks/timeFormat'].includes('s')) {
+		timeStringSettings.second = '2-digit';
+	}
+
 	// Get the initial time.
-	const initialTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-	const { time, hours, minutes, seconds, ampm } = getTimestampFormat(
-		initialTime,
-		context,
+	const { time, hours, minutes, seconds, ampm } = getDateTimeFormat(
+		new Date().toLocaleTimeString('en-US', timeStringSettings),
+		context['world-clocks/timeFormat'],
 		manualOffset,
 	);
 
@@ -75,10 +86,9 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	 */
 	const updateTime = () => {
 		// Update new time to the state.
-		const newTime = new Date().toLocaleTimeString('en-US', timeStringSettings);
-		const { time, hours, minutes, seconds, ampm } = getTimestampFormat(
-			newTime,
-			context,
+		const { time, hours, minutes, seconds, ampm } = getDateTimeFormat(
+			new Date().toLocaleTimeString('en-US', timeStringSettings),
+			context['world-clocks/timeFormat'],
 			manualOffset,
 		);
 

@@ -44,14 +44,16 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	}
 
 	// Get the initial time.
-	const { timeString, hours, minutes, seconds, ampm } = getDateTimeData(
+	const { timeString, dateString, hours, minutes, seconds, ampm } = getDateTimeData(
 		validTimezone,
 		context['world-clocks/timeFormat'],
 		manualOffset,
+		context['world-clocks/dateFormat'],
 	);
 
 	// Save initial time in state.
 	const [currentTimeString, setCurrentTimeString] = useState(timeString); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+	const [currentDateString, setCurrentDateString] = useState(dateString); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 	const [currentHour, setCurrentHour] = useState(hours); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 	const [currentMinute, setCurrentMinute] = useState(minutes); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 	const [currentSecond, setCurrentSecond] = useState(seconds); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
@@ -62,13 +64,15 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	 */
 	const updateTime = () => {
 		// Update new time to the state.
-		const { timeString, hours, minutes, seconds, ampm } = getDateTimeData(
+		const { timeString, dateString, hours, minutes, seconds, ampm } = getDateTimeData(
 			validTimezone,
 			context['world-clocks/timeFormat'],
 			manualOffset,
+			context['world-clocks/dateFormat'],
 		);
 
 		setCurrentTimeString(timeString);
+		setCurrentDateString(dateString);
 		setCurrentHour(hours);
 		setCurrentMinute(minutes);
 		setCurrentSecond(seconds);
@@ -77,7 +81,7 @@ const Clock = ({ timezone, clockLabel, context }) => {
 
 	// Set interval to update time every second.
 	useEffect( () => { // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
-		const intervalId = setInterval(updateTime);
+		const intervalId = setInterval(updateTime, 1000);
 
 		return () => {
 			clearInterval(intervalId);
@@ -105,8 +109,16 @@ const Clock = ({ timezone, clockLabel, context }) => {
 						<>
 							<p className="clock-label">{clockLabel}</p>
 
-							{hasDigitalClocks && (
-								<p className="digital-clock">{currentTimeString}</p>
+							{(hasDigitalClocks || context['world-clocks/showDate']) && (
+								<p className="clock-datetime">
+									{hasDigitalClocks && (
+										<span className="digital-clock">{currentTimeString}</span>
+									)}
+
+									{context['world-clocks/showDate'] && (
+										<span className="clock-date">{currentDateString}</span>
+									)}
+								</p>
 							)}
 						</>
 					)}
@@ -199,8 +211,16 @@ const Clock = ({ timezone, clockLabel, context }) => {
 						<>
 							<p className="clock-label">{clockLabel}</p>
 
-							{hasDigitalClocks && (
-								<p className="digital-clock">{currentTimeString}</p>
+							{(hasDigitalClocks || context['world-clocks/showDate']) && (
+								<p className="clock-datetime">
+									{hasDigitalClocks && (
+										<span className="digital-clock">{currentTimeString}</span>
+									)}
+
+									{context['world-clocks/showDate'] && (
+										<span className="clock-date">{currentDateString}</span>
+									)}
+								</p>
 							)}
 						</>
 					)}
@@ -209,7 +229,13 @@ const Clock = ({ timezone, clockLabel, context }) => {
 
 			{hasDigitalClocks && !hasAnalogClocks && !hasAnalogClocksReverse && (
 				<>
-					<p className="digital-clock">{currentTimeString}</p>
+					<p className="clock-datetime">
+						<span className="digital-clock">{currentTimeString}</span>
+
+						{context['world-clocks/showDate'] && (
+							<span className="clock-date">{currentDateString}</span>
+						)}
+					</p>
 
 					<p className="clock-label">{clockLabel}</p>
 				</>

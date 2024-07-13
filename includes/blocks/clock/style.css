@@ -12,16 +12,17 @@
 		overflow-wrap: anywhere;
 		padding: 24px 0;
 
-		& .digital-clock {
-			font-size: 24px;
+		& .clock-datetime,
+		& .clock-label,
+		& .digital-clock,
+		& .clock-date {
+			font-size: 18px;
 			margin: 0;
 			padding: 0;
 		}
 
-		& .clock-label {
-			font-size: 18px;
-			margin: 0;
-			padding: 0;
+		& .digital-clock {
+			font-size: 24px;
 		}
 	}
 }
@@ -172,11 +173,37 @@
 
 	& > .wp-block-world-clocks-clock {
 		flex-basis: 100%;
-		flex-direction: row;
-		justify-content: space-between;
+		flex-direction: column;
+		gap: 24px;
+		justify-content: start;
+
+		@media screen and (min-width: 480px) {
+
+			flex-direction: row;
+			gap: unset;
+			justify-content: space-between;
+		}
 
 		&:last-of-type {
 			border-bottom: unset;
+		}
+
+		& .clock-datetime {
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+
+			@media screen and (min-width: 480px) {
+
+				align-items: start;
+			}
+
+			@media screen and (min-width: 768px) {
+
+				align-items: center;
+				flex-direction: row;
+				gap: 24px;
+			}
 		}
 	}
 }

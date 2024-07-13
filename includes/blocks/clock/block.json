@@ -28,6 +28,8 @@
 		"world-clocks/showClocksAmPmIndicator",
 		"world-clocks/showDigitalTime",
 		"world-clocks/timeFormat",
+		"world-clocks/showDate",
+		"world-clocks/dateFormat",
 		"world-clocks/layout",
 		"world-clocks/marksFormat"
 	],

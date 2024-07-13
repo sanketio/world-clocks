@@ -34,8 +34,16 @@ $wrapper_attributes = get_block_wrapper_attributes(
 				<?php echo esc_html( $attributes['clockLabel'] ); ?>
 			</p>
 
-			<?php if ( $has_digital_clocks ) : ?>
-				<p class="digital-clock"></p>
+			<?php if ( $has_digital_clocks || $context['world-clocks/showDate'] ) : ?>
+				<p class="clock-datetime">
+					<?php if ( $has_digital_clocks ) : ?>
+						<span class="digital-clock"></span>
+					<?php endif; ?>
+
+					<?php if ( $context['world-clocks/showDate'] ) : ?>
+						<span class="clock-date"></span>
+					<?php endif; ?>
+				</p>
 			<?php endif; ?>
 		<?php endif; ?>
 
@@ -149,14 +157,28 @@ $wrapper_attributes = get_block_wrapper_attributes(
 				<?php echo esc_html( $attributes['clockLabel'] ); ?>
 			</p>
 
-			<?php if ( $has_digital_clocks ) : ?>
-				<p class="digital-clock"></p>
+			<?php if ( $has_digital_clocks || $context['world-clocks/showDate'] ) : ?>
+				<p class="clock-datetime">
+					<?php if ( $has_digital_clocks ) : ?>
+						<span class="digital-clock"></span>
+					<?php endif; ?>
+
+					<?php if ( $context['world-clocks/showDate'] ) : ?>
+						<span class="clock-date"></span>
+					<?php endif; ?>
+				</p>
 			<?php endif; ?>
 		<?php endif; ?>
 	<?php endif; ?>
 
 	<?php if ( $has_digital_clocks && ! $has_analog_clocks && ! $has_analog_clocks_reverse ) : ?>
-		<p class="digital-clock"></p>
+		<p class="clock-datetime">
+			<span class="digital-clock"></span>
+
+			<?php if ( $context['world-clocks/showDate'] ) : ?>
+				<span class="clock-date"></span>
+			<?php endif; ?>
+		</p>
 
 		<p class="clock-label">
 			<?php echo esc_html( $attributes['clockLabel'] ); ?>

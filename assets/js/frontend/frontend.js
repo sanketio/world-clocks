@@ -22,6 +22,7 @@ const outputClock = () => {
 			wpClocks?.dataset?.showclocksampmindicator &&
 			wpClocks?.dataset?.showclocksampmindicator !== '';
 		const timeFormat = wpClocks?.dataset?.timeformat || 'h:i:s A';
+		const dateFormat = wpClocks?.dataset?.dateformat || 'Y-m-d';
 
 		// Loop through each clock block.
 		childClocks.forEach((singleClock) => {
@@ -39,6 +40,7 @@ const outputClock = () => {
 
 			// Find the relevant child elements for the single clock.
 			const digitalClockElement = singleClock.querySelector('.digital-clock');
+			const dateElement = singleClock.querySelector('.clock-date');
 			const analogClockIndicator = singleClock.querySelector('.analog-clock .indicator');
 			const analogClockHourHand = singleClock.querySelector('.analog-clock .hour');
 			const analogClockMinuteHand = singleClock.querySelector('.analog-clock .minute');
@@ -49,14 +51,19 @@ const outputClock = () => {
 			 */
 			const updateTime = () => {
 				// Update new time to the state.
-				const { timeString, hours, minutes, seconds, ampm } = getDateTimeData(
+				const { timeString, dateString, hours, minutes, seconds, ampm } = getDateTimeData(
 					validTimezone,
 					timeFormat,
 					manualOffset,
+					dateFormat,
 				);
 
 				if (digitalClockElement) {
 					digitalClockElement.innerText = timeString;
+				}
+
+				if (dateElement) {
+					dateElement.innerText = dateString;
 				}
 
 				if (analogClockIndicator) {
@@ -80,10 +87,10 @@ const outputClock = () => {
 				}
 			};
 
-			// Set interval to update time every second.
-			setInterval(updateTime);
-
 			updateTime();
+
+			// Set interval to update time every second.
+			setInterval(updateTime, 1000);
 		});
 	});
 };

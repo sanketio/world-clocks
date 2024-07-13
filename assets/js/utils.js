@@ -9,10 +9,16 @@ import { date, getSettings, setSettings } from '@wordpress/date';
  * @param {string} timezone Timezone.
  * @param {string} timeFormat Time format.
  * @param {boolean} manualOffset If manual offset is selected as a timezone.
+ * @param {string} dateFormat Date format.
  *
  * @returns {object}
  */
-export const getDateTimeData = (timezone, timeFormat, manualOffset = false) => {
+export const getDateTimeData = (
+	timezone,
+	timeFormat,
+	manualOffset = false,
+	dateFormat = 'Y-m-d',
+) => {
 	const originalSettings = getSettings();
 
 	let timezoneSetting = {
@@ -32,7 +38,7 @@ export const getDateTimeData = (timezone, timeFormat, manualOffset = false) => {
 
 	setSettings(newSettings);
 
-	const dateString = date('Y-m-d', undefined, timezone);
+	const dateString = date(dateFormat, undefined, timezone);
 	const timeString = date(timeFormat, undefined, timezone);
 
 	const newDateTime = new Date(`${dateString} ${timeString}`);

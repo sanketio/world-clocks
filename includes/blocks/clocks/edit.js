@@ -26,7 +26,7 @@ import {
 	ExternalLink,
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { createInterpolateElement } from '@wordpress/element';
+import { useState, createInterpolateElement } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -64,6 +64,27 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 	} = attributes;
 	const shouldShowTimeFormatSetting = !shouldShowClockSettings || showDigitalTime;
 	const shouldShowColumnSettings = layout !== 'digital-row';
+
+	const [timeFormatError, setTimeFormatError] = useState(false); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+
+	/**
+	 * On key down event for the suggestions.
+	 *
+	 * @param {object} event Fired event for the keys.
+	 *
+	 * @returns {void}
+	 */
+	const onKeyDown = (event) => {
+		const { key } = event;
+
+		const nonAllowedKeys = ['d', 'j', 'S', 'l', 'D', 'm', 'n', 'F', 'M', 'Y', 'y'];
+		if (nonAllowedKeys.includes(key)) {
+			setTimeFormatError(true);
+			event.preventDefault();
+		} else {
+			setTimeFormatError(false);
+		}
+	};
 
 	return (
 		<PanelBody title={__('Visibility Settings', 'world-clocks')}>
@@ -110,29 +131,38 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 			)}
 
 			{shouldShowTimeFormatSetting && (
-				<TextControl
-					label={__('Time Format', 'world-clocks')}
-					help={createInterpolateElement(
-						__(
-							'Enter a time <Link>format string</Link>. Please note, the "Timezone abbreviation (T)" is not supported.',
-							'world-clocks',
-						),
-						{
-							Link: (
-								<ExternalLink
-									href={__(
-										'https://wordpress.org/documentation/article/customize-date-and-time-format/',
-										'world-clocks',
-									)}
-								/>
-							),
-						},
+				<>
+					<TextControl
+						label={__('Time Format', 'world-clocks')}
+						help={createInterpolateElement(
+							__('Enter a time <Link>format string</Link>.', 'world-clocks'),
+							{
+								Link: (
+									<ExternalLink
+										href={__(
+											'https://wordpress.org/documentation/article/customize-date-and-time-format/',
+											'world-clocks',
+										)}
+									/>
+								),
+							},
+						)}
+						value={timeFormat}
+						onChange={(timeFormat) => {
+							setAttributes({ timeFormat });
+						}}
+						onKeyDown={onKeyDown}
+					/>
+
+					{timeFormatError && (
+						<p className="not-allowed-keys-error">
+							{__(
+								'The date format keys ("d", "j", "S", "l", "D", "m", "n", "F", "M", "Y", "y") are not allowed in time format.',
+								'world-clocks',
+							)}
+						</p>
 					)}
-					value={timeFormat}
-					onChange={(timeFormat) => {
-						setAttributes({ timeFormat });
-					}}
-				/>
+				</>
 			)}
 		</PanelBody>
 	);

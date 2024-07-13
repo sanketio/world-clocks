@@ -1,6 +1,6 @@
 import '../../css/frontend/style.css';
 
-import { getDateTimeFormat } from './utils';
+import { getDateTimeData } from '../utils';
 
 const outputClock = () => {
 	// Fetch all the parent clock blocks element, if not found, return early.
@@ -28,13 +28,13 @@ const outputClock = () => {
 			// Find the timezone for the clock.
 			const timezone = singleClock?.dataset?.timezone || 'UTC';
 			let validTimezone = timezone;
-			let manualOffset = 0;
+			let manualOffset = false;
 			if (
 				timezone.toUpperCase().includes('UTC-') ||
 				timezone.toUpperCase().includes('UTC+')
 			) {
-				manualOffset = timezone.replace('UTC', '');
-				validTimezone = 'UTC';
+				validTimezone = timezone.replace('UTC', '');
+				manualOffset = true;
 			}
 
 			// Find the relevant child elements for the single clock.
@@ -44,38 +44,19 @@ const outputClock = () => {
 			const analogClockMinuteHand = singleClock.querySelector('.analog-clock .minute');
 			const analogClockSecondHand = singleClock.querySelector('.analog-clock .second');
 
-			// Default time string object.
-			const timeStringSettings = {
-				timeZone: validTimezone,
-			};
-
-			const hourFormat = ['g', 'h', 'G', 'H'].find((format) => timeFormat.includes(format));
-			if (hourFormat) {
-				timeStringSettings.hour12 = !['G', 'H'].includes(hourFormat);
-				timeStringSettings.hour = ['g', 'G'].includes(hourFormat) ? 'numeric' : '2-digit';
-			}
-
-			if (timeFormat.includes('i')) {
-				timeStringSettings.minute = '2-digit';
-			}
-
-			if (timeFormat.includes('s')) {
-				timeStringSettings.second = '2-digit';
-			}
-
 			/**
 			 * Update time every second.
 			 */
 			const updateTime = () => {
 				// Update new time to the state.
-				const { time, hours, minutes, seconds, ampm } = getDateTimeFormat(
-					new Date().toLocaleTimeString('en-US', timeStringSettings),
+				const { timeString, hours, minutes, seconds, ampm } = getDateTimeData(
 					timeFormat,
+					validTimezone,
 					manualOffset,
 				);
 
 				if (digitalClockElement) {
-					digitalClockElement.innerText = time;
+					digitalClockElement.innerText = timeString;
 				}
 
 				if (analogClockIndicator) {

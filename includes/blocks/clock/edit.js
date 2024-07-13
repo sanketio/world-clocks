@@ -13,12 +13,7 @@ import { useState, useEffect } from '@wordpress/element';
  * Internal dependencies
  */
 import TimezoneSelector from './timezone-selector';
-import {
-	hasDigitalClockLayout,
-	hasAnalogClockLayout,
-	hasAnalogClockReverseLayout,
-	getDateTimeFormat,
-} from './utils';
+import { getDateTimeData } from '../../../assets/js/utils';
 
 import './editor.css';
 import './style.css';
@@ -35,47 +30,28 @@ import './style.css';
  */
 const Clock = ({ timezone, clockLabel, context }) => {
 	// World clocks layout flags.
-	const hasDigitalClocks = hasDigitalClockLayout(context);
-	const hasAnalogClocks = hasAnalogClockLayout(context);
-	const hasAnalogClocksReverse = hasAnalogClockReverseLayout(context);
+	const hasDigitalClocks =
+		['digital-column', 'digital-row'].includes(context['world-clocks/layout']) ||
+		context['world-clocks/showDigitalTime'];
+	const hasAnalogClocks = context['world-clocks/layout'] === 'clock';
+	const hasAnalogClocksReverse = context['world-clocks/layout'] === 'clock-reverse';
 
 	let validTimezone = timezone;
-	let manualOffset = 0;
+	let manualOffset = false;
 	if (timezone.toUpperCase().includes('UTC-') || timezone.toUpperCase().includes('UTC+')) {
-		manualOffset = timezone.replace('UTC', '');
-		validTimezone = 'UTC';
-	}
-
-	// Default time string object.
-	const timeStringSettings = {
-		timeZone: validTimezone,
-	};
-
-	const hourFormat = ['g', 'h', 'G', 'H'].find((format) =>
-		context['world-clocks/timeFormat'].includes(format),
-	);
-	if (hourFormat) {
-		timeStringSettings.hour12 = !['G', 'H'].includes(hourFormat);
-		timeStringSettings.hour = ['g', 'G'].includes(hourFormat) ? 'numeric' : '2-digit';
-	}
-
-	if (context['world-clocks/timeFormat'].includes('i')) {
-		timeStringSettings.minute = '2-digit';
-	}
-
-	if (context['world-clocks/timeFormat'].includes('s')) {
-		timeStringSettings.second = '2-digit';
+		validTimezone = timezone.replace('UTC', '');
+		manualOffset = true;
 	}
 
 	// Get the initial time.
-	const { time, hours, minutes, seconds, ampm } = getDateTimeFormat(
-		new Date().toLocaleTimeString('en-US', timeStringSettings),
+	const { timeString, hours, minutes, seconds, ampm } = getDateTimeData(
 		context['world-clocks/timeFormat'],
+		validTimezone,
 		manualOffset,
 	);
 
 	// Save initial time in state.
-	const [currentTime, setCurrentTime] = useState(time); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+	const [currentTimeString, setCurrentTimeString] = useState(timeString); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 	const [currentHour, setCurrentHour] = useState(hours); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 	const [currentMinute, setCurrentMinute] = useState(minutes); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 	const [currentSecond, setCurrentSecond] = useState(seconds); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
@@ -86,13 +62,13 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	 */
 	const updateTime = () => {
 		// Update new time to the state.
-		const { time, hours, minutes, seconds, ampm } = getDateTimeFormat(
-			new Date().toLocaleTimeString('en-US', timeStringSettings),
+		const { timeString, hours, minutes, seconds, ampm } = getDateTimeData(
 			context['world-clocks/timeFormat'],
+			validTimezone,
 			manualOffset,
 		);
 
-		setCurrentTime(time);
+		setCurrentTimeString(timeString);
 		setCurrentHour(hours);
 		setCurrentMinute(minutes);
 		setCurrentSecond(seconds);
@@ -129,7 +105,9 @@ const Clock = ({ timezone, clockLabel, context }) => {
 						<>
 							<p className="clock-label">{clockLabel}</p>
 
-							{hasDigitalClocks && <p className="digital-clock">{currentTime}</p>}
+							{hasDigitalClocks && (
+								<p className="digital-clock">{currentTimeString}</p>
+							)}
 						</>
 					)}
 
@@ -221,7 +199,9 @@ const Clock = ({ timezone, clockLabel, context }) => {
 						<>
 							<p className="clock-label">{clockLabel}</p>
 
-							{hasDigitalClocks && <p className="digital-clock">{currentTime}</p>}
+							{hasDigitalClocks && (
+								<p className="digital-clock">{currentTimeString}</p>
+							)}
 						</>
 					)}
 				</>
@@ -229,7 +209,7 @@ const Clock = ({ timezone, clockLabel, context }) => {
 
 			{hasDigitalClocks && !hasAnalogClocks && !hasAnalogClocksReverse && (
 				<>
-					<p className="digital-clock">{currentTime}</p>
+					<p className="digital-clock">{currentTimeString}</p>
 
 					<p className="clock-label">{clockLabel}</p>
 				</>

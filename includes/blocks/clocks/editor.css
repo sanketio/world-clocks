@@ -26,3 +26,8 @@
 		}
 	}
 }
+
+.not-allowed-keys-error {
+	color: var(--c-red);
+	font-style: italic;
+}

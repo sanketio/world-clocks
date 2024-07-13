@@ -50,8 +50,8 @@ const outputClock = () => {
 			const updateTime = () => {
 				// Update new time to the state.
 				const { timeString, hours, minutes, seconds, ampm } = getDateTimeData(
-					timeFormat,
 					validTimezone,
+					timeFormat,
 					manualOffset,
 				);
 

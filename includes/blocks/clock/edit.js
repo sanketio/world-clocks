@@ -45,8 +45,8 @@ const Clock = ({ timezone, clockLabel, context }) => {
 
 	// Get the initial time.
 	const { timeString, hours, minutes, seconds, ampm } = getDateTimeData(
-		context['world-clocks/timeFormat'],
 		validTimezone,
+		context['world-clocks/timeFormat'],
 		manualOffset,
 	);
 
@@ -63,8 +63,8 @@ const Clock = ({ timezone, clockLabel, context }) => {
 	const updateTime = () => {
 		// Update new time to the state.
 		const { timeString, hours, minutes, seconds, ampm } = getDateTimeData(
-			context['world-clocks/timeFormat'],
 			validTimezone,
+			context['world-clocks/timeFormat'],
 			manualOffset,
 		);
 

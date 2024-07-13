@@ -6,13 +6,13 @@ import { date, getSettings, setSettings } from '@wordpress/date';
 /**
  * Returns timestamp format with hours, minutes and seconds.
  *
- * @param {string} timeFormat Time format.
  * @param {string} timezone Timezone.
+ * @param {string} timeFormat Time format.
  * @param {boolean} manualOffset If manual offset is selected as a timezone.
  *
  * @returns {object}
  */
-export const getDateTimeData = (timeFormat, timezone, manualOffset = false) => {
+export const getDateTimeData = (timezone, timeFormat, manualOffset = false) => {
 	const originalSettings = getSettings();
 
 	let timezoneSetting = {

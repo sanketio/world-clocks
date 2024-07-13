@@ -27,6 +27,14 @@
 			"type": "string",
 			"default": "h:i:s A"
 		},
+		"showDate": {
+			"type": "boolean",
+			"default": false
+		},
+		"dateFormat": {
+			"type": "string",
+			"default": "Y-m-d"
+		},
 		"layout": {
 			"type": "string",
 			"default": "digital-column"
@@ -40,6 +48,8 @@
 		"world-clocks/showClocksAmPmIndicator": "showClocksAmPmIndicator",
 		"world-clocks/showDigitalTime": "showDigitalTime",
 		"world-clocks/timeFormat": "timeFormat",
+		"world-clocks/showDate": "showDate",
+		"world-clocks/dateFormat": "dateFormat",
 		"world-clocks/layout": "layout",
 		"world-clocks/marksFormat": "marksFormat"
 	},

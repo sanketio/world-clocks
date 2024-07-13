@@ -60,29 +60,66 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 		showClocksAmPmIndicator,
 		showDigitalTime,
 		timeFormat,
+		showDate,
+		dateFormat,
 		layout,
 	} = attributes;
 	const shouldShowTimeFormatSetting = !shouldShowClockSettings || showDigitalTime;
 	const shouldShowColumnSettings = layout !== 'digital-row';
 
 	const [timeFormatError, setTimeFormatError] = useState(false); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
+	const [dateFormatError, setDateFormatError] = useState(false); // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
 
 	/**
-	 * On key down event for the suggestions.
+	 * On key down event for the time format text.
 	 *
 	 * @param {object} event Fired event for the keys.
 	 *
 	 * @returns {void}
 	 */
-	const onKeyDown = (event) => {
+	const onKeyDownTimeFormat = (event) => {
 		const { key } = event;
 
-		const nonAllowedKeys = ['d', 'j', 'S', 'l', 'D', 'm', 'n', 'F', 'M', 'Y', 'y'];
+		const nonAllowedKeys = [
+			'd',
+			'j',
+			'S',
+			'l',
+			'D',
+			'm',
+			'n',
+			'F',
+			'M',
+			'Y',
+			'y',
+			'c',
+			'r',
+			'U',
+		];
 		if (nonAllowedKeys.includes(key)) {
 			setTimeFormatError(true);
 			event.preventDefault();
 		} else {
 			setTimeFormatError(false);
+		}
+	};
+
+	/**
+	 * On key down event for the date format text.
+	 *
+	 * @param {object} event Fired event for the keys.
+	 *
+	 * @returns {void}
+	 */
+	const onKeyDownDateFormat = (event) => {
+		const { key } = event;
+
+		const nonAllowedKeys = ['a', 'A', 'g', 'h', 'G', 'H', 'i', 's', 'T', 'c', 'r', 'U'];
+		if (nonAllowedKeys.includes(key)) {
+			setDateFormatError(true);
+			event.preventDefault();
+		} else {
+			setDateFormatError(false);
 		}
 	};
 
@@ -151,13 +188,56 @@ const VisibilitySettings = ({ setAttributes, attributes, shouldShowClockSettings
 						onChange={(timeFormat) => {
 							setAttributes({ timeFormat });
 						}}
-						onKeyDown={onKeyDown}
+						onKeyDown={onKeyDownTimeFormat}
 					/>
 
 					{timeFormatError && (
 						<p className="not-allowed-keys-error">
 							{__(
-								'The date format keys ("d", "j", "S", "l", "D", "m", "n", "F", "M", "Y", "y") are not allowed in time format.',
+								'The date format keys ("d", "j", "S", "l", "D", "m", "n", "F", "M", "Y", "y", "c", "r", "U") are not allowed in time format.',
+								'world-clocks',
+							)}
+						</p>
+					)}
+				</>
+			)}
+
+			<ToggleControl
+				label={__('Show Date', 'world-clocks')}
+				checked={showDate}
+				onChange={(showDate) => {
+					setAttributes({ showDate });
+				}}
+			/>
+
+			{showDate && (
+				<>
+					<TextControl
+						label={__('Date Format', 'world-clocks')}
+						help={createInterpolateElement(
+							__('Enter a date <Link>format string</Link>.', 'world-clocks'),
+							{
+								Link: (
+									<ExternalLink
+										href={__(
+											'https://wordpress.org/documentation/article/customize-date-and-time-format/',
+											'world-clocks',
+										)}
+									/>
+								),
+							},
+						)}
+						value={dateFormat}
+						onChange={(dateFormat) => {
+							setAttributes({ dateFormat });
+						}}
+						onKeyDown={onKeyDownDateFormat}
+					/>
+
+					{dateFormatError && (
+						<p className="not-allowed-keys-error">
+							{__(
+								'The time format keys ("a", "A", "g", "h", "G", "H", "i", "s", "T", "c", "r", "U") are not allowed in date format.',
 								'world-clocks',
 							)}
 						</p>

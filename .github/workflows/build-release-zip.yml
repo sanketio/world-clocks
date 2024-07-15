@@ -1,0 +1,27 @@
+name: Build release zip
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+   branches:
+    - trunk
+
+jobs:
+  build:
+    name: Build release zip
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build plugin # Remove or modify this step as needed
+        run: |
+          composer install --no-dev
+          set +a && nvm install
+          nvm use
+          npm install
+          npm run build
+
+      - name: Generate ZIP file
+        uses: 10up/action-wordpress-plugin-build-zip@stable

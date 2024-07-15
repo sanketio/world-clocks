@@ -18,6 +18,19 @@ World clocks are an essential tool for tracking the current time across differen
 1. Install through the WordPress plugin directory or download, unzip and upload the files to your `/wp-content/plugins/` directory.
 2. Activate the plugin.
 
+### Manual Installation from GitHub repo
+
+1. Download the ZIP file from this [repo](https://github.com/sanketio/world-clocks/archive/refs/heads/trunk.zip).
+2. Extract the ZIP file, rename it to `world-clocks` if it's not the extracted directory name, and place it in your site's `wp-content/plugins` directory.
+3. Open the terminal and go to `wp-content/plugins/world-clocks`
+4. Install composer dependencies: `composer install --no-dev`
+5. Install NPM dependencies:
+   1. `set +a && nvm install`
+   2. `nvm use`
+   3. `npm install`
+   4. `npm run build`
+6. Activate the plugin.
+
 ## Configuration
 
 There are two blocks available with this plugin:

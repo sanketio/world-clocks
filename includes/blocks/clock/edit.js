@@ -81,7 +81,7 @@ const Clock = ({ timezone, clockLabel, context }) => {
 
 	// Set interval to update time every second.
 	useEffect( () => { // eslint-disable-line react-hooks/rules-of-hooks, prettier/prettier
-		const intervalId = setInterval(updateTime, 1000);
+		const intervalId = setInterval(updateTime);
 
 		return () => {
 			clearInterval(intervalId);

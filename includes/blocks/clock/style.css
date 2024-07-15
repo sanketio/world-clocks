@@ -35,6 +35,12 @@
 		flex-direction: column;
 		gap: 24px;
 		justify-content: flex-start;
+
+		& .clock-datetime {
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+		}
 	}
 
 	&.has-clocks-1-columns,
@@ -238,7 +244,7 @@
 					left: 50%;
 					position: absolute;
 					text-transform: uppercase;
-					top: 58%;
+					top: 60%;
 					transform: translate(-46%, -50%);
 				}
 
@@ -300,7 +306,7 @@
 
 				& span {
 					display: inline-block;
-					font-size: 16px;
+					font-size: 14px;
 					font-weight: 600;
 				}
 

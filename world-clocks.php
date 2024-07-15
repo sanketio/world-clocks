@@ -2,9 +2,9 @@
 /**
  * Plugin Name:       World Clocks
  * Plugin URI:        https://wordpress.org/plugins/world-clocks/
- * Description:       Enable clocks for the sites with different timezones, includes a custom Gutenberg block
+ * Description:       Enable world clocks for the sites with different timezones, with a custom block for the WordPress block editor (Gutenberg).
  * Version:           1.0.0
- * Requires at least: 6.0
+ * Requires at least: 6.4
  * Requires PHP:      8.0
  * Author:            Sanket Parmar
  * Author URI:        https://sanketio.github.io/

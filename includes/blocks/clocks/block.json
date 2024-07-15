@@ -37,7 +37,7 @@
 		},
 		"layout": {
 			"type": "string",
-			"default": "digital-column"
+			"default": "digital-row"
 		},
 		"marksFormat": {
 			"type": "string",

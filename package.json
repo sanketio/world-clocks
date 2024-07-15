@@ -1,7 +1,7 @@
 {
 	"name": "@sanketio/world-clocks",
 	"version": "1.0.0",
-	"description": "Enable clocks for the sites with different timezones, includes a custom Gutenberg block.",
+	"description": "Enable world clocks for the sites with different timezones, with a custom block for the WordPress block editor (Gutenberg).",
 	"homepage": "https://github.com/sanketio/world-clocks#readme",
 	"license": "GPL-2.0-or-later",
 	"author": {

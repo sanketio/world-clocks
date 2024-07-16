@@ -25,10 +25,10 @@
 			}
 		},
 		{
-			"step": "importFile",
+			"step": "importWxr",
 			"file": {
 				"resource": "url",
-				"url": "https:\/\/raw.githubusercontent.com\/sanketio\/world-clocks\/ec6071406de403e9c9f4b5833abf4e438816df05\/.wordpress-org\/blueprints\/demo-data.xml"
+				"url": "https://raw.githubusercontent.com/sanketio/world-clocks/trunk/.wordpress-org/blueprints/demo-data.xml"
 			}
 		}
 	]

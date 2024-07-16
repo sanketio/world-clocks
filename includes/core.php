@@ -51,6 +51,10 @@ function admin_styles() {
  */
 function styles() {
 
+	if ( ! has_block( 'world-clocks/clocks' ) ) {
+		return;
+	}
+
 	$frontend_css_data    = get_asset_info( 'frontend' );
 	$frontend_css_version = empty( $frontend_css_data['version'] ) ? constant( 'CLOCKS_VERSION' ) : $frontend_css_data['version'];
 
@@ -68,6 +72,10 @@ function styles() {
  * @return void
  */
 function scripts() {
+
+	if ( ! has_block( 'world-clocks/clocks' ) ) {
+		return;
+	}
 
 	$frontend_js_data         = get_asset_info( 'frontend' );
 	$frontend_js_dependencies = empty( $frontend_js_data['dependencies'] ) ? [] : $frontend_js_data['dependencies'];

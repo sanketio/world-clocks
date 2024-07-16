@@ -1,6 +1,6 @@
 === World Clocks ===
 Contributors:      sanket.parmar
-Tags:              clock, watch, time, timezone, digital, analog
+Tags:              clock, watch, time, timezone
 Requires at least: 6.5
 Tested up to:      6.5
 Stable tag:        1.0.0

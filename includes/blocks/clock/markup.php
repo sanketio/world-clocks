@@ -10,6 +10,10 @@
  * @var array    $context    Block context.
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 use function WorldClocks\Helpers\has_analog_clock_layout;
 use function WorldClocks\Helpers\has_analog_clock_reverse_layout;
 use function WorldClocks\Helpers\has_digital_clock_layout;

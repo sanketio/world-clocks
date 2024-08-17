@@ -10,6 +10,10 @@
  * @var array    $context    Block context.
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $css_classes = [
 	"has-clocks-layout-{$attributes['layout']}",
 	"has-clocks-marks-format-{$attributes['marksFormat']}",

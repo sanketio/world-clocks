@@ -1,8 +1,8 @@
 === World Clocks ===
 Contributors:      sanket.parmar
 Tags:              clock, watch, time, timezone
-Requires at least: 6.5
-Tested up to:      6.5
+Requires at least: 6.4
+Tested up to:      6.6.1
 Stable tag:        1.0.0
 Requires PHP:      8.0
 License:           GPLv2 or later

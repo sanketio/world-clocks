@@ -145,5 +145,5 @@ You can override the default timezone label with your own.
 
 == Changelog ==
 
-= 1.0.0 - TBD =
+= 1.0.0 - 2024-08-18 =
 * Initial plugin release

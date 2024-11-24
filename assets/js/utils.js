@@ -40,8 +40,9 @@ export const getDateTimeData = (
 
 	const dateString = date(dateFormat, undefined, timezone);
 	const timeString = date(timeFormat, undefined, timezone);
+	const defaultTimeString = date('h:i:s A', undefined, timezone);
 
-	const newDateTime = new Date(`${dateString} ${timeString}`);
+	const newDateTime = new Date(`${dateString} ${defaultTimeString}`);
 
 	const hours = newDateTime.getHours();
 	const minutes = newDateTime.getMinutes();

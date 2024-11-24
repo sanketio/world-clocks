@@ -3,7 +3,7 @@ Contributors:      sanket.parmar
 Tags:              clock, watch, time, timezone
 Requires at least: 6.4
 Tested up to:      6.6.1
-Stable tag:        1.0.0
+Stable tag:        1.0.1
 Requires PHP:      8.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -144,6 +144,10 @@ You can override the default timezone label with your own.
 12. Timezone Label to override the default timezone label for the Single Clock block.
 
 == Changelog ==
+
+= 1.0.1 - 2024-11-24 =
+* **Changed:** Bump WordPress "tested up to" version to 6.7.1
+* **Fixed:** Fixed time format issue with Analog clocks.
 
 = 1.0.0 - 2024-08-18 =
 * Initial plugin release

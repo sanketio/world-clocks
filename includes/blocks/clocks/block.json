@@ -63,5 +63,7 @@
 	"textdomain": "world-clocks",
 	"editorScript": "file:../../../dist/clocks-block.js",
 	"editorStyle": "file:../../../dist/clocks-block.css",
-	"style": "file:../../../dist/style-clocks-block.css"
+	"style": "file:../../../dist/style-clocks-block.css",
+	"viewScript": "file:../../../dist/frontend.js",
+	"viewStyle": "file:../../../dist/frontend.css"
 }

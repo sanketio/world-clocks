@@ -2,8 +2,8 @@
 Contributors:      sanket.parmar
 Tags:              clock, watch, time, timezone
 Requires at least: 6.4
-Tested up to:      6.8.2
-Stable tag:        1.0.2
+Tested up to:      6.9.1
+Stable tag:        1.0.3
 Requires PHP:      8.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -144,6 +144,10 @@ You can override the default timezone label with your own.
 12. Timezone Label to override the default timezone label for the Single Clock block.
 
 == Changelog ==
+
+= 1.0.3 - 2026-02-25 =
+* **Changed:** Bump WordPress "tested up to" version to 6.9.1.
+* **Fixed:** Block now works correctly in site editor templates (header, footer, and other template parts).
 
 = 1.0.2 - 2025-07-22 =
 * **Changed:** Bump WordPress "tested up to" version to 6.8.2

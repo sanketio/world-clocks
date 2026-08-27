@@ -261,7 +261,7 @@ const ClockBlockEdit = (props) => {
 	const { attributes, context } = props;
 	const { timezone, clockLabel } = attributes;
 
-	// Resolve to an IANA identifier; blocks saved before 1.0.4 hold a translated display string.
+	// Resolve to an IANA identifier; blocks saved before 1.1.0 hold a translated display string.
 	const formattedTimezone = resolveTimezone(timezone);
 
 	const blockProps = useBlockProps();

@@ -175,7 +175,7 @@ function get_timezones( $locale = null ) {
 /**
  * Resolve a saved timezone attribute to an IANA identifier.
  *
- * Blocks saved before 1.0.4 stored the translated display string rather than the identifier.
+ * Blocks saved before 1.1.0 stored the translated display string rather than the identifier.
  *
  * @param string $timezone Timezone as stored on the block.
  *
@@ -192,13 +192,13 @@ function resolve_timezone( $timezone ) {
 		return $timezone;
 	}
 
-	// Identifiers, and the pre-1.0.4 English form that only differed by spaces.
+	// Identifiers, and the pre-1.1.0 English form that only differed by spaces.
 	$candidate = str_replace( ' ', '_', $timezone );
 	if ( in_array( $candidate, timezone_identifiers_list(), true ) ) {
 		return $candidate;
 	}
 
-	// Pre-1.0.4 translated values, resolvable while the site locale is unchanged.
+	// Pre-1.1.0 translated values, resolvable while the site locale is unchanged.
 	foreach ( get_timezones() as $entry ) {
 		if ( empty( $entry['disabled'] ) && isset( $entry['display'] ) && $entry['display'] === $timezone ) {
 			return $entry['value'];

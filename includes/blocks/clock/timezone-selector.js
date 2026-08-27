@@ -88,7 +88,7 @@ const TimezoneSelector = (props) => {
 		return finalTimezones;
 	};
 
-	// Default values. Blocks saved before 1.0.4 hold a translated display string, so resolve first.
+	// Default values. Blocks saved before 1.1.0 hold a translated display string, so resolve first.
 	const resolvedTimezone = resolveTimezone(timezone);
 	const defaultUserInput = displayTimezone(resolvedTimezone);
 	const defaultFilteredTimezones = timezone ? filterTimezones(defaultUserInput) : timezones;

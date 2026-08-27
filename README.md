@@ -11,7 +11,7 @@ World clocks are an essential tool for tracking the current time across differen
 ## Requirements
 
 * [PHP](https://www.php.net/) 8.0+
-* [WordPress](http://wordpress.org/) 6.5+
+* [WordPress](http://wordpress.org/) 6.6+
 
 ## Installation
 

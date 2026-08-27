@@ -3,7 +3,7 @@
 /**
  * Resolve a stored timezone attribute to an IANA identifier.
  *
- * Blocks saved before 1.0.4 stored the translated display string rather than the identifier.
+ * Blocks saved before 1.1.0 stored the translated display string rather than the identifier.
  *
  * @param {string} stored Timezone as stored on the block.
  *

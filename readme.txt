@@ -1,9 +1,9 @@
 === World Clocks ===
 Contributors:      sanket.parmar
 Tags:              clock, watch, time, timezone
-Requires at least: 6.4
-Tested up to:      6.9.1
-Stable tag:        1.0.3
+Requires at least: 6.6
+Tested up to:      7.1
+Stable tag:        1.1.0
 Requires PHP:      8.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -144,6 +144,13 @@ You can override the default timezone label with your own.
 12. Timezone Label to override the default timezone label for the Single Clock block.
 
 == Changelog ==
+
+= 1.1.0 - 2026-08-27 =
+* **Changed:** Minimum supported WordPress version is now 6.6.
+* **Changed:** Bump WordPress "tested up to" version to 7.1.
+* **Fixed:** AM/PM indicator no longer disappears from analog clocks on WordPress 7.1.
+* **Fixed:** Timezones are stored as IANA identifiers, so clocks work on sites in any language. Clocks saved by earlier versions keep working without being re-saved.
+* **Fixed:** Editor preview now matches the frontend for timezones such as Asia/Ho Chi Minh.
 
 = 1.0.3 - 2026-02-25 =
 * **Changed:** Bump WordPress "tested up to" version to 6.9.1.

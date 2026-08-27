@@ -9,6 +9,11 @@ import { __ } from '@wordpress/i18n';
 import { UP, DOWN, ENTER, ESCAPE } from '@wordpress/keycodes';
 
 /**
+ * Internal dependencies
+ */
+import { resolveTimezone, displayTimezone } from './resolve-timezone';
+
+/**
  * Timezone selector component.
  *
  * @param {object} props Block props.
@@ -40,7 +45,7 @@ const TimezoneSelector = (props) => {
 		const foundTimezones = timezones.filter((timezoneObj) => {
 			return (
 				!timezoneObj?.disabled &&
-				timezoneObj.value.toLowerCase().includes(timezoneString.toLowerCase())
+				timezoneObj.display.toLowerCase().includes(timezoneString.toLowerCase())
 			);
 		});
 
@@ -50,14 +55,14 @@ const TimezoneSelector = (props) => {
 		// Loop through filtered timezones and inject Timezone continents.
 		foundTimezones.forEach((timezoneObj) => {
 			let continentClockLabel = 'UTC';
-			if (timezoneObj.value.includes('/')) {
+			if (timezoneObj.display.includes('/')) {
 				// Get the continent name
-				const continentTimezone = timezoneObj.value.split('/');
+				const continentTimezone = timezoneObj.display.split('/');
 
 				continentClockLabel = continentTimezone[0];
 			} else if (
-				timezoneObj.value.includes(`${continentClockLabel}-`) ||
-				timezoneObj.value.includes(`${continentClockLabel}+`)
+				timezoneObj.display.includes(`${continentClockLabel}-`) ||
+				timezoneObj.display.includes(`${continentClockLabel}+`)
 			) {
 				continentClockLabel = 'Manual Offsets';
 			}
@@ -83,9 +88,10 @@ const TimezoneSelector = (props) => {
 		return finalTimezones;
 	};
 
-	// Default values.
-	const defaultUserInput = timezone || 'UTC';
-	const defaultFilteredTimezones = timezone ? filterTimezones(timezone) : timezones;
+	// Default values. Blocks saved before 1.0.4 hold a translated display string, so resolve first.
+	const resolvedTimezone = resolveTimezone(timezone);
+	const defaultUserInput = displayTimezone(resolvedTimezone);
+	const defaultFilteredTimezones = timezone ? filterTimezones(defaultUserInput) : timezones;
 
 	const [activeTimezone, setActiveSuggestion] = useState(1);
 	const [filteredTimezones, setFilteredTimezones] = useState(defaultFilteredTimezones);
@@ -147,18 +153,19 @@ const TimezoneSelector = (props) => {
 				return;
 			}
 
-			const foundTimezones = filterTimezones(filteredTimezones[activeTimezone].value);
+			const selected = filteredTimezones[activeTimezone];
+			const foundTimezones = filterTimezones(selected.display);
 
 			// Only override timezone label if timezone is updated.
-			if (timezone !== filteredTimezones[activeTimezone].value) {
-				setAttributes({ clockLabel: filteredTimezones[activeTimezone].value });
+			if (resolvedTimezone !== selected.value) {
+				setAttributes({ clockLabel: selected.display });
 			}
 
-			setAttributes({ timezone: filteredTimezones[activeTimezone].value });
+			setAttributes({ timezone: selected.value });
 
 			setActiveSuggestion(1);
 			setShowSuggestions(false);
-			setUserInput(filteredTimezones[activeTimezone].value);
+			setUserInput(selected.display);
 			setFilteredTimezones(foundTimezones);
 		} else if (keyCode === UP) {
 			if (activeTimezone <= 1) {
@@ -212,18 +219,19 @@ const TimezoneSelector = (props) => {
 		}
 
 		const selectedTimezone = event.target.dataset.timezoneValue;
-		const foundTimezones = filterTimezones(selectedTimezone);
+		const selectedDisplay = event.target.dataset.timezoneDisplay;
+		const foundTimezones = filterTimezones(selectedDisplay);
 
 		// Only override timezone label if timezone is updated.
-		if (timezone !== selectedTimezone) {
-			setAttributes({ clockLabel: selectedTimezone });
+		if (resolvedTimezone !== selectedTimezone) {
+			setAttributes({ clockLabel: selectedDisplay });
 		}
 
 		setAttributes({ timezone: selectedTimezone });
 
 		setActiveSuggestion(1);
 		setFilteredTimezones(foundTimezones);
-		setUserInput(selectedTimezone);
+		setUserInput(selectedDisplay);
 		setShowSuggestions(false);
 	};
 
@@ -249,7 +257,7 @@ const TimezoneSelector = (props) => {
 							className += ' timezone-active';
 						}
 
-						if (timezoneObj.value === defaultUserInput) {
+						if (timezoneObj.value === resolvedTimezone) {
 							className += ' timezone-selected';
 						}
 
@@ -258,7 +266,7 @@ const TimezoneSelector = (props) => {
 						}
 
 						let clockLabelText = timezoneObj.label;
-						if (timezoneObj.value === defaultUserInput) {
+						if (timezoneObj.value === resolvedTimezone) {
 							clockLabelText += ` ${__('(Selected)', 'world-clocks')}`;
 						}
 
@@ -267,6 +275,7 @@ const TimezoneSelector = (props) => {
 								className={className}
 								key={timezoneObj.value}
 								data-timezone-value={timezoneObj.value}
+								data-timezone-display={timezoneObj.display}
 								onClick={onClick}
 								disabled={timezoneObj?.disabled}
 							>

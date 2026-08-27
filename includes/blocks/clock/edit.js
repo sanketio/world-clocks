@@ -13,6 +13,7 @@ import { useState, useEffect } from '@wordpress/element';
  * Internal dependencies
  */
 import TimezoneSelector from './timezone-selector';
+import { resolveTimezone } from './resolve-timezone';
 import { getDateTimeData } from '../../../assets/js/utils';
 
 import './editor.css';
@@ -260,8 +261,8 @@ const ClockBlockEdit = (props) => {
 	const { attributes, context } = props;
 	const { timezone, clockLabel } = attributes;
 
-	// Format timezone for Date object.
-	const formattedTimezone = timezone.replace(' ', '_');
+	// Resolve to an IANA identifier; blocks saved before 1.0.4 hold a translated display string.
+	const formattedTimezone = resolveTimezone(timezone);
 
 	const blockProps = useBlockProps();
 

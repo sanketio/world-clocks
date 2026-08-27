@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use function WorldClocks\Helpers\has_analog_clock_layout;
 use function WorldClocks\Helpers\has_analog_clock_reverse_layout;
 use function WorldClocks\Helpers\has_digital_clock_layout;
+use function WorldClocks\Helpers\resolve_timezone;
 
 $has_digital_clocks        = has_digital_clock_layout( $context );
 $has_analog_clocks         = has_analog_clock_layout( $context );
@@ -27,7 +28,7 @@ $has_marks_format_combine = 'combine' === $context['world-clocks/marksFormat'];
 
 $wrapper_attributes = get_block_wrapper_attributes(
 	[
-		'data-timezone' => str_replace( ' ', '_', $attributes['timezone'] ),
+		'data-timezone' => resolve_timezone( $attributes['timezone'] ),
 	]
 );
 ?>

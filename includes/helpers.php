@@ -41,8 +41,9 @@ function get_timezones( $locale = null ) {
 			'disabled' => true,
 		],
 		[
-			'value' => 'UTC',
-			'label' => 'UTC',
+			'value'   => 'UTC',
+			'label'   => 'UTC',
+			'display' => 'UTC',
 		],
 	];
 
@@ -52,9 +53,9 @@ function get_timezones( $locale = null ) {
 	$tz_identifiers = timezone_identifiers_list();
 
 	// Loop through all the timezones and save it to return array with formatted value.
-	foreach ( $tz_identifiers as $zone ) {
+	foreach ( $tz_identifiers as $identifier ) {
 
-		$zone = explode( '/', $zone );
+		$zone = explode( '/', $identifier );
 		if ( ! in_array( $zone[0], $continents, true ) ) {
 			continue;
 		}
@@ -80,15 +81,18 @@ function get_timezones( $locale = null ) {
 			$structure[] = [
 				'value'    => "t{$continent}",
 				'label'    => $continent,
+				'display'  => $continent,
 				'disabled' => true,
 			];
 
 			$added_continents[] = $continent;
 		}
 
+		// 'value' is the IANA identifier so it survives a locale change; 'display' carries the translated text.
 		$structure[] = [
-			'value' => "{$continent}/{$value}",
-			'label' => $value,
+			'value'   => $identifier,
+			'label'   => $value,
+			'display' => "{$continent}/{$value}",
 		];
 	}
 
@@ -159,12 +163,49 @@ function get_timezones( $locale = null ) {
 	foreach ( $offset_range as $offset ) {
 
 		$structure[] = [
-			'value' => "UTC{$offset}",
-			'label' => "UTC{$offset}",
+			'value'   => "UTC{$offset}",
+			'label'   => "UTC{$offset}",
+			'display' => "UTC{$offset}",
 		];
 	}
 
 	return $structure;
+}
+
+/**
+ * Resolve a saved timezone attribute to an IANA identifier.
+ *
+ * Blocks saved before 1.0.4 stored the translated display string rather than the identifier.
+ *
+ * @param string $timezone Timezone as stored on the block.
+ *
+ * @return string
+ */
+function resolve_timezone( $timezone ) {
+
+	if ( empty( $timezone ) ) {
+		return 'UTC';
+	}
+
+	// UTC and manual offsets are already in their final form.
+	if ( str_starts_with( $timezone, 'UTC' ) ) {
+		return $timezone;
+	}
+
+	// Identifiers, and the pre-1.0.4 English form that only differed by spaces.
+	$candidate = str_replace( ' ', '_', $timezone );
+	if ( in_array( $candidate, timezone_identifiers_list(), true ) ) {
+		return $candidate;
+	}
+
+	// Pre-1.0.4 translated values, resolvable while the site locale is unchanged.
+	foreach ( get_timezones() as $entry ) {
+		if ( empty( $entry['disabled'] ) && isset( $entry['display'] ) && $entry['display'] === $timezone ) {
+			return $entry['value'];
+		}
+	}
+
+	return $timezone;
 }
 
 /**

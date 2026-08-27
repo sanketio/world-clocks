@@ -24,13 +24,14 @@ if ( ! $attributes['clocksStackOnMobile'] ) {
 	$css_classes[] = 'has-clocks-not-stacked-on-mobile';
 }
 
+// WordPress 7.1 drops boolean values from get_block_wrapper_attributes(); '1'/'' matches what esc_attr() produced on earlier versions.
 $wrapper_attributes = get_block_wrapper_attributes(
 	[
 		'class'                        => join( ' ', $css_classes ),
-		'data-showclocksampmindicator' => $attributes['showClocksAmPmIndicator'],
-		'data-showdigitaltime'         => $attributes['showDigitalTime'],
+		'data-showclocksampmindicator' => $attributes['showClocksAmPmIndicator'] ? '1' : '',
+		'data-showdigitaltime'         => $attributes['showDigitalTime'] ? '1' : '',
 		'data-timeformat'              => $attributes['timeFormat'],
-		'data-showdate'                => $attributes['showDate'],
+		'data-showdate'                => $attributes['showDate'] ? '1' : '',
 		'data-dateformat'              => $attributes['dateFormat'],
 		'data-layout'                  => $attributes['layout'],
 		'data-marksformat'             => $attributes['marksFormat'],

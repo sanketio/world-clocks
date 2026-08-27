@@ -65,5 +65,5 @@
 	"editorStyle": "file:../../../dist/clocks-block.css",
 	"style": "file:../../../dist/style-clocks-block.css",
 	"viewScript": "file:../../../dist/frontend.js",
-	"viewStyle": "file:../../../dist/frontend.css"
+	"viewStyle": "file:../../../dist/style-frontend.css"
 }

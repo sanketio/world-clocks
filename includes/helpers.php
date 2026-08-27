@@ -205,7 +205,7 @@ function has_digital_clock_layout( $context ) {
 	$digital_clock_layouts = [ 'digital-column', 'digital-row' ];
 
 	return in_array( $context['world-clocks/layout'], $digital_clock_layouts, true ) || $context['world-clocks/showDigitalTime'];
-};
+}
 
 /**
  * If parent clock block has analog layout set.
@@ -227,4 +227,4 @@ function has_analog_clock_layout( $context ) {
  */
 function has_analog_clock_reverse_layout( $context ) {
 	return 'clock-reverse' === $context['world-clocks/layout'];
-};
+}

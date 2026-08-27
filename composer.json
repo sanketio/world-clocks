@@ -17,7 +17,7 @@
 		"php": ">=8.0"
 	},
 	"require-dev": {
-		"10up/phpcs-composer": "dev-master"
+		"10up/phpcs-composer": "^3.0"
 	},
 	"scripts": {
 		"phpcs": "./vendor/bin/phpcs . -p -s",
